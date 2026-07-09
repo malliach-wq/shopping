@@ -1311,7 +1311,7 @@ var css=[
 '.rct-listpick{margin-top:10px}',
 '.rct-listpick label{font-size:.75rem;font-weight:600;color:#374151;display:block;margin-bottom:4px}',
 '.rct-listpick select{width:100%;padding:7px 10px;border:1px solid #d1d5db;border-radius:8px;font-size:.82rem}',
-'.rct-ftr{display:flex;justify-content:flex-end;gap:8px;padding:14px 20px;border-top:1px solid #e5e7eb;background:#fff;position:sticky;bottom:0}'
+'.rct-ftr{display:flex;justify-content:flex-end;gap:8px;padding:14px 20px;border-top:1px solid #e5e7eb;background:#fff;position:sticky;bottom:0}','.rct-store-info{padding:12px 20px;border-bottom:1px solid #e5e7eb;background:#f8fafc}','.rsi-row{display:flex;gap:10px;flex-wrap:wrap}','.rsi-field{display:flex;flex-direction:column;gap:3px;flex:1;min-width:140px}','.rsi-field-sm{flex:0 1 160px}','.rsi-field label{font-size:.7rem;font-weight:600;color:#6b7280;text-transform:uppercase;letter-spacing:.04em}','.rsi-field input{padding:6px 9px;border:1px solid #d1d5db;border-radius:6px;font-size:.82rem;font-family:inherit;width:100%;box-sizing:border-box}','.rsi-field input:focus{border-color:#93c5fd;outline:none;background:#eff6ff}'
 ].join('');
 var se=document.createElement('style');se.textContent=css;document.head.appendChild(se);
 
@@ -1333,10 +1333,11 @@ function renderRecSidebar(){
     var dt=r.date?new Date(r.date).toLocaleDateString():'';
     var tot=r.total?('\u20ac'+fmt(r.total)):'';
     var n=r.items?r.items.length:0;
+    var loc=r.storeLocation?('<span style="color:#9ca3af">'+esc(r.storeLocation.slice(0,35))+'</span>'):'<span></span>';
     var lnk=r.linkedListName?('<span class="rc-badge">'+esc(r.linkedListName)+'</span>'):'';
     return '<div class="rc-card" onclick="openRDetail(\''+id+'\')">'
       +'<div class="rc-store">'+esc(r.storeName||'Receipt')+(tot?' <span style="font-weight:400;color:#6b7280">'+esc(tot)+'</span>':'')+'</div>'
-      +'<div class="rc-meta"><span>'+dt+'</span>'+(n?'<span>'+n+' items</span>':'')+''+lnk+'</div></div>';
+      +'<div class="rc-meta"><span>'+dt+'</span>'+loc+(n?'<span>'+n+' items</span>':'')+''+lnk+'</div></div>';
   }).join('');
 }
 window.openReceiptUpload=function(){if(typeof openReceiptModal==='function')openReceiptModal();};
@@ -1374,13 +1375,33 @@ window.parseReceiptOCR=function(text){
 /* RECEIPT TABLE MODAL */
 var _rctRows=[],_rctOcrText='',_rctAction='record';
 
+window.parseStoreInfo=function(text){
+  if(!text||!text.trim())return{storeName:'',storeLocation:'',vatNumber:''};
+  var lines=text.split('
+').map(function(l){return l.trim();}).filter(function(l){return l.length>1;});
+  var storeName='',addrLines=[],vatNumber='';
+  var pEnd=/(\d+[.,]\d{2})\s*[A-Z*]?\s*$/;
+  var vRe=/(?:vat\s*reg(?:istration)?\s*(?:no\.?|#|number)?|tax\s*(?:id|reg|no\.?)|\btin\b|p\.?\s*iva|\bnif\b|vatin|partita\s*iva)\s*[:\-]?\s*([A-Z0-9\-\/\.]{4,20})/i;
+  var sRe=/^(?:receipt|invoice|date|time|till|cashier|server|tel|phone|fax|www\.|http|open\s*hours|thank|welcome|please)/i;
+  for(var vi=0;vi<lines.length;vi++){var vm=lines[vi].match(vRe);if(vm){vatNumber=vm[1].trim();break;}}
+  for(var ai=0;ai<Math.min(lines.length,10);ai++){
+    var al=lines[ai];if(pEnd.test(al))break;if(sRe.test(al))break;if(vRe.test(al))continue;
+    if(!storeName)storeName=al;else if(addrLines.length<3)addrLines.push(al);
+  }
+  return{storeName:storeName,storeLocation:addrLines.join(', '),vatNumber:vatNumber};
+};
 function buildRctModal(){
   if(document.getElementById('rctModal'))return;
   var m=document.createElement('div');m.id='rctModal';
   m.innerHTML='<div class="rct-box">'
     +'<div class="rct-hd"><h2>Review Receipt</h2>'
     +'<button style="border:none;background:none;font-size:1.4rem;cursor:pointer;color:#9ca3af;padding:0;margin-left:8px" onclick="closeRctModal()">\u00d7</button></div>'
-    +'<details class="rct-raw"><summary>Raw OCR text</summary><pre id="rctRaw"></pre></details>'
+        +'<div class="rct-store-info"><div class="rsi-row">'
+    +'<div class="rsi-field"><label>Store Name</label><input id="rctStoreName" type="text" placeholder="e.g. Lidl Malta"></div>'
+    +'<div class="rsi-field"><label>Store Location / Address</label><input id="rctStoreLoc" type="text" placeholder="e.g. 123 High Street, Valletta"></div>'
+    +'<div class="rsi-field rsi-field-sm"><label>VAT Reg. No.</label><input id="rctVatNo" type="text" placeholder="e.g. MT12345678"></div>'
+    +'</div></div>'
++'<details class="rct-raw"><summary>Raw OCR text</summary><pre id="rctRaw"></pre></details>'
     +'<div class="rct-tbl-wrap"><table class="rct-tbl">'
     +'<thead><tr>'
     +'<th>Description</th><th>Product Code</th><th>Qty</th><th>Unit Price</th><th>Total</th><th></th>'
@@ -1424,6 +1445,11 @@ window.openReceiptTable=function(ocrText){
   document.querySelectorAll('#rctActPanel .ract').forEach(function(b){b.classList.toggle('sel',b.dataset.action==='record');});
   document.getElementById('rctListPickWrap').style.display='none';
   renderRctTable();
+  var _si=window.parseStoreInfo?window.parseStoreInfo(_rctOcrText):{storeName:'',storeLocation:'',vatNumber:''};
+  var _sn=document.getElementById('rctStoreName');var _sl=document.getElementById('rctStoreLoc');var _sv=document.getElementById('rctVatNo');
+  if(_sn)_sn.value=_si.storeName||'';
+  if(_sl)_sl.value=_si.storeLocation||'';
+  if(_sv)_sv.value=_si.vatNumber||'';
   document.getElementById('rctModal').classList.add('open');
 }
 
@@ -1480,11 +1506,12 @@ function rctFillLists(){
 window.rctSave=function(){
   var action=_rctAction||'record';
   var total=num(document.getElementById('rctTotal').value)||_rctRows.reduce(function(a,r){return a+num(r.total);},0);
-  var rawLines=_rctOcrText.trim().split('\n');
-  var storeName=(rawLines[0]||'Receipt').trim().slice(0,50);
+  var storeName=(document.getElementById('rctStoreName')?document.getElementById('rctStoreName').value.trim():'')||(_rctOcrText.trim().split('\n')[0]||'Receipt').slice(0,50);
+  var storeLocation=document.getElementById('rctStoreLoc')?document.getElementById('rctStoreLoc').value.trim():'';
+  var vatNumber=document.getElementById('rctVatNo')?document.getElementById('rctVatNo').value.trim():'';
   var recId=rid();
   var all=rLoad(R_KEY);
-  all[recId]={storeName:storeName,total:total,items:_rctRows.slice(),action:action,date:Date.now()};
+  all[recId]={storeName:storeName,storeLocation:storeLocation,vatNumber:vatNumber,total:total,items:_rctRows.slice(),action:action,date:Date.now()};
   if(action==='record'){
     rSave(R_KEY,all);closeRctModal();
     if(typeof closeReceiptModal==='function')closeReceiptModal();
@@ -1534,7 +1561,7 @@ window.openRDetail=function(id){
   m.innerHTML='<div class="mbox" style="padding:22px">'
     +'<div style="display:flex;align-items:center;gap:8px;margin-bottom:14px">'
     +'<div style="flex:1"><h2 style="margin:0;font-size:1rem">'+esc(rec.storeName||'Receipt')+'</h2>'
-    +'<div style="font-size:.75rem;color:#6b7280;margin-top:2px">'+dt+' \u00b7 '+(labels[rec.action]||'saved')+'</div></div>'
+    +'<div style="font-size:.75rem;color:#6b7280;margin-top:2px">'+dt+' \u00b7 '+(labels[rec.action]||'saved')+'</div>'+(rec.storeLocation?'<div style="font-size:.73rem;color:#6b7280;margin-top:1px">'+esc(rec.storeLocation)+'</div>':'')+(rec.vatNumber?'<div style="font-size:.73rem;color:#9ca3af;margin-top:1px">VAT: '+esc(rec.vatNumber)+'</div>':'')+'</div>'
     +'<button onclick="document.getElementById(\'rdtModal\').style.display=\'none\'" style="border:none;background:none;font-size:1.4rem;cursor:pointer;color:#9ca3af;padding:0">\u00d7</button></div>'
     +(rec.total?'<div style="font-size:.9rem;font-weight:600;margin-bottom:10px">Total: \u20ac'+fmt(rec.total)+'</div>':'')
     +(rec.linkedListName?'<div style="font-size:.78rem;color:#065f46;background:#d1fae5;padding:5px 10px;border-radius:8px;margin-bottom:10px">Linked: '+esc(rec.linkedListName)+'</div>':'')
