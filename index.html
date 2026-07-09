@@ -1218,19 +1218,19 @@ if(urlList){const t=setInterval(()=>{if(getList(urlList)){clearInterval(t);selec
 
 <script>
 (function(){
-const R_KEY='shopping_receipts',RCP_KEY='shopping_recipes',LISTS_KEY='shopping_lists_v1';
+var R_KEY='shopping_receipts',RCP_KEY='shopping_recipes',LISTS_KEY='shopping_lists_v1';
 function esc(s){return s?String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'):''}
+function num(v){var n=parseFloat(String(v).replace(',','.'));return isNaN(n)?0:n;}
+function fmt(v){return num(v).toFixed(2);}
 function rid(){return Date.now().toString(36)+Math.random().toString(36).slice(2)}
 function rLoad(k){try{return JSON.parse(localStorage.getItem(k))||{}}catch(e){return{}}}
 function rSave(k,d){try{localStorage.setItem(k,JSON.stringify(d))}catch(e){}}
 function getLists(){return rLoad(LISTS_KEY)}
 function saveLists(d){rSave(LISTS_KEY,d)}
 
-/* CSS */
 var css=[
 '#sidebar-accord{display:flex;flex-direction:column;flex:1;overflow-y:auto}',
 '.sidebar-section{display:flex;flex-direction:column}',
-
 '.sec-hdr{display:flex;align-items:center;padding:11px 14px 11px 16px;cursor:pointer;background:#f8fafc;border-bottom:1px solid #e5e7eb;flex-shrink:0;-webkit-user-select:none;user-select:none}',
 '.sec-hdr:hover{background:#f0f4f8}',
 '.sec-title{flex:1;font-size:.8rem;font-weight:700;color:#374151;letter-spacing:.02em;text-transform:uppercase}',
@@ -1252,18 +1252,13 @@ var css=[
 '.rcp-cnt{font-size:.72rem;color:#9ca3af;flex-shrink:0}',
 '.rcp-btn{padding:3px 10px;border-radius:6px;border:1px solid #e5e7eb;background:#fff;font-size:.7rem;color:#374151;cursor:pointer;white-space:nowrap;flex-shrink:0}',
 '.rcp-btn:hover{background:#f3f4f6}',
-'.r-acts{display:flex;gap:8px;padding:0 4px 14px}',
-'.ract{flex:1;padding:10px 5px 8px;border-radius:10px;border:2px solid #e5e7eb;background:#fff;cursor:pointer;text-align:center;transition:all .15s}',
+'.r-acts{display:flex;gap:8px;margin-bottom:12px}',
+'.ract{flex:1;padding:10px 6px 8px;border-radius:10px;border:2px solid #e5e7eb;background:#fff;cursor:pointer;text-align:center;transition:all .15s}',
 '.ract.sel{border-color:#2563eb;background:#eff6ff}',
 '.ract-lbl{font-size:.72rem;font-weight:600;color:#374151;margin-bottom:2px}',
 '.ract.sel .ract-lbl{color:#1d4ed8}',
 '.ract-sub{font-size:.64rem;color:#9ca3af;line-height:1.3}',
 '.ract.sel .ract-sub{color:#3b82f6}',
-'#rListPickRow{display:none;padding:0 4px 10px}',
-'#rListPickRow.show{display:block}',
-'#rListPickRow label{font-size:.75rem;font-weight:600;color:#374151;display:block;margin-bottom:4px}',
-'#rListPickRow select{width:100%;padding:6px 10px;border:1px solid #d1d5db;border-radius:8px;font-size:.8rem}',
-'.r-info{font-size:.7rem;color:#9ca3af;text-align:center;padding:0 0 10px}',
 '#rcpModal,#rtlModal,#rdtModal{position:fixed;inset:0;background:rgba(0,0,0,.42);z-index:600;display:none;align-items:center;justify-content:center}',
 '#rcpModal.open,#rtlModal.open,#rdtModal.open{display:flex}',
 '.mbox{background:#fff;border-radius:16px;width:min(460px,95vw);max-height:88vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.15)}',
@@ -1283,23 +1278,52 @@ var css=[
 '.il label:last-child{border-bottom:none}',
 '.ri-list{max-height:220px;overflow-y:auto;border:1px solid #e5e7eb;border-radius:8px;margin:6px 0}',
 '.ri-row{padding:6px 12px;border-bottom:1px solid #f3f4f6;font-size:.8rem;display:flex;justify-content:space-between}',
-'.ri-row:last-child{border-bottom:none}'
+'.ri-row:last-child{border-bottom:none}',
+/* receipt table modal */',
+'#rctModal{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:700;display:none;align-items:flex-start;justify-content:center;padding:16px;overflow-y:auto;box-sizing:border-box}',
+'#rctModal.open{display:flex}',
+'.rct-box{background:#fff;border-radius:16px;width:min(900px,100%);margin:auto;box-shadow:0 20px 60px rgba(0,0,0,.2);overflow:hidden}',
+'.rct-hd{display:flex;align-items:center;padding:16px 20px;border-bottom:1px solid #e5e7eb;background:#fff;position:sticky;top:0;z-index:1}',
+'.rct-hd h2{flex:1;margin:0;font-size:1rem;font-weight:600}',
+'.rct-raw{margin:12px 20px;background:#f9fafb;border-radius:8px;border:1px solid #e5e7eb}',
+'.rct-raw summary{padding:8px 14px;font-size:.75rem;font-weight:600;color:#6b7280;cursor:pointer;list-style:none}',
+'.rct-raw summary::-webkit-details-marker{display:none}',
+'.rct-raw summary::before{content:"+ "}',
+'details.rct-raw[open] summary::before{content:"- "}',
+'.rct-raw pre{margin:0;padding:8px 14px 12px;font-size:.7rem;color:#374151;white-space:pre-wrap;max-height:140px;overflow-y:auto;border-top:1px solid #e5e7eb;line-height:1.5}',
+'.rct-tbl-wrap{padding:0 20px;overflow-x:auto}',
+'.rct-tbl{width:100%;border-collapse:collapse;font-size:.82rem}',
+'.rct-tbl th{padding:8px 6px;text-align:left;font-size:.72rem;font-weight:600;color:#6b7280;border-bottom:2px solid #e5e7eb;white-space:nowrap;background:#fff}',
+'.rct-tbl td{padding:3px 3px;border-bottom:1px solid #f3f4f6;vertical-align:middle}',
+'.rct-cell{border:1px solid transparent;border-radius:4px;padding:5px 7px;width:100%;font-size:.82rem;font-family:inherit;background:transparent;box-sizing:border-box}',
+'.rct-cell:focus{border-color:#93c5fd;background:#eff6ff;outline:none}',
+'.rct-num{text-align:right;width:80px}',
+'.rct-del{border:none;background:none;color:#d1d5db;font-size:1.1rem;cursor:pointer;padding:3px 7px;border-radius:4px;line-height:1}',
+'.rct-del:hover{background:#fee2e2;color:#dc2626}',
+'.rct-add-btn{display:block;width:calc(100% - 40px);margin:10px 20px;padding:8px;border-radius:8px;border:1px dashed #d1d5db;background:none;font-size:.8rem;color:#6b7280;cursor:pointer;text-align:left}',
+'.rct-add-btn:hover{border-color:#93c5fd;color:#2563eb;background:#f0f9ff}',
+'.rct-totals{display:flex;align-items:center;justify-content:space-between;padding:12px 20px;background:#f8fafc;border-top:1px solid #e5e7eb;flex-wrap:wrap;gap:8px}',
+'.rct-totals-left{font-size:.82rem;color:#374151}',
+'.rct-totals-left strong{color:#111827;margin-left:4px}',
+'.rct-totals-right{display:flex;align-items:center;gap:8px;font-size:.82rem;font-weight:600;color:#374151}',
+'.rct-totals-right input{width:90px;padding:5px 8px;border:1px solid #d1d5db;border-radius:6px;font-size:.82rem;text-align:right}',
+'.rct-act-panel{padding:16px 20px;border-top:1px solid #e5e7eb}',
+'.rct-act-title{font-size:.78rem;font-weight:600;color:#374151;margin-bottom:10px}',
+'.rct-listpick{margin-top:10px}',
+'.rct-listpick label{font-size:.75rem;font-weight:600;color:#374151;display:block;margin-bottom:4px}',
+'.rct-listpick select{width:100%;padding:7px 10px;border:1px solid #d1d5db;border-radius:8px;font-size:.82rem}',
+'.rct-ftr{display:flex;justify-content:flex-end;gap:8px;padding:14px 20px;border-top:1px solid #e5e7eb;background:#fff;position:sticky;bottom:0}'
 ].join('');
 var se=document.createElement('style');se.textContent=css;document.head.appendChild(se);
 
-/* chevron SVG */
 var CHEV='<svg class="sec-chev" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4,2 8,6 4,10"/></svg>';
 
-/* ACCORDION TOGGLE */
 window.toggleSection=function(id){
-  document.querySelectorAll('.sidebar-section').forEach(function(s){
-    s.classList.toggle('sec-open',s.dataset.sec===id);
-  });
+  document.querySelectorAll('.sidebar-section').forEach(function(s){s.classList.toggle('sec-open',s.dataset.sec===id);});
   if(id==='receipts')renderRecSidebar();
   if(id==='recipes')renderRcpSidebar();
 };
 
-/* RECEIPTS SIDEBAR */
 function renderRecSidebar(){
   var el=document.getElementById('receiptsSidebar');if(!el)return;
   var d=rLoad(R_KEY);
@@ -1308,113 +1332,196 @@ function renderRecSidebar(){
   el.innerHTML=e.map(function(x){
     var id=x[0],r=x[1];
     var dt=r.date?new Date(r.date).toLocaleDateString():'';
-    var tot=r.total?('€'+Number(r.total).toFixed(2)):'';
+    var tot=r.total?('\u20ac'+fmt(r.total)):'';
+    var n=r.items?r.items.length:0;
     var lnk=r.linkedListName?('<span class="rc-badge">'+esc(r.linkedListName)+'</span>'):'';
-    return '<div class="rc-card" onclick="openRDetail(\''+id+'\')">'+'<div class="rc-store">'+esc(r.storeName||'Receipt')+(tot?' <span style="font-weight:400;color:#6b7280">'+esc(tot)+'</span>':'')+'</div>'+'<div class="rc-meta"><span>'+dt+'</span>'+lnk+'</div></div>';
+    return '<div class="rc-card" onclick="openRDetail(\''+id+'\')">'
+      +'<div class="rc-store">'+esc(r.storeName||'Receipt')+(tot?' <span style="font-weight:400;color:#6b7280">'+esc(tot)+'</span>':'')+'</div>'
+      +'<div class="rc-meta"><span>'+dt+'</span>'+(n?'<span>'+n+' items</span>':'')+''+lnk+'</div></div>';
   }).join('');
 }
+window.openReceiptUpload=function(){if(typeof openReceiptModal==='function')openReceiptModal();};
 
-/* RECEIPT UPLOAD */
-window.openReceiptUpload=function(){
-  window._rMode='upload';window._rAction='record';
-  if(!document.getElementById('rActionArea'))buildReceiptExt();
-  var a=document.getElementById('rActionArea');if(a)a.style.display='';
-  if(typeof openReceiptModal==='function')openReceiptModal();
-};
-
-function buildReceiptExt(){
-  var modal=document.getElementById('receiptModal');if(!modal)return;
-  var inner=modal.querySelector('.modal');if(!inner)return;
-  var h2=inner.querySelector('h2,h3');if(!h2)return;
-  var div=document.createElement('div');div.id='rActionArea';
-  div.innerHTML='<div style="padding:0 4px 10px;font-size:.78rem;font-weight:600;color:#374151;margin-bottom:6px">What to do with this receipt?</div>'
-    +'<div class="r-acts">'
-    +'<div class="ract sel" data-action="record" onclick="selRAction(\'record\')"><div class="ract-lbl">Record only</div><div class="ract-sub">Save for records</div></div>'
-    +'<div class="ract" data-action="new_list" onclick="selRAction(\'new_list\')"><div class="ract-lbl">New List</div><div class="ract-sub">Create from items</div></div>'
-    +'<div class="ract" data-action="reconcile" onclick="selRAction(\'reconcile\')"><div class="ract-lbl">Reconcile</div><div class="ract-sub">Match existing list</div></div>'
-    +'</div>'
-    +'<div id="rListPickRow"><label>Reconcile with:</label><select id="rListPick"></select></div>'
-    +'<div class="r-info">Receipt will be saved to My Receipts</div>';
-  h2.insertAdjacentElement('afterend',div);
+/* OCR PARSER */
+function parseReceiptOCR(text){
+  if(!text||!text.trim())return{rows:[],receiptTotal:null};
+  var lines=text.split('\n').map(function(l){return l.trim();}).filter(function(l){return l.length>1;});
+  var rows=[];
+  var priceEnd=/(\d+[.,]\d{2})\s*[A-Z*]?\s*$/;
+  var qtyX=/(\d+)\s*[xX\u00d7]\s*(\d+[.,]\d{2})/;
+  var codeAt=/^([0-9]{4,15})\s+/;
+  var skipRe=/^(total|subtotal|tax|vat|gst|change|cash|card|thank|receipt|date|time|till|store|visit|loyalty|points|discount|saving|welcome|please|tel|phone|address|email|www|http|ref|auth|no\.|invoice|balance|amount|paid|tender|transaction)/i;
+  lines.forEach(function(line){
+    if(skipRe.test(line.trim()))return;
+    var pm=line.match(priceEnd);if(!pm)return;
+    var itemTotal=num(pm[1]);
+    if(itemTotal<=0)return;
+    var before=line.slice(0,line.lastIndexOf(pm[1])).trim();
+    var qty=1,unitPrice=null,code='',name=before;
+    var qm=before.match(qtyX);
+    if(qm){qty=parseInt(qm[1])||1;unitPrice=num(qm[2]);name=before.slice(0,before.indexOf(qm[0])).trim()||before;}
+    var cm=name.match(codeAt);
+    if(cm){code=cm[1];name=name.slice(cm[0].length).trim();}
+    if(!unitPrice||isNaN(unitPrice))unitPrice=qty>1?itemTotal/qty:itemTotal;
+    name=name.replace(/\s{2,}/g,' ').trim();
+    if(name&&name.length>1){rows.push({name:name,code:code,qty:qty,unitPrice:parseFloat(unitPrice.toFixed(2)),total:itemTotal});}
+  });
+  var receiptTotal=null;
+  var totLine=lines.slice().reverse().find(function(l){return /total/i.test(l);});
+  if(totLine){var m=totLine.match(/(\d+[.,]\d{2})\s*$/);if(m)receiptTotal=num(m[1]);}
+  return{rows:rows,receiptTotal:receiptTotal};
 }
 
-window.selRAction=function(a){
-  window._rAction=a;
-  document.querySelectorAll('.ract').forEach(function(b){b.classList.toggle('sel',b.dataset.action===a);});
-  var r=document.getElementById('rListPickRow');
-  if(r){r.classList.toggle('show',a==='reconcile');if(a==='reconcile')fillListPick();}
-};
+/* RECEIPT TABLE MODAL */
+var _rctRows=[],_rctOcrText='',_rctAction='record';
 
-function fillListPick(){
-  var s=document.getElementById('rListPick');if(!s)return;
+function buildRctModal(){
+  if(document.getElementById('rctModal'))return;
+  var m=document.createElement('div');m.id='rctModal';
+  m.innerHTML='<div class="rct-box">'
+    +'<div class="rct-hd"><h2>Review Receipt</h2>'
+    +'<button style="border:none;background:none;font-size:1.4rem;cursor:pointer;color:#9ca3af;padding:0;margin-left:8px" onclick="closeRctModal()">\u00d7</button></div>'
+    +'<details class="rct-raw"><summary>Raw OCR text</summary><pre id="rctRaw"></pre></details>'
+    +'<div class="rct-tbl-wrap"><table class="rct-tbl">'
+    +'<thead><tr>'
+    +'<th>Description</th><th>Product Code</th><th>Qty</th><th>Unit Price</th><th>Total</th><th></th>'
+    +'</tr></thead>'
+    +'<tbody id="rctTbody"></tbody>'
+    +'</table></div>'
+    +'<button class="rct-add-btn" onclick="addRctRow()">+ Add row</button>'
+    +'<div class="rct-totals">'
+    +'<div class="rct-totals-left">Items total: <strong id="rctItemsTotal">\u20ac0.00</strong></div>'
+    +'<div class="rct-totals-right">Receipt total: <input id="rctTotal" type="number" step="0.01" min="0" placeholder="0.00"></div>'
+    +'</div>'
+    +'<div id="rctActPanel" style="display:none">'
+    +'<div class="rct-act-panel"><div class="rct-act-title">What would you like to do with this receipt?</div>'
+    +'<div class="r-acts">'
+    +'<div class="ract sel" data-action="record" onclick="selRctAction(\'record\')"><div class="ract-lbl">Record only</div><div class="ract-sub">Historical records</div></div>'
+    +'<div class="ract" data-action="new_list" onclick="selRctAction(\'new_list\')"><div class="ract-lbl">New List</div><div class="ract-sub">Create from items</div></div>'
+    +'<div class="ract" data-action="reconcile" onclick="selRctAction(\'reconcile\')"><div class="ract-lbl">Reconcile</div><div class="ract-sub">Match existing list</div></div>'
+    +'</div>'
+    +'<div id="rctListPickWrap" style="display:none" class="rct-listpick"><label>Select list to reconcile with:</label><select id="rctListSel"></select></div>'
+    +'</div></div>'
+    +'<div class="rct-ftr">'
+    +'<button class="btn-g" onclick="closeRctModal()">Cancel</button>'
+    +'<button id="rctConfBtn" class="btn-p" onclick="rctConfirm()">Table looks good \u2192</button>'
+    +'<button id="rctSaveBtn" class="btn-p" onclick="rctSave()" style="display:none">Save Receipt</button>'
+    +'</div></div>';
+  document.body.appendChild(m);
+}
+
+function openReceiptTable(ocrText){
+  buildRctModal();
+  _rctOcrText=ocrText||'';
+  var parsed=parseReceiptOCR(_rctOcrText);
+  _rctRows=parsed.rows.length?parsed.rows:[{name:'',code:'',qty:1,unitPrice:0,total:0}];
+  _rctAction='record';
+  document.getElementById('rctRaw').textContent=_rctOcrText||(parsed.rows.length?'':'No text could be extracted from the image.');
+  if(parsed.receiptTotal)document.getElementById('rctTotal').value=fmt(parsed.receiptTotal);
+  else document.getElementById('rctTotal').value='';
+  document.getElementById('rctActPanel').style.display='none';
+  document.getElementById('rctConfBtn').style.display='';
+  document.getElementById('rctSaveBtn').style.display='none';
+  document.querySelectorAll('#rctActPanel .ract').forEach(function(b){b.classList.toggle('sel',b.dataset.action==='record');});
+  document.getElementById('rctListPickWrap').style.display='none';
+  renderRctTable();
+  document.getElementById('rctModal').classList.add('open');
+}
+
+function renderRctTable(){
+  var tb=document.getElementById('rctTbody');if(!tb)return;
+  tb.innerHTML=_rctRows.map(function(r,i){
+    return '<tr>'
+      +'<td><input class="rct-cell" style="min-width:150px" value="'+esc(r.name||'')+'" onchange="_rctRows['+i+'].name=this.value"></td>'
+      +'<td><input class="rct-cell" style="width:90px" value="'+esc(r.code||'')+'" onchange="_rctRows['+i+'].code=this.value"></td>'
+      +'<td><input class="rct-cell rct-num" type="number" min="0" step="1" value="'+esc(r.qty||1)+'" onchange="_rctRows['+i+'].qty=num(this.value);rctCalcRow('+i+')"></td>'
+      +'<td><input class="rct-cell rct-num" type="number" min="0" step="0.01" value="'+esc(fmt(r.unitPrice))+'" onchange="_rctRows['+i+'].unitPrice=num(this.value);rctCalcRow('+i+')"></td>'
+      +'<td><input class="rct-cell rct-num" id="rct-tot-'+i+'" type="number" min="0" step="0.01" value="'+esc(fmt(r.total))+'" onchange="_rctRows['+i+'].total=num(this.value);rctRefreshTotals()"></td>'
+      +'<td><button class="rct-del" onclick="rctDelRow('+i+')">\u00d7</button></td>'
+      +'</tr>';
+  }).join('');
+  rctRefreshTotals();
+}
+
+window.rctCalcRow=function(i){
+  var r=_rctRows[i];var t=num(r.qty)*num(r.unitPrice);
+  _rctRows[i].total=t;
+  var el=document.getElementById('rct-tot-'+i);if(el)el.value=fmt(t);
+  rctRefreshTotals();
+};
+window.rctRefreshTotals=function(){
+  var sum=_rctRows.reduce(function(a,r){return a+num(r.total);},0);
+  var el=document.getElementById('rctItemsTotal');if(el)el.textContent='\u20ac'+fmt(sum);
+};
+window.addRctRow=function(){
+  _rctRows.push({name:'',code:'',qty:1,unitPrice:0,total:0});
+  renderRctTable();
+  var rows=document.querySelectorAll('#rctTbody tr');
+  if(rows.length){var inp=rows[rows.length-1].querySelector('input');if(inp)inp.focus();}
+};
+window.rctDelRow=function(i){_rctRows.splice(i,1);renderRctTable();};
+window.closeRctModal=function(){var m=document.getElementById('rctModal');if(m)m.classList.remove('open');};
+window.rctConfirm=function(){
+  document.getElementById('rctActPanel').style.display='';
+  document.getElementById('rctConfBtn').style.display='none';
+  document.getElementById('rctSaveBtn').style.display='';
+  rctFillLists();
+  document.getElementById('rctActPanel').scrollIntoView({behavior:'smooth',block:'nearest'});
+};
+window.selRctAction=function(a){
+  _rctAction=a;
+  document.querySelectorAll('#rctActPanel .ract').forEach(function(b){b.classList.toggle('sel',b.dataset.action===a);});
+  var p=document.getElementById('rctListPickWrap');if(p)p.style.display=a==='reconcile'?'':'none';
+};
+function rctFillLists(){
+  var s=document.getElementById('rctListSel');if(!s)return;
   var l=getLists();var e=Object.entries(l).filter(function(x){return x[1].status!=='closed';});
   s.innerHTML=e.length?e.map(function(x){return '<option value="'+x[0]+'">'+esc(x[1].name||'List')+'</option>';}).join(''):'<option>No open lists</option>';
 }
-
-/* WRAP closeReceiptModal */
-var _origClose=window.closeReceiptModal;
-window.closeReceiptModal=function(){
-  var a=document.getElementById('rActionArea');if(a)a.style.display='none';
-  window._rMode=null;window._rAction='record';
-  if(typeof _origClose==='function')_origClose();
-};
-
-/* WRAP applyReceiptPrices */
-var _origApply=window.applyReceiptPrices;
-window.applyReceiptPrices=function(){
-  var action=window._rMode==='upload'?(window._rAction||'record'):'reconcile';
-  var items=extractItems();
-  var ocrEl=document.querySelector('.ocr-text,.receipt-text');
-  var ocrText=ocrEl?ocrEl.textContent:'';
-  var storeName=ocrText.trim().split('\n')[0]?ocrText.trim().split('\n')[0].trim().slice(0,40):null;
-  var totM=ocrText.match(/total[:\s]*[\u20ac$\xa3]?\s*(\d+[.,]\d{2})/i);
-  var total=totM?parseFloat(totM[1].replace(',','.')):0;
-  var recId=saveReceipt({storeName:storeName,total:total||null,items:items,action:action,ocrText:ocrText});
+window.rctSave=function(){
+  var action=_rctAction||'record';
+  var total=num(document.getElementById('rctTotal').value)||_rctRows.reduce(function(a,r){return a+num(r.total);},0);
+  var rawLines=_rctOcrText.trim().split('\n');
+  var storeName=(rawLines[0]||'Receipt').trim().slice(0,50);
+  var recId=rid();
+  var all=rLoad(R_KEY);
+  all[recId]={storeName:storeName,total:total,items:_rctRows.slice(),action:action,date:Date.now()};
   if(action==='record'){
-    closeReceiptModal();renderRecSidebar();return;
+    rSave(R_KEY,all);closeRctModal();
+    if(typeof closeReceiptModal==='function')closeReceiptModal();
+    renderRecSidebar();toggleSection('receipts');return;
   }
   if(action==='new_list'){
-    createListFromRec(items,storeName,recId);closeReceiptModal();renderRecSidebar();return;
+    var items={};
+    _rctRows.forEach(function(r){if(r.name||r.code){items['i'+rid()]={name:r.name||(r.code||'Item'),qty:r.qty||1,done:false,price:r.unitPrice||null,cat:'Other'};}});
+    var lists=getLists();var lid='l'+rid();
+    var lName=storeName+' \u2013 '+new Date().toLocaleDateString();
+    lists[lid]={name:lName,store:storeName,created:Date.now(),status:'open',items:items};
+    saveLists(lists);
+    all[recId].linkedListName=lName;all[recId].linkedListId=lid;
+    rSave(R_KEY,all);closeRctModal();
+    if(typeof closeReceiptModal==='function')closeReceiptModal();
+    if(typeof window.renderSidebar==='function')window.renderSidebar();
+    renderRecSidebar();toggleSection('lists');
+    setTimeout(function(){if(typeof selectList==='function')selectList(lid);},400);return;
   }
-  if(window._rMode==='upload'&&action==='reconcile'){
-    var lid=document.getElementById('rListPick')?document.getElementById('rListPick').value:null;
-    if(lid){closeReceiptModal();renderRecSidebar();}
-    else if(typeof _origApply==='function'){_origApply();renderRecSidebar();}
+  if(action==='reconcile'){
+    var lid2=document.getElementById('rctListSel')?document.getElementById('rctListSel').value:null;
+    rSave(R_KEY,all);closeRctModal();
+    if(typeof closeReceiptModal==='function')closeReceiptModal();
+    renderRecSidebar();
+    if(lid2){toggleSection('lists');setTimeout(function(){if(typeof selectList==='function')selectList(lid2);},400);}
     return;
   }
-  if(typeof _origApply==='function')_origApply();
-  var currentList=document.getElementById('listTitle')?document.getElementById('listTitle').textContent:null;
-  saveReceipt({storeName:storeName,total:total||null,items:items,action:'reconcile',linkedListName:currentList});
-  renderRecSidebar();
 };
 
-function extractItems(){
-  var items=[];
-  document.querySelectorAll('#receiptMatchList [data-id],.match-row').forEach(function(r){
-    var n=r.querySelector('.item-name,[data-name]');
-    var p=r.querySelector('.item-price,[data-price]');
-    if(n&&n.textContent.trim())items.push({name:n.textContent.trim(),price:p?parseFloat(p.textContent.replace(/[^0-9.]/g,''))||null:null});
-  });
-  return items;
-}
-
-function saveReceipt(d){
-  var all=rLoad(R_KEY);var id=rid();
-  all[id]=Object.assign({date:Date.now()},d);rSave(R_KEY,all);return id;
-}
-
-function createListFromRec(items,storeName,recId){
-  var lists=getLists();var lid='l'+rid();
-  var name=(storeName||'Receipt')+' – '+new Date().toLocaleDateString();
-  var itemsObj={};
-  (items||[]).forEach(function(it){itemsObj['i'+rid()]={name:it.name||it,qty:1,done:false,price:it.price||null,cat:'Other'};});
-  lists[lid]={name:name,store:storeName||'',created:Date.now(),status:'open',items:itemsObj};
-  saveLists(lists);
-  var all=rLoad(R_KEY);if(all[recId]){all[recId].linkedListName=name;all[recId].linkedListId=lid;rSave(R_KEY,all);}
-  if(typeof window.renderSidebar==='function')window.renderSidebar();
-  toggleSection('lists');
-  setTimeout(function(){if(typeof selectList==='function')selectList(lid);},400);
-}
+/* WRAP applyReceiptPrices to open table */
+var _origApply=window.applyReceiptPrices;
+window.applyReceiptPrices=function(){
+  var ocrEl=document.querySelector('#receiptOCR,.ocr-text,.receipt-text,[class*="ocr"]');
+  var ocrText=ocrEl?ocrEl.textContent.trim():'';
+  openReceiptTable(ocrText);
+};
 
 /* RECEIPT DETAIL */
 window.openRDetail=function(id){
@@ -1422,26 +1529,31 @@ window.openRDetail=function(id){
   var m=document.getElementById('rdtModal');
   if(!m){m=document.createElement('div');m.id='rdtModal';document.body.appendChild(m);}
   var dt=rec.date?new Date(rec.date).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'}):'?';
-  var items=Array.isArray(rec.items)?rec.items:Object.values(rec.items||{});
+  var items=Array.isArray(rec.items)?rec.items:[];
   var labels={record:'Record only',new_list:'New list created',reconcile:'Reconciled list'};
-  m.className='rdtModal open';
+  m.className='rdtModal open';m.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,.42);z-index:600;display:flex;align-items:center;justify-content:center';
   m.innerHTML='<div class="mbox" style="padding:22px">'
     +'<div style="display:flex;align-items:center;gap:8px;margin-bottom:14px">'
     +'<div style="flex:1"><h2 style="margin:0;font-size:1rem">'+esc(rec.storeName||'Receipt')+'</h2>'
-    +'<div style="font-size:.75rem;color:#6b7280;margin-top:2px">'+dt+' · '+(labels[rec.action]||rec.action||'saved')+'</div></div>'
-    +'<button onclick="document.getElementById(\'rdtModal\').className=\'rdtModal\'" style="border:none;background:none;font-size:1.4rem;cursor:pointer;color:#9ca3af;padding:0">×</button></div>'
-    +(rec.total?'<div style="font-size:.9rem;font-weight:600;margin-bottom:10px">Total: €'+Number(rec.total).toFixed(2)+'</div>':'')
-    +(rec.linkedListName?'<div style="font-size:.78rem;color:#065f46;background:#d1fae5;padding:5px 10px;border-radius:8px;margin-bottom:10px">Linked to: '+esc(rec.linkedListName)+'</div>':'')
+    +'<div style="font-size:.75rem;color:#6b7280;margin-top:2px">'+dt+' \u00b7 '+(labels[rec.action]||'saved')+'</div></div>'
+    +'<button onclick="document.getElementById(\'rdtModal\').style.display=\'none\'" style="border:none;background:none;font-size:1.4rem;cursor:pointer;color:#9ca3af;padding:0">\u00d7</button></div>'
+    +(rec.total?'<div style="font-size:.9rem;font-weight:600;margin-bottom:10px">Total: \u20ac'+fmt(rec.total)+'</div>':'')
+    +(rec.linkedListName?'<div style="font-size:.78rem;color:#065f46;background:#d1fae5;padding:5px 10px;border-radius:8px;margin-bottom:10px">Linked: '+esc(rec.linkedListName)+'</div>':'')
     +'<div style="font-size:.78rem;font-weight:600;color:#6b7280;margin-bottom:6px">Items ('+items.length+')</div>'
-    +'<div class="ri-list">'+(items.length?items.map(function(it){return '<div class="ri-row">'+esc(it.name||it)+(it.price?'<span style="color:#6b7280">€'+Number(it.price).toFixed(2)+'</span>':'')+'</div>';}).join(''):'<div style="padding:12px;text-align:center;color:#9ca3af;font-size:.8rem">No items extracted</div>')+'</div>'
+    +'<div class="ri-list">'+( items.length?items.map(function(it){
+      return '<div class="ri-row">'+esc(it.name||it.code||'Item')
+        +(it.qty&&it.qty>1?'<span style="color:#9ca3af;margin-left:6px">x'+it.qty+'</span>':'')
+        +(it.total?'<span style="color:#6b7280">\u20ac'+fmt(it.total)+'</span>':'')
+        +'</div>';
+    }).join(''):'<div style="padding:12px;text-align:center;color:#9ca3af;font-size:.8rem">No items</div>')+'</div>'
     +'<div style="display:flex;gap:8px;justify-content:flex-end;margin-top:10px">'
-    +'<button class="btn-d" onclick="delReceipt(\''+id+'\')">× Delete</button>'
-    +'<button class="btn-g" onclick="document.getElementById(\'rdtModal\').className=\'rdtModal\'">Close</button></div></div>';
+    +'<button class="btn-d" onclick="delReceipt(\''+id+'\')">&times; Delete</button>'
+    +'<button class="btn-g" onclick="document.getElementById(\'rdtModal\').style.display=\'none\'">Close</button></div></div>';
 };
 window.delReceipt=function(id){
   if(!confirm('Delete this receipt?'))return;
   var all=rLoad(R_KEY);delete all[id];rSave(R_KEY,all);
-  document.getElementById('rdtModal').className='rdtModal';
+  document.getElementById('rdtModal').style.display='none';
   renderRecSidebar();
 };
 
@@ -1462,20 +1574,19 @@ function renderRcpSidebar(){
   }).join('');
 }
 
-/* RECIPE MODAL */
 function ensureRcpModal(){
   if(document.getElementById('rcpModal'))return;
   var m=document.createElement('div');m.id='rcpModal';
   m.innerHTML='<div class="mbox">'
     +'<div class="mhd"><h2 id="rcpTitle">New Recipe</h2>'
-    +'<button onclick="closeRcpModal()" style="border:none;background:none;font-size:1.4rem;cursor:pointer;color:#9ca3af;padding:0;margin-left:8px">×</button></div>'
+    +'<button onclick="closeRcpModal()" style="border:none;background:none;font-size:1.4rem;cursor:pointer;color:#9ca3af;padding:0;margin-left:8px">\u00d7</button></div>'
     +'<div class="mbd">'
     +'<label>Recipe Name</label>'
     +'<input id="rcpName" type="text" placeholder="e.g. Spaghetti Bolognese">'
     +'<label>Ingredients <span style="font-weight:400;font-size:.7rem;color:#9ca3af">(one per line, with quantities)</span></label>'
-    +'<textarea id="rcpIngs" placeholder="500g mince&#10;1 onion&#10;2 cloves garlic&#10;400g tinned tomatoes"></textarea>'
+    +'<textarea id="rcpIngs" placeholder="500g mince&#10;1 onion&#10;2 cloves garlic"></textarea>'
     +'<div class="mftr">'
-    +'<button id="rcpDel" class="btn-d" onclick="delCurRcp()" style="display:none">× Delete Recipe</button>'
+    +'<button id="rcpDel" class="btn-d" onclick="delCurRcp()" style="display:none">\u00d7 Delete</button>'
     +'<button class="btn-g" onclick="closeRcpModal()">Cancel</button>'
     +'<button class="btn-p" onclick="saveRcpModal()">Save</button>'
     +'</div></div></div>';
@@ -1517,22 +1628,19 @@ window.delCurRcp=function(){
   closeRcpModal();renderRcpSidebar();
 };
 
-/* RECIPE -> LIST */
 function ensureRtlModal(){
   if(document.getElementById('rtlModal'))return;
   var m=document.createElement('div');m.id='rtlModal';
   m.innerHTML='<div class="mbox" style="padding:22px">'
     +'<div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">'
     +'<h2 style="flex:1;margin:0;font-size:.95rem;font-weight:600">Add to Shopping List</h2>'
-    +'<button onclick="closeRtl()" style="border:none;background:none;font-size:1.4rem;cursor:pointer;color:#9ca3af;padding:0">×</button></div>'
+    +'<button onclick="closeRtl()" style="border:none;background:none;font-size:1.4rem;cursor:pointer;color:#9ca3af;padding:0">\u00d7</button></div>'
     +'<div id="rtlFrom" style="font-size:.78rem;color:#6b7280;margin-bottom:12px"></div>'
     +'<div style="font-size:.75rem;font-weight:600;color:#374151;margin-bottom:3px">Select ingredients:</div>'
     +'<div id="rtlIngs" class="il"></div>'
     +'<div style="font-size:.75rem;font-weight:600;color:#374151;margin-bottom:6px">Add to:</div>'
-    +'<label style="display:flex;align-items:center;gap:6px;font-size:.8rem;cursor:pointer;margin-bottom:6px">'
-    +'<input type="radio" name="rtlC" value="new" checked> Create new list</label>'
-    +'<label style="display:flex;align-items:center;gap:6px;font-size:.8rem;cursor:pointer">'
-    +'<input type="radio" name="rtlC" value="existing"> Add to existing list:</label>'
+    +'<label style="display:flex;align-items:center;gap:6px;font-size:.8rem;cursor:pointer;margin-bottom:6px"><input type="radio" name="rtlC" value="new" checked> Create new list</label>'
+    +'<label style="display:flex;align-items:center;gap:6px;font-size:.8rem;cursor:pointer"><input type="radio" name="rtlC" value="existing"> Add to existing list:</label>'
     +'<select id="rtlSel" style="width:100%;margin-top:6px;padding:7px 10px;border:1px solid #d1d5db;border-radius:8px;font-size:.8rem"></select>'
     +'<div style="display:flex;gap:8px;justify-content:flex-end;margin-top:14px">'
     +'<button class="btn-g" onclick="closeRtl()">Cancel</button>'
@@ -1555,15 +1663,13 @@ window.closeRtl=function(){var m=document.getElementById('rtlModal');if(m)m.clas
 window.confirmRtl=function(){
   var checked=[].slice.call(document.querySelectorAll('#rtlIngs input:checked')).map(function(c){return c.value;});
   if(!checked.length){alert('Select at least one ingredient.');return;}
-  var choice=document.querySelector('input[name=rtlC]:checked');
-  var choiceVal=choice?choice.value:'new';
+  var choice=document.querySelector('input[name=rtlC]:checked');var choiceVal=choice?choice.value:'new';
   var lists=getLists();var items={};
   checked.forEach(function(ing){items['i'+rid()]={name:ing,qty:1,done:false,cat:'Other'};});
   var lid;
   if(choiceVal==='new'){
     var all=rLoad(RCP_KEY);var rn=all[window._addRcpId]?all[window._addRcpId].name:'Recipe';
-    lid='l'+rid();
-    lists[lid]={name:rn,store:'',created:Date.now(),status:'open',items:items};
+    lid='l'+rid();lists[lid]={name:rn,store:'',created:Date.now(),status:'open',items:items};
   }else{
     lid=document.getElementById('rtlSel').value;
     if(!lid){alert('Select a list.');return;}
@@ -1576,26 +1682,20 @@ window.confirmRtl=function(){
   setTimeout(function(){if(typeof selectList==='function')selectList(lid);},400);
 };
 
-/* DOM RESTRUCTURE */
-function makeSection(id,title,addCb,open){
+/* RESTRUCTURE SIDEBAR */
+function makeSection(id,title,addFn,open){
   var s=document.createElement('div');
-  s.className='sidebar-section'+(open?' sec-open':'');
-  s.dataset.sec=id;
-  var hdr=document.createElement('div');
-  hdr.className='sec-hdr';
+  s.className='sidebar-section'+(open?' sec-open':'');s.dataset.sec=id;
+  var hdr=document.createElement('div');hdr.className='sec-hdr';
   hdr.setAttribute('onclick','toggleSection("'+id+'")');
   var btn=document.createElement('button');
-  btn.className='sec-add';btn.title=addCb.title;btn.textContent='+';
-  btn.setAttribute('onclick','event.stopPropagation();'+addCb.fn+'()');
+  btn.className='sec-add';btn.textContent='+';
+  btn.setAttribute('onclick','event.stopPropagation();'+addFn+'()');
   hdr.innerHTML='<span class="sec-title">'+title+'</span>';
-  hdr.appendChild(btn);
-  hdr.insertAdjacentHTML('beforeend',CHEV);
-  var body=document.createElement('div');
-  body.className='sec-body';
-  s.appendChild(hdr);s.appendChild(body);
-  return s;
+  hdr.appendChild(btn);hdr.insertAdjacentHTML('beforeend',CHEV);
+  var body=document.createElement('div');body.className='sec-body';
+  s.appendChild(hdr);s.appendChild(body);return s;
 }
-
 function restructure(){
   var bar=document.getElementById('sidebar');
   if(!bar||document.getElementById('sidebar-accord'))return;
@@ -1608,23 +1708,22 @@ function restructure(){
     if(oc.indexOf('Recipe')>-1||oc.indexOf('recipe')>-1||tx.indexOf('Recipe')>-1)b.style.display='none';
   });
   var accord=document.createElement('div');accord.id='sidebar-accord';
-  var s1=makeSection('lists','My Shopping Lists',{title:'New list',fn:'openNewListModal'},true);
-  var s1body=s1.querySelector('.sec-body');
+  var s1=makeSection('lists','My Shopping Lists','openNewListModal',true);
+  var s1b=s1.querySelector('.sec-body');
   if(hdr&&hdr.parentElement===bar)bar.removeChild(hdr);
-  if(lsSec)s1body.appendChild(lsSec);
-  if(closedSec&&closedSec.parentElement===bar)s1body.appendChild(closedSec);
+  if(lsSec)s1b.appendChild(lsSec);
+  if(closedSec&&closedSec.parentElement===bar)s1b.appendChild(closedSec);
   accord.appendChild(s1);
-  var s2=makeSection('receipts','My Receipts',{title:'Upload receipt',fn:'openReceiptUpload'},false);
+  var s2=makeSection('receipts','My Receipts','openReceiptUpload',false);
   s2.querySelector('.sec-body').innerHTML='<div id="receiptsSidebar"></div>';
   accord.appendChild(s2);
-  var s3=makeSection('recipes','My Recipes',{title:'New recipe',fn:'openNewRecipeModal'},false);
+  var s3=makeSection('recipes','My Recipes','openNewRecipeModal',false);
   s3.querySelector('.sec-body').innerHTML='<div id="recipesSidebar"></div>';
   accord.appendChild(s3);
   bar.insertBefore(accord,footer||null);
 }
 
-/* INIT */
-
+/* UTF-8 HEALER */
 function healUTF8(){
   var walk=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);
   var n;
@@ -1652,6 +1751,8 @@ function healUTF8(){
     });
   });
 }
+
+/* INIT */
 function init(){restructure();renderRecSidebar();renderRcpSidebar();setTimeout(healUTF8,400);setTimeout(healUTF8,1800);}
 var _oSA=window.startApp;
 if(typeof _oSA==='function'){
