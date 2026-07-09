@@ -1133,19 +1133,40 @@ window.dragOver=function(e){e.preventDefault();document.getElementById('receiptD
 window.dropReceipt=function(e){e.preventDefault();document.getElementById('receiptDrop').classList.remove('drag-over');if(e.dataTransfer.files[0])processReceipt(e.dataTransfer.files[0]);};
 window.processReceipt=async function(file){
   if(!file)return;
-  document.getElementById('ocrProgress').style.display='block';
-  document.getElementById('receiptDrop').style.display='none';
-  document.getElementById('ocrStatus').textContent='Loading OCRÃ¢ÂÂ¦';
-  document.getElementById('ocrBarFill').style.width='10%';
+  var prog=document.getElementById('ocrProgress');
+  var drop=document.getElementById('receiptDrop');
+  var stat=document.getElementById('ocrStatus');
+  var bar=document.getElementById('ocrBarFill');
+  if(prog)prog.style.display='block';
+  if(drop)drop.style.display='none';
+  if(stat)stat.textContent='Loading OCR…';
+  if(bar)bar.style.width='10%';
   try{
-    const sc=document.createElement('script');sc.src='https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js';
-    document.head.appendChild(sc);await new Promise(r=>sc.onload=r);
-    document.getElementById('ocrBarFill').style.width='30%';
-    const worker=await Tesseract.createWorker('eng',1,{logger:m=>{if(m.status==='recognizing text'){document.getElementById('ocrBarFill').style.width=(30+m.progress*60)+'%';document.getElementById('ocrStatus').textContent='ReadingÃ¢ÂÂ¦ '+Math.round(m.progress*100)+'%';}}});
-    const{data:{text}}=await worker.recognize(file);await worker.terminate();
-    document.getElementById('ocrBarFill').style.width='100%';
-    parseReceiptText(text);
-  }catch(e){document.getElementById('ocrStatus').textContent='OCR failed: '+e.message;}
+    var worker=await Tesseract.createWorker('eng',1,{
+      workerPath:'https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/worker.min.js',
+      corePath:'https://cdn.jsdelivr.net/npm/tesseract.js-core@5/tesseract-core-simd-lstm.wasm.js',
+      langPath:'https://tessdata.projectnaptha.com/4.0.0/',
+      logger:function(m){
+        if(m.status==='recognizing text'){
+          if(bar)bar.style.width=(30+m.progress*60)+'%';
+          if(stat)stat.textContent='Reading… '+Math.round(m.progress*100)+'%';
+        }
+      }
+    });
+    var result=await worker.recognize(file);
+    await worker.terminate();
+    if(bar)bar.style.width='100%';
+    if(stat)stat.textContent='Done';
+    var text=result.data.text||'';
+    if(typeof closeReceiptModal==='function')closeReceiptModal();
+    if(typeof openReceiptTable==='function')openReceiptTable(text);
+  }catch(e){
+    if(stat)stat.textContent='OCR failed – enter items manually';
+    setTimeout(function(){
+      if(typeof closeReceiptModal==='function')closeReceiptModal();
+      if(typeof openReceiptTable==='function')openReceiptTable('');
+    },1200);
+  }
 };
 function parseReceiptText(text){
   const lines=text.split('\n').map(l=>l.trim()).filter(Boolean),priceRe=/(\d+[.,]\d{2})/g;
