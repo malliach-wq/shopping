@@ -368,7 +368,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
           <button class="btn btn-ghost btn-sm" onclick="document.getElementById('itemImageFile').click()">Ã°ÂÂÂ· Upload Photo</button>
           <span style="font-size:.75rem;color:var(--text-muted)">or drag &amp; drop</span>
         </div>
-        <input type="file" id="itemImageFile" accept="image/*" style="display:none" onchange="handleItemImage(this.files[0])"/>
+        <input type="file" id="itemImageFile" accept="image/*,application/pdf" style="display:none" onchange="handleItemImage(this.files[0])"/>
       </div>
       <div id="lastBoughtDisplay" style="display:none;font-size:.78rem;color:var(--text-muted);padding:6px 0"></div>
     </div>
@@ -1142,6 +1142,29 @@ window.processReceipt=async function(file){
   if(stat)stat.textContent='Loading OCR…';
   if(bar)bar.style.width='10%';
   try{
+    var imgSrc=file;
+    if(file.type==='application/pdf'||file.name.toLowerCase().endsWith('.pdf')){
+      if(stat)stat.textContent='Rendering PDF…';
+      if(bar)bar.style.width='15%';
+      if(typeof pdfjsLib==='undefined'){
+        await new Promise(function(res,rej){
+          var s=document.createElement('script');
+          s.src='https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.min.js';
+          s.onload=res;s.onerror=rej;
+          document.head.appendChild(s);
+        });
+        pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.worker.min.js';
+      }
+      var ab=await file.arrayBuffer();
+      var pdf=await pdfjsLib.getDocument({data:ab}).promise;
+      var page=await pdf.getPage(1);
+      var vp=page.getViewport({scale:2.5});
+      var canvas=document.createElement('canvas');
+      canvas.width=vp.width;canvas.height=vp.height;
+      await page.render({canvasContext:canvas.getContext('2d'),viewport:vp}).promise;
+      imgSrc=canvas;
+      if(bar)bar.style.width='30%';
+    }
     var worker=await Tesseract.createWorker('eng',1,{
       workerPath:'https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/worker.min.js',
       corePath:'https://cdn.jsdelivr.net/npm/tesseract.js-core@5/tesseract-core-simd-lstm.wasm.js',
@@ -1153,7 +1176,7 @@ window.processReceipt=async function(file){
         }
       }
     });
-    var result=await worker.recognize(file);
+    var result=await worker.recognize(imgSrc);
     await worker.terminate();
     if(bar)bar.style.width='100%';
     if(stat)stat.textContent='Done';
@@ -1162,6 +1185,7 @@ window.processReceipt=async function(file){
     if(typeof openReceiptTable==='function')openReceiptTable(text);
   }catch(e){
     if(stat)stat.textContent='OCR failed – enter items manually';
+    console.error('OCR error:',e);
     setTimeout(function(){
       if(typeof closeReceiptModal==='function')closeReceiptModal();
       if(typeof openReceiptTable==='function')openReceiptTable('');
