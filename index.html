@@ -215,19 +215,19 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 <!-- Setup -->
 <div class="setup-overlay" id="setupOverlay" style="display:none">
   <div class="setup-card">
-    <h2>ð Shopping Lists Setup</h2>
+    <h2>Ã°ÂÂÂ Shopping Lists Setup</h2>
     <p>Enable real-time family sharing with Firebase (free, 2 min). Or skip for local-only.</p>
     <div class="setup-steps">
-      <div class="setup-step">Go to <a href="https://console.firebase.google.com" target="_blank" style="color:var(--accent)">console.firebase.google.com</a> â create project</div>
-      <div class="setup-step">Build â Realtime Database â Create â Start in test mode</div>
-      <div class="setup-step">Project Settings â Your apps â Add web app â copy firebaseConfig</div>
+      <div class="setup-step">Go to <a href="https://console.firebase.google.com" target="_blank" style="color:var(--accent)">console.firebase.google.com</a> Ã¢ÂÂ create project</div>
+      <div class="setup-step">Build Ã¢ÂÂ Realtime Database Ã¢ÂÂ Create Ã¢ÂÂ Start in test mode</div>
+      <div class="setup-step">Project Settings Ã¢ÂÂ Your apps Ã¢ÂÂ Add web app Ã¢ÂÂ copy firebaseConfig</div>
       <div class="setup-step">Paste it below:</div>
     </div>
     <div class="form-field"><label>Firebase Config JSON</label>
       <textarea id="fbConfigInput" rows="5" placeholder='{"apiKey":"...","databaseURL":"...","projectId":"..."}'></textarea>
     </div>
     <div class="form-field"><label>Your Name</label><input type="text" id="setupName" placeholder="e.g. Chris" maxlength="20"/></div>
-    <button class="btn btn-primary" style="width:100%;justify-content:center;padding:12px" onclick="saveSetup()">Get Started â</button>
+    <button class="btn btn-primary" style="width:100%;justify-content:center;padding:12px" onclick="saveSetup()">Get Started Ã¢ÂÂ</button>
     <p style="margin-top:10px;text-align:center;font-size:.75rem">Or <a href="#" onclick="useLocalMode()" style="color:var(--accent)">use without sync</a></p>
   </div>
 </div>
@@ -239,7 +239,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
   <p style="color:#fff;font-size:.9rem;margin-top:24px;opacity:.85">Point camera at barcode</p>
   <div id="scannerResult" class="scanner-result" style="display:none"></div>
   <div style="position:absolute;bottom:40px;display:flex;gap:12px;align-items:center">
-    <input type="text" id="manualBarcodeInput" placeholder="Type barcode manuallyâ¦" style="background:#fff;color:#000;border-radius:99px;padding:10px 16px;border:none;width:220px;font-size:.9rem"/>
+    <input type="text" id="manualBarcodeInput" placeholder="Type barcode manuallyÃ¢ÂÂ¦" style="background:#fff;color:#000;border-radius:99px;padding:10px 16px;border:none;width:220px;font-size:.9rem"/>
     <button class="btn btn-white btn-sm" onclick="lookupManualBarcode()">Look Up</button>
     <button class="btn" style="background:#fff2;color:#fff;border:1px solid #fff4" onclick="closeScanner()">Cancel</button>
   </div>
@@ -247,36 +247,36 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 
 <div class="app" id="app" style="display:none">
   <div class="sidebar" id="sidebar">
-    <div class="sidebar-header"><h1>ð My Lists</h1><button class="icon-btn" onclick="openNewListModal()">ï¼</button></div>
+    <div class="sidebar-header"><h1>Ã°ÂÂÂ My Lists</h1><button class="icon-btn" onclick="openNewListModal()">Ã¯Â¼Â</button></div>
     <div class="lists-section" id="listsSidebar"></div>
     <div class="sidebar-footer">
       <div class="user-pill">
         <div class="user-avatar" id="userAvatar">C</div>
         <span id="userNameLabel" style="flex:1">Chris</span>
-        <button class="icon-btn" onclick="toggleTheme()" style="width:24px;height:24px;font-size:.85rem">ð</button>
+        <button class="icon-btn" onclick="toggleTheme()" style="width:24px;height:24px;font-size:.85rem">Ã°ÂÂÂ</button>
       </div>
-      <button class="btn btn-ghost btn-sm" style="justify-content:center" onclick="openRecipe()">ð Import Recipe</button>
+      <button class="btn btn-ghost btn-sm" style="justify-content:center" onclick="openRecipe()">Ã°ÂÂÂ Import Recipe</button>
     </div>
   </div>
 
   <div class="main">
     <div class="main-header" id="mainHeader">
-      <button class="icon-btn" id="menuBtn" onclick="toggleSidebar()" style="display:none">â°</button>
+      <button class="icon-btn" id="menuBtn" onclick="toggleSidebar()" style="display:none">Ã¢ÂÂ°</button>
       <div class="header-title">
         <h2 id="listTitle">Select a list</h2>
         <div style="display:flex;align-items:center;gap:5px">
           <div class="header-store" id="listStoreLine"></div>
-          <button class="icon-btn" id="editTripBtn" onclick="editTripDetails()" style="display:none;width:18px;height:18px;font-size:.65rem;opacity:.65" title="Edit store &amp; date">âï¸</button>
+          <button class="icon-btn" id="editTripBtn" onclick="editTripDetails()" style="display:none;width:18px;height:18px;font-size:.65rem;opacity:.65" title="Edit store &amp; date">Ã¢ÂÂÃ¯Â¸Â</button>
         </div>
       </div>
       <div class="header-actions">
-        <button class="btn btn-ghost btn-sm" id="suggestionsBtn" onclick="reopenSuggestions()" style="display:none" title="Smart suggestions">ð¡</button>
-        <button class="btn btn-ghost btn-sm" id="startShoppingBtn" onclick="startShopping()" style="display:none">ð Start Shopping</button>
-        <button class="btn btn-ghost btn-sm" id="reopenListBtn" onclick="reopenList()" style="display:none">â© Reopen</button>
-        <button class="btn btn-white btn-sm" id="endShoppingBtn" onclick="endShopping()" style="display:none">â Finish</button>
-        <button class="btn btn-ghost btn-sm" onclick="shareList()" id="shareBtn" style="display:none">ð</button>
-        <button class="btn btn-ghost btn-sm" onclick="printList()" id="printBtn" style="display:none">ð¨</button>
-        <button class="icon-btn" onclick="openEditListModal()" id="editListBtn" style="display:none">â</button>
+        <button class="btn btn-ghost btn-sm" id="suggestionsBtn" onclick="reopenSuggestions()" style="display:none" title="Smart suggestions">Ã°ÂÂÂ¡</button>
+        <button class="btn btn-ghost btn-sm" id="startShoppingBtn" onclick="startShopping()" style="display:none">Ã°ÂÂÂ Start Shopping</button>
+        <button class="btn btn-ghost btn-sm" id="reopenListBtn" onclick="reopenList()" style="display:none">Ã¢ÂÂ© Reopen</button>
+        <button class="btn btn-white btn-sm" id="endShoppingBtn" onclick="endShopping()" style="display:none">Ã¢ÂÂ Finish</button>
+        <button class="btn btn-ghost btn-sm" onclick="shareList()" id="shareBtn" style="display:none">Ã°ÂÂÂ</button>
+        <button class="btn btn-ghost btn-sm" onclick="printList()" id="printBtn" style="display:none">Ã°ÂÂÂ¨</button>
+        <button class="icon-btn" onclick="openEditListModal()" id="editListBtn" style="display:none">Ã¢ÂÂ</button>
       </div>
     </div>
 
@@ -288,7 +288,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     </div>
 
     <div class="recipe-panel" id="recipePanel">
-      <p style="font-size:.8rem;color:var(--text-muted);margin-bottom:8px">Paste ingredients â one per line (e.g. "2 cups flour")</p>
+      <p style="font-size:.8rem;color:var(--text-muted);margin-bottom:8px">Paste ingredients Ã¢ÂÂ one per line (e.g. "2 cups flour")</p>
       <textarea id="recipeInput" placeholder="500g chicken breast&#10;2 cloves garlic&#10;1 tin tomatoes"></textarea>
       <div style="display:flex;gap:8px;margin-top:8px">
         <button class="btn btn-primary btn-sm" onclick="importRecipe()">Add to List</button>
@@ -297,25 +297,25 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     </div>
 
     <div class="items-area" id="itemsArea">
-      <div class="empty-state"><div class="icon">ð</div><h3>Select a list</h3><p>Choose from the sidebar or create a new one.</p></div>
+      <div class="empty-state"><div class="icon">Ã°ÂÂÂ</div><h3>Select a list</h3><p>Choose from the sidebar or create a new one.</p></div>
     </div>
   </div>
 </div>
 
-<button class="fab" id="addFab" style="display:none" onclick="openAddModal()">ï¼</button>
+<button class="fab" id="addFab" style="display:none" onclick="openAddModal()">Ã¯Â¼Â</button>
 
 <div class="shopping-bar" id="shoppingBar">
   <div class="shopping-counter">
     <div class="picked-count"><span id="pickedCount">0</span> / <span id="totalCount">0</span> picked</div>
     <div class="total-label">Tap items as you pick them up</div>
   </div>
-  <div class="shopping-total" id="shoppingTotal">â¬0.00</div>
-  <button class="btn btn-white btn-sm" onclick="openReceiptModal()">ð§¾ Validate Receipt</button>
+  <div class="shopping-total" id="shoppingTotal">Ã¢ÂÂ¬0.00</div>
+  <button class="btn btn-white btn-sm" onclick="openReceiptModal()">Ã°ÂÂ§Â¾ Validate Receipt</button>
 </div>
 
 <div class="bottom-bar" id="bottomBar" style="display:none">
   <div class="quick-add-wrap">
-    <input class="quick-add-input" id="quickInput" placeholder="Quick addâ¦ or tap ï¼ for full form" autocomplete="off"/>
+    <input class="quick-add-input" id="quickInput" placeholder="Quick addÃ¢ÂÂ¦ or tap Ã¯Â¼Â for full form" autocomplete="off"/>
     <div class="autocomplete-dropdown" id="autocomplete" style="display:none"></div>
   </div>
   <button class="btn btn-primary" onclick="addItemFromQuick()">Add</button>
@@ -324,12 +324,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 <!-- Add/Edit Item Modal -->
 <div class="modal-overlay" id="itemModal" onclick="if(event.target===this)closeItemModal()">
   <div class="modal">
-    <div class="modal-header"><h3 id="itemModalTitle">Add Item</h3><button class="icon-btn" onclick="closeItemModal()">â</button></div>
+    <div class="modal-header"><h3 id="itemModalTitle">Add Item</h3><button class="icon-btn" onclick="closeItemModal()">Ã¢ÂÂ</button></div>
     <div class="modal-body">
       <div style="display:flex;gap:8px;margin-bottom:14px">
-        <button class="btn btn-ghost" style="flex:1;justify-content:center" onclick="openScanner()">ð· Scan Barcode</button>
-        <input type="text" id="barcodeManualField" placeholder="Barcode numberâ¦" style="flex:2;padding:9px 12px;border-radius:10px;border:1.5px solid var(--border);background:var(--surface2);color:var(--text);font-size:.87rem;outline:none"/>
-        <button class="btn btn-ghost btn-sm" onclick="lookupBarcodeField()">â</button>
+        <button class="btn btn-ghost" style="flex:1;justify-content:center" onclick="openScanner()">Ã°ÂÂÂ· Scan Barcode</button>
+        <input type="text" id="barcodeManualField" placeholder="Barcode numberÃ¢ÂÂ¦" style="flex:2;padding:9px 12px;border-radius:10px;border:1.5px solid var(--border);background:var(--surface2);color:var(--text);font-size:.87rem;outline:none"/>
+        <button class="btn btn-ghost btn-sm" onclick="lookupBarcodeField()">Ã¢ÂÂ</button>
       </div>
       <div id="barcodeStatus" style="display:none;font-size:.78rem;padding:6px 10px;border-radius:8px;margin-bottom:10px"></div>
       <div class="form-row">
@@ -341,31 +341,31 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
         <div class="form-field"><label>Qty</label><input type="number" id="itemQtyInput" placeholder="1" min="0" step="any"/></div>
         <div class="form-field"><label>Unit</label>
           <select id="itemUnitInput">
-            <option value="">â</option><option>pcs</option><option>kg</option><option>g</option><option>litre</option><option>ml</option>
+            <option value="">Ã¢ÂÂ</option><option>pcs</option><option>kg</option><option>g</option><option>litre</option><option>ml</option>
             <option>pack</option><option>bottle</option><option>tin</option><option>box</option><option>bag</option><option>bunch</option>
           </select>
         </div>
       </div>
       <div class="form-row">
-        <div class="form-field"><label>Cost (â¬)</label><input type="number" id="itemPriceInput" placeholder="0.00" min="0" step="0.01"/></div>
+        <div class="form-field"><label>Cost (Ã¢ÂÂ¬)</label><input type="number" id="itemPriceInput" placeholder="0.00" min="0" step="0.01"/></div>
         <div class="form-field"><label>Category</label>
           <select id="itemCategoryInput">
             <option value="">Auto-detect</option>
-            <option>ð¥¦ Produce</option><option>ð¥ Dairy</option><option>ð Bakery</option><option>ð¥© Meat &amp; Fish</option>
-            <option>âï¸ Frozen</option><option>ð¥« Canned &amp; Dry</option><option>ð§ Beverages</option><option>ð« Snacks &amp; Sweets</option>
-            <option>ð§´ Personal Care</option><option>ð§¹ Household</option><option>ð¾ Pets</option><option>ð Health</option><option>ð¦ Other</option>
+            <option>Ã°ÂÂ¥Â¦ Produce</option><option>Ã°ÂÂ¥Â Dairy</option><option>Ã°ÂÂÂ Bakery</option><option>Ã°ÂÂ¥Â© Meat &amp; Fish</option>
+            <option>Ã¢ÂÂÃ¯Â¸Â Frozen</option><option>Ã°ÂÂ¥Â« Canned &amp; Dry</option><option>Ã°ÂÂ§Â Beverages</option><option>Ã°ÂÂÂ« Snacks &amp; Sweets</option>
+            <option>Ã°ÂÂ§Â´ Personal Care</option><option>Ã°ÂÂ§Â¹ Household</option><option>Ã°ÂÂÂ¾ Pets</option><option>Ã°ÂÂÂ Health</option><option>Ã°ÂÂÂ¦ Other</option>
           </select>
         </div>
       </div>
       <div class="form-field"><label>Notes</label><textarea id="itemNotesInput" rows="2" placeholder="e.g. lactose-free, ripe ones, on offer"></textarea></div>
       <div class="form-field">
-        <label>Photo <span style="font-weight:400;text-transform:none;letter-spacing:0;font-size:.72rem">(optional â helps spot on shelf)</span></label>
+        <label>Photo <span style="font-weight:400;text-transform:none;letter-spacing:0;font-size:.72rem">(optional Ã¢ÂÂ helps spot on shelf)</span></label>
         <div id="itemImagePreviewWrap" style="display:none" class="img-preview-wrap">
           <img id="itemImagePreview" class="img-preview" src="" alt=""/>
-          <button class="img-remove-btn" onclick="clearItemImage()">â</button>
+          <button class="img-remove-btn" onclick="clearItemImage()">Ã¢ÂÂ</button>
         </div>
         <div id="itemImagePlaceholder" style="display:flex;align-items:center;gap:10px">
-          <button class="btn btn-ghost btn-sm" onclick="document.getElementById('itemImageFile').click()">ð· Upload Photo</button>
+          <button class="btn btn-ghost btn-sm" onclick="document.getElementById('itemImageFile').click()">Ã°ÂÂÂ· Upload Photo</button>
           <span style="font-size:.75rem;color:var(--text-muted)">or drag &amp; drop</span>
         </div>
         <input type="file" id="itemImageFile" accept="image/*" style="display:none" onchange="handleItemImage(this.files[0])"/>
@@ -373,7 +373,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
       <div id="lastBoughtDisplay" style="display:none;font-size:.78rem;color:var(--text-muted);padding:6px 0"></div>
     </div>
     <div class="modal-footer">
-      <button class="btn btn-danger btn-sm" id="deleteItemBtn" onclick="deleteEditingItem()" style="display:none;margin-right:auto">ð Delete</button>
+      <button class="btn btn-danger btn-sm" id="deleteItemBtn" onclick="deleteEditingItem()" style="display:none;margin-right:auto">Ã°ÂÂÂ Delete</button>
       <button class="btn btn-ghost" onclick="closeItemModal()">Cancel</button>
       <button class="btn btn-primary" onclick="saveItemModal()" id="itemSaveBtn">Add to List</button>
     </div>
@@ -383,7 +383,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 <!-- New/Edit List Modal -->
 <div class="modal-overlay" id="listModal" onclick="if(event.target===this)closeListModal()">
   <div class="modal">
-    <div class="modal-header"><h3 id="listModalTitle">New List</h3><button class="icon-btn" onclick="closeListModal()">â</button></div>
+    <div class="modal-header"><h3 id="listModalTitle">New List</h3><button class="icon-btn" onclick="closeListModal()">Ã¢ÂÂ</button></div>
     <div class="modal-body">
       <div class="form-field"><label>List Name</label><input type="text" id="listNameInput" placeholder="e.g. Weekly Shop"/></div>
       <div class="form-field"><label>Icon</label><div class="icon-grid" id="iconGrid"></div></div>
@@ -402,7 +402,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 <!-- Start/Edit Trip Modal -->
 <div class="modal-overlay" id="startShoppingModal" onclick="if(event.target===this)closeStartShoppingModal()">
   <div class="modal" style="max-width:400px">
-    <div class="modal-header"><h3 id="shopModalTitle">ð Start Shopping</h3><button class="icon-btn" onclick="closeStartShoppingModal()">â</button></div>
+    <div class="modal-header"><h3 id="shopModalTitle">Ã°ÂÂÂ Start Shopping</h3><button class="icon-btn" onclick="closeStartShoppingModal()">Ã¢ÂÂ</button></div>
     <div class="modal-body">
       <p id="shopModalHint" style="font-size:.85rem;color:var(--text-muted);margin-bottom:16px">Confirm the store and date/time for this trip.</p>
       <div class="form-field"><label>Store / Supermarket</label><input type="text" id="shopConfirmStore" placeholder="e.g. Lidl Malta"/></div>
@@ -410,7 +410,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     </div>
     <div class="modal-footer">
       <button class="btn btn-ghost" onclick="closeStartShoppingModal()">Cancel</button>
-      <button class="btn btn-primary" id="shopModalConfirmBtn" onclick="confirmShopping()">Start ð</button>
+      <button class="btn btn-primary" id="shopModalConfirmBtn" onclick="confirmShopping()">Start Ã°ÂÂÂ</button>
     </div>
   </div>
 </div>
@@ -420,7 +420,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
   <div class="modal" style="max-width:600px">
     <div class="modal-header">
       <div><h3 id="suggestionsTitle">Smart Suggestions</h3><p id="suggestionsSubtitle" style="font-size:.75rem;color:var(--text-muted);margin-top:2px"></p></div>
-      <button class="icon-btn" onclick="closeSuggestions()">â</button>
+      <button class="icon-btn" onclick="closeSuggestions()">Ã¢ÂÂ</button>
     </div>
     <div class="modal-body" style="padding-top:8px"><div id="suggestionsBody"></div></div>
     <div class="modal-footer"><button class="btn btn-ghost" onclick="closeSuggestions()">Done</button></div>
@@ -430,28 +430,28 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 <!-- Receipt Modal -->
 <div class="modal-overlay" id="receiptModal" onclick="if(event.target===this)closeReceiptModal()">
   <div class="modal" style="max-width:580px">
-    <div class="modal-header"><h3>ð§¾ Validate Receipt</h3><button class="icon-btn" onclick="closeReceiptModal()">â</button></div>
+    <div class="modal-header"><h3>Ã°ÂÂ§Â¾ Validate Receipt</h3><button class="icon-btn" onclick="closeReceiptModal()">Ã¢ÂÂ</button></div>
     <div class="modal-body">
       <div id="receiptUploadArea">
         <div class="receipt-drop" id="receiptDrop" onclick="document.getElementById('receiptFileInput').click()" ondragover="dragOver(event)" ondrop="dropReceipt(event)">
-          <div class="icon">ð§¾</div>
+          <div class="icon">Ã°ÂÂ§Â¾</div>
           <p style="font-weight:600;margin-bottom:4px">Upload your receipt</p>
-          <p style="font-size:.8rem;color:var(--text-muted)">Photo or scan â we'll match items and record prices.</p>
+          <p style="font-size:.8rem;color:var(--text-muted)">Photo or scan Ã¢ÂÂ we'll match items and record prices.</p>
         </div>
         <input type="file" id="receiptFileInput" accept="image/*" style="display:none" onchange="processReceipt(this.files[0])"/>
         <div id="ocrProgress" class="ocr-progress" style="display:none">
-          <p style="font-size:.85rem;font-weight:600" id="ocrStatus">Reading receiptâ¦</p>
+          <p style="font-size:.85rem;font-weight:600" id="ocrStatus">Reading receiptÃ¢ÂÂ¦</p>
           <div class="ocr-bar"><div class="ocr-bar-fill" id="ocrBarFill" style="width:0%"></div></div>
         </div>
       </div>
       <div id="receiptResults" style="display:none">
         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
           <p style="font-size:.83rem;font-weight:600">Matched items:</p>
-          <button class="btn btn-ghost btn-sm" onclick="resetReceipt()">â© Upload again</button>
+          <button class="btn btn-ghost btn-sm" onclick="resetReceipt()">Ã¢ÂÂ© Upload again</button>
         </div>
         <div id="receiptMatchList"></div>
         <div id="receiptUnmatched" style="margin-top:12px;display:none">
-          <p style="font-size:.78rem;font-weight:600;color:var(--text-muted);margin-bottom:6px">â  Not on list:</p>
+          <p style="font-size:.78rem;font-weight:600;color:var(--text-muted);margin-bottom:6px">Ã¢ÂÂ  Not on list:</p>
           <div id="receiptUnmatchedList"></div>
         </div>
       </div>
@@ -466,37 +466,37 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 <div class="toast" id="toast"></div>
 
 <script type="module">
-// ââ Config ââââââââââââââââââââââââââââââââââââââââââââââ
+// Ã¢ÂÂÃ¢ÂÂ Config Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ
 const LISTS_KEY='shopping_lists_v1',USER_KEY='shopping_user',CFG_KEY='shopping_fb_cfg',HISTORY_KEY='shopping_history';
 let db=null,currentListId=null,currentFilter='all',editingItemId=null,editingListId=null;
-let selectedIcon='ð',selectedColor='#22c55e',acIndex=-1;
+let selectedIcon='Ã°ÂÂÂ',selectedColor='#22c55e',acIndex=-1;
 let shoppingMode=false,receiptMatches=[],_shopModalMode='start',currentItemImage=null;
 let scannerStream=null,scannerActive=false;
 let _sugSession={};
-const ICONS=['ð','ð ','ð','ð','ðï¸','ð¿','ð¶','ð¾','ð','ð','ð§¹','ð·'];
+const ICONS=['Ã°ÂÂÂ','Ã°ÂÂÂ ','Ã°ÂÂÂ','Ã°ÂÂÂ','Ã°ÂÂÂÃ¯Â¸Â','Ã°ÂÂÂ¿','Ã°ÂÂÂ¶','Ã°ÂÂÂ¾','Ã°ÂÂÂ','Ã°ÂÂÂ','Ã°ÂÂ§Â¹','Ã°ÂÂÂ·'];
 const COLORS=['#22c55e','#3b82f6','#f59e0b','#ef4444','#8b5cf6','#ec4899','#06b6d4','#f97316','#84cc16','#14b8a6'];
 const CATEGORIES={
-  'ð¥¦ Produce':['apple','banana','orange','lemon','lime','grape','strawberr','blueberr','raspberry','melon','tomato','potato','onion','garlic','ginger','carrot','broccoli','spinach','lettuce','cucumber','pepper','avocado','mango','pineapple','pear','peach','plum','kiwi','cherry','mushroom','celery','courgette','zucchini','aubergine','eggplant','cabbage','cauliflower','leek','spring onion','salad','herbs','parsley','coriander','basil','mint','rocket','peas','beans','sweetcorn'],
-  'ð¥ Dairy':['milk','cheese','butter','yogurt','yoghurt','cream','egg','margarine','mozzarella','parmesan','feta','cheddar','brie'],
-  'ð Bakery':['bread','roll','baguette','croissant','bagel','muffin','cake','biscuit','cookie','pastry','wrap','pitta','tortilla','loaf'],
-  'ð¥© Meat & Fish':['chicken','beef','pork','lamb','fish','salmon','tuna','prawn','shrimp','mince','steak','sausage','bacon','turkey','duck','sardine','cod'],
-  'âï¸ Frozen':['frozen','ice cream','oven chips','sorbet'],
-  'ð¥« Canned & Dry':['pasta','rice','lentil','chickpea','kidney bean','flour','sugar','salt','oil','vinegar','sauce','ketchup','mustard','mayonnaise','jam','honey','cereal','oat','stock','broth','soup','tinned','canned','baked beans','coconut milk','passata'],
-  'ð§ Beverages':['water','juice','coffee','tea','wine','beer','coke','cola','sprite','fanta','lemonade','kombucha','smoothie','energy drink','soft drink','squash'],
-  'ð« Snacks & Sweets':['chocolate','crisp','popcorn','nuts','peanut','almond','walnut','cashew','pistachio','raisin','granola bar','sweets','candy','gummy'],
-  'ð§´ Personal Care':['shampoo','conditioner','shower gel','soap','toothpaste','toothbrush','deodorant','razor','moisturiser','lotion','sunscreen','cotton','floss'],
-  'ð§¹ Household':['washing up','dishwasher','laundry','detergent','bleach','sponge','bin bag','toilet paper','tissue','kitchen roll','foil','cling film','cleaning'],
-  'ð¾ Pets':['dog food','cat food','kibble','litter','pet treats'],
-  'ð Health':['vitamin','supplement','paracetamol','ibuprofen','plaster','medicine'],
+  'Ã°ÂÂ¥Â¦ Produce':['apple','banana','orange','lemon','lime','grape','strawberr','blueberr','raspberry','melon','tomato','potato','onion','garlic','ginger','carrot','broccoli','spinach','lettuce','cucumber','pepper','avocado','mango','pineapple','pear','peach','plum','kiwi','cherry','mushroom','celery','courgette','zucchini','aubergine','eggplant','cabbage','cauliflower','leek','spring onion','salad','herbs','parsley','coriander','basil','mint','rocket','peas','beans','sweetcorn'],
+  'Ã°ÂÂ¥Â Dairy':['milk','cheese','butter','yogurt','yoghurt','cream','egg','margarine','mozzarella','parmesan','feta','cheddar','brie'],
+  'Ã°ÂÂÂ Bakery':['bread','roll','baguette','croissant','bagel','muffin','cake','biscuit','cookie','pastry','wrap','pitta','tortilla','loaf'],
+  'Ã°ÂÂ¥Â© Meat & Fish':['chicken','beef','pork','lamb','fish','salmon','tuna','prawn','shrimp','mince','steak','sausage','bacon','turkey','duck','sardine','cod'],
+  'Ã¢ÂÂÃ¯Â¸Â Frozen':['frozen','ice cream','oven chips','sorbet'],
+  'Ã°ÂÂ¥Â« Canned & Dry':['pasta','rice','lentil','chickpea','kidney bean','flour','sugar','salt','oil','vinegar','sauce','ketchup','mustard','mayonnaise','jam','honey','cereal','oat','stock','broth','soup','tinned','canned','baked beans','coconut milk','passata'],
+  'Ã°ÂÂ§Â Beverages':['water','juice','coffee','tea','wine','beer','coke','cola','sprite','fanta','lemonade','kombucha','smoothie','energy drink','soft drink','squash'],
+  'Ã°ÂÂÂ« Snacks & Sweets':['chocolate','crisp','popcorn','nuts','peanut','almond','walnut','cashew','pistachio','raisin','granola bar','sweets','candy','gummy'],
+  'Ã°ÂÂ§Â´ Personal Care':['shampoo','conditioner','shower gel','soap','toothpaste','toothbrush','deodorant','razor','moisturiser','lotion','sunscreen','cotton','floss'],
+  'Ã°ÂÂ§Â¹ Household':['washing up','dishwasher','laundry','detergent','bleach','sponge','bin bag','toilet paper','tissue','kitchen roll','foil','cling film','cleaning'],
+  'Ã°ÂÂÂ¾ Pets':['dog food','cat food','kibble','litter','pet treats'],
+  'Ã°ÂÂÂ Health':['vitamin','supplement','paracetamol','ibuprofen','plaster','medicine'],
 };
-function guessCategory(n){n=(n||'').toLowerCase();for(const[cat,kw]of Object.entries(CATEGORIES)){if(kw.some(k=>n.includes(k)))return cat;}return'ð¦ Other';}
+function guessCategory(n){n=(n||'').toLowerCase();for(const[cat,kw]of Object.entries(CATEGORIES)){if(kw.some(k=>n.includes(k)))return cat;}return'Ã°ÂÂÂ¦ Other';}
 
-// ââ Storage ââââââââââââââââââââââââââââââââââââââââââââââ
+// Ã¢ÂÂÃ¢ÂÂ Storage Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ
 function localLoad(){try{return JSON.parse(localStorage.getItem(LISTS_KEY))||{};}catch{return{};}}
 function localSave(d){localStorage.setItem(LISTS_KEY,JSON.stringify(d));}
 let listsData={};
 
-// ââ Firebase âââââââââââââââââââââââââââââââââââââââââââââ
+// Ã¢ÂÂÃ¢ÂÂ Firebase Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ
 async function initFirebase(cfg){
   const{initializeApp}=await import('https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js');
   const{getDatabase,ref,set,onValue,remove,update}=await import('https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js');
@@ -508,7 +508,7 @@ async function fbWrite(p,v){if(!db)return;await window._fb.set(window._fb.ref(db
 async function fbUpdate(p,v){if(!db)return;await window._fb.update(window._fb.ref(db,p),v);}
 async function fbRemove(p){if(!db)return;await window._fb.remove(window._fb.ref(db,p));}
 
-// ââ Helpers ââââââââââââââââââââââââââââââââââââââââââââââ
+// Ã¢ÂÂÃ¢ÂÂ Helpers Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ
 function uid(){return Date.now().toString(36)+Math.random().toString(36).slice(2);}
 function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.className='toast show';setTimeout(()=>t.className='toast',2600);}
@@ -518,7 +518,7 @@ function getList(id){return getAllLists()[id];}
 function getHistory(){try{return JSON.parse(localStorage.getItem(HISTORY_KEY))||[];}catch{return[];}}
 function addToHistory(name,category){const h=getHistory().filter(i=>i.name!==name);h.unshift({name,category});localStorage.setItem(HISTORY_KEY,JSON.stringify(h.slice(0,200)));}
 
-// ââ Setup ââââââââââââââââââââââââââââââââââââââââââââââââ
+// Ã¢ÂÂÃ¢ÂÂ Setup Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ
 window.saveSetup=async function(){
   const raw=document.getElementById('fbConfigInput').value.trim();
   const name=document.getElementById('setupName').value.trim();
@@ -552,27 +552,27 @@ async function startApp(){
   else await startApp();
 })();
 
-// ââ Sidebar ââââââââââââââââââââââââââââââââââââââââââââââ
+// Ã¢ÂÂÃ¢ÂÂ Sidebar Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ
 function listCardHTML(id,list){
   const items=list.items?Object.values(list.items):[];
   const closed=list.status==='closed';
   const rem=items.filter(i=>!i.checked).length;
   const trip=list.shoppingLabel?list.shoppingLabel.substring(0,30):(list.store||'');
   return `<div class="list-item${id===currentListId?' active':''}${closed?' closed':''}" onclick="selectList('${id}')">
-    <div class="list-icon" style="background:${list.color||'#22c55e'}22">${closed?'â':list.icon||'ð'}</div>
+    <div class="list-icon" style="background:${list.color||'#22c55e'}22">${closed?'Ã¢ÂÂ':list.icon||'Ã°ÂÂÂ'}</div>
     <div class="list-meta">
       <div class="list-name">${esc(list.name)}</div>
       <div class="list-count">${trip?esc(trip)+'<br>':''}${items.length} item${items.length!==1?'s':''}</div>
     </div>
     ${closed?'<span class="list-closed-badge">Done</span>':rem>0?`<span class="list-badge">${rem}</span>`:''}
-    <button class="list-edit-btn" onclick="editList(event,'${id}')" title="Edit list">âï¸</button>
+    <button class="list-edit-btn" onclick="editList(event,'${id}')" title="Edit list">Ã¢ÂÂÃ¯Â¸Â</button>
   </div>`;
 }
 function renderSidebar(){
   const lists=getAllLists();
   const el=document.getElementById('listsSidebar');
   const entries=Object.entries(lists);
-  if(!entries.length){el.innerHTML='<div style="padding:20px 10px;text-align:center;color:var(--text-muted);font-size:.82rem">No lists yet.<br>Click ï¼ to create one.</div>';return;}
+  if(!entries.length){el.innerHTML='<div style="padding:20px 10px;text-align:center;color:var(--text-muted);font-size:.82rem">No lists yet.<br>Click Ã¯Â¼Â to create one.</div>';return;}
   const open=entries.filter(([,l])=>l.status!=='closed');
   const closed=entries.filter(([,l])=>l.status==='closed');
   let html='';
@@ -589,7 +589,7 @@ window.selectList=function(id){
   currentListId=id;currentFilter='all';renderSidebar();
   const list=getList(id);const closed=list?.status==='closed';
   document.getElementById('listTitle').textContent=list?.name||'';
-  const sl=list?.shoppingLabel?'ð '+list.shoppingLabel:(list?.store?'ð '+list.store:'');
+  const sl=list?.shoppingLabel?'Ã°ÂÂÂ '+list.shoppingLabel:(list?.store?'Ã°ÂÂÂ '+list.store:'');
   document.getElementById('listStoreLine').textContent=sl;
   document.getElementById('editTripBtn').style.display=sl?'':'none';
   ['filterBar','shareBtn','printBtn','editListBtn','suggestionsBtn'].forEach(n=>{const e=document.getElementById(n);if(e)e.style.display='';});
@@ -603,7 +603,7 @@ window.selectList=function(id){
   if(window.innerWidth<=640)closeSidebar();
 };
 
-// ââ Items âââââââââââââââââââââââââââââââââââââââââââââââââ
+// Ã¢ÂÂÃ¢ÂÂ Items Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ
 function lastBoughtChip(ts){
   if(!ts)return'';
   const days=Math.floor((Date.now()-ts)/86400000);
@@ -611,7 +611,7 @@ function lastBoughtChip(ts){
   if(days===0){cls='recent';label='today';}else if(days===1){cls='recent';label='yesterday';}
   else if(days<=7){cls='recent';label=days+'d ago';}else if(days<=21){cls='medium';label=Math.floor(days/7)+'w ago';}
   else if(days<=60){cls='old';label=Math.floor(days/7)+'w ago';}else{cls='old';label=Math.floor(days/30)+'mo ago';}
-  return`<span class="last-bought-chip ${cls}" title="${new Date(ts).toLocaleDateString()}">ð ${label}</span>`;
+  return`<span class="last-bought-chip ${cls}" title="${new Date(ts).toLocaleDateString()}">Ã°ÂÂÂ ${label}</span>`;
 }
 function renderItems(){
   const list=getList(currentListId);if(!list)return;
@@ -619,20 +619,20 @@ function renderItems(){
   const priced=items.filter(i=>i.price&&!i.checked);
   const total=priced.reduce((s,i)=>s+(parseFloat(i.price)||0)*(parseFloat(i.qty)||1),0);
   const pill=document.getElementById('budgetPill');
-  if(priced.length){pill.style.display='';pill.textContent='ð§¾ â¬'+total.toFixed(2);}else pill.style.display='none';
+  if(priced.length){pill.style.display='';pill.textContent='Ã°ÂÂ§Â¾ Ã¢ÂÂ¬'+total.toFixed(2);}else pill.style.display='none';
   if(shoppingMode){
     const picked=items.filter(i=>i.checked).length;
     document.getElementById('pickedCount').textContent=picked;
     document.getElementById('totalCount').textContent=items.length;
-    document.getElementById('shoppingTotal').textContent='â¬'+items.filter(i=>i.checked&&i.price).reduce((s,i)=>s+(parseFloat(i.price)||0)*(parseFloat(i.qty)||1),0).toFixed(2);
+    document.getElementById('shoppingTotal').textContent='Ã¢ÂÂ¬'+items.filter(i=>i.checked&&i.price).reduce((s,i)=>s+(parseFloat(i.price)||0)*(parseFloat(i.qty)||1),0).toFixed(2);
   }
   let filtered=items;
   if(currentFilter==='active')filtered=items.filter(i=>!i.checked);
   if(currentFilter==='checked')filtered=items.filter(i=>i.checked);
   const active=filtered.filter(i=>!i.checked),checked=filtered.filter(i=>i.checked);
   let html='';
-  if(!items.length)html='<div class="empty-state"><div class="icon">ð</div><h3>List is empty</h3><p>Tap ï¼ to add items.</p></div>';
-  else if(!filtered.length)html='<div class="empty-state"><div class="icon">â¨</div><h3>Nothing here</h3></div>';
+  if(!items.length)html='<div class="empty-state"><div class="icon">Ã°ÂÂÂ</div><h3>List is empty</h3><p>Tap Ã¯Â¼Â to add items.</p></div>';
+  else if(!filtered.length)html='<div class="empty-state"><div class="icon">Ã¢ÂÂ¨</div><h3>Nothing here</h3></div>';
   else{
     const groups={};
     active.forEach(i=>{const cat=i.category||guessCategory(i.name);if(!groups[cat])groups[cat]=[];groups[cat].push(i);});
@@ -642,7 +642,7 @@ function renderItems(){
       html+='</div>';
     });
     if(checked.length&&currentFilter!=='active'){
-      html+=`<div class="section-divider" onclick="toggleCheckedSection(this)"><div class="section-divider-line"></div><div class="section-divider-label"><span>â¼</span> ${checked.length} ${shoppingMode?'in basket':'checked'}</div><div class="section-divider-line"></div></div><div id="checkedSection">`;
+      html+=`<div class="section-divider" onclick="toggleCheckedSection(this)"><div class="section-divider-line"></div><div class="section-divider-label"><span>Ã¢ÂÂ¼</span> ${checked.length} ${shoppingMode?'in basket':'checked'}</div><div class="section-divider-line"></div></div><div id="checkedSection">`;
       checked.forEach(item=>{html+=itemCardHTML(item,list);});
       html+='</div>';
     }
@@ -651,14 +651,14 @@ function renderItems(){
 }
 function itemCardHTML(item,list){
   const shopping=shoppingMode;
-  const storeSearch=list.store&&list.storeUrl?`<button class="item-search-btn" onclick="searchItem('${esc(item.name)}','${esc(list.storeUrl)}','${esc(list.store)}',event)">ð ${esc(list.store)}</button>`:'';
+  const storeSearch=list.store&&list.storeUrl?`<button class="item-search-btn" onclick="searchItem('${esc(item.name)}','${esc(list.storeUrl)}','${esc(list.store)}',event)">Ã°ÂÂÂ ${esc(list.store)}</button>`:'';
   const thumb=item.image
     ?`<img class="item-thumb" src="${item.image}" alt="${esc(item.name)}" onclick="openItemModal('${item.id}')">`
-    :`<div class="item-thumb-placeholder" onclick="openItemModal('${item.id}')" title="Add photo">ð·</div>`;
+    :`<div class="item-thumb-placeholder" onclick="openItemModal('${item.id}')" title="Add photo">Ã°ÂÂÂ·</div>`;
   return`<div class="item-card${item.checked?(shopping?' picked':' checked'):''}" id="ic-${item.id}">
     <div class="item-main">
       ${thumb}
-      <div class="item-check${item.checked?' done':''}${shopping?' shopping-pick':''}" onclick="toggleItem('${item.id}')">${item.checked?'â':''}</div>
+      <div class="item-check${item.checked?' done':''}${shopping?' shopping-pick':''}" onclick="toggleItem('${item.id}')">${item.checked?'Ã¢ÂÂ':''}</div>
       <div class="item-body" onclick="openItemModal('${item.id}')">
         <div class="item-name">${esc(item.name)}</div>
         <div class="item-detail-row">
@@ -668,7 +668,7 @@ function itemCardHTML(item,list){
             ${item.qty?`<span>${item.qty}${item.unit?' '+item.unit:''}</span>`:''}
           </div>
           <div class="item-detail-line">
-            ${item.price?`<span class="item-price-tag">â¬${(parseFloat(item.price)*(parseFloat(item.qty)||1)).toFixed(2)}</span>`:''}
+            ${item.price?`<span class="item-price-tag">Ã¢ÂÂ¬${(parseFloat(item.price)*(parseFloat(item.qty)||1)).toFixed(2)}</span>`:''}
             ${item.notes?`<span style="font-style:italic;color:var(--text-muted)">${esc(item.notes)}</span>`:''}
             ${lastBoughtChip(item.lastBought)}
             ${item.addedBy&&item.addedBy!==getUserName()?`<span style="color:var(--text-muted)">by ${esc(item.addedBy)}</span>`:''}
@@ -677,13 +677,13 @@ function itemCardHTML(item,list){
         </div>
       </div>
       <div class="item-actions" onclick="event.stopPropagation()">
-        <button class="icon-btn" onclick="removeItem('${item.id}')" style="font-size:.85rem">ð</button>
+        <button class="icon-btn" onclick="removeItem('${item.id}')" style="font-size:.85rem">Ã°ÂÂÂ</button>
       </div>
     </div>
   </div>`;
 }
 
-// ââ Item interactions âââââââââââââââââââââââââââââââââââââ
+// Ã¢ÂÂÃ¢ÂÂ Item interactions Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ
 window.toggleItem=async function(itemId){
   const item=getList(currentListId)?.items?.[itemId];if(!item)return;
   const newVal=!item.checked,updates={checked:newVal};if(newVal)updates.lastBought=Date.now();
@@ -694,11 +694,11 @@ window.removeItem=async function(itemId){
   if(db)await fbRemove(`lists/${currentListId}/items/${itemId}`);
   else{const d=localLoad();delete d[currentListId].items[itemId];localSave(d);listsData=d;renderSidebar();renderItems();}
 };
-window.toggleCheckedSection=function(el){const s=document.getElementById('checkedSection');if(s){const h=s.style.display==='none';s.style.display=h?'':'none';el.querySelector('span').textContent=h?'â¼':'â¶';}};
+window.toggleCheckedSection=function(el){const s=document.getElementById('checkedSection');if(s){const h=s.style.display==='none';s.style.display=h?'':'none';el.querySelector('span').textContent=h?'Ã¢ÂÂ¼':'Ã¢ÂÂ¶';}};
 window.searchItem=function(name,url,store,e){e.stopPropagation();window.open(`${url}/search?q=${encodeURIComponent(name)}`,'_blank');};
 window.setFilter=function(f,el){currentFilter=f;document.querySelectorAll('.filter-chip').forEach(c=>c.classList.remove('active'));el.classList.add('active');renderItems();};
 
-// ââ Quick add âââââââââââââââââââââââââââââââââââââââââââââ
+// Ã¢ÂÂÃ¢ÂÂ Quick add Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ
 function parseQuickInput(raw){
   raw=raw.trim();let qty='',unit='',name=raw;
   const m=raw.match(/^([\d.]+)\s*(kg|g|litre|l|ml|pcs?|pack|bottle|tin|box|bag|bunch)s?\s+(.+)$/i);
@@ -741,7 +741,7 @@ async function writeItem(item){
   else{const d=localLoad();if(!d[currentListId].items)d[currentListId].items={};d[currentListId].items[item.id]=item;localSave(d);listsData=d;renderSidebar();renderItems();}
 }
 
-// ââ Item Image ââââââââââââââââââââââââââââââââââââââââââââ
+// Ã¢ÂÂÃ¢ÂÂ Item Image Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ
 function compressImage(file,maxW,maxH,q){
   return new Promise(resolve=>{
     const img=new Image(),url=URL.createObjectURL(file);
@@ -775,7 +775,7 @@ function setImageUI(data){
   else{document.getElementById('itemImagePreview').src='';document.getElementById('itemImagePreviewWrap').style.display='none';document.getElementById('itemImagePlaceholder').style.display='flex';}
 }
 
-// ââ Item Modal ââââââââââââââââââââââââââââââââââââââââââââ
+// Ã¢ÂÂÃ¢ÂÂ Item Modal Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ
 window.openAddModal=function(prefill={}){
   editingItemId=null;
   document.getElementById('itemModalTitle').textContent='Add Item';
@@ -816,7 +816,7 @@ window.openItemModal=function(itemId){
   document.getElementById('itemImageFile').value='';
   setImageUI(item.image||null);
   const lbEl=document.getElementById('lastBoughtDisplay');
-  if(item.lastBought){const d=Math.floor((Date.now()-item.lastBought)/86400000);lbEl.innerHTML='ð Last bought: <strong>'+(d===0?'today':d===1?'yesterday':d+'d ago')+'</strong> ('+new Date(item.lastBought).toLocaleDateString()+')';lbEl.style.display='';}
+  if(item.lastBought){const d=Math.floor((Date.now()-item.lastBought)/86400000);lbEl.innerHTML='Ã°ÂÂÂ Last bought: <strong>'+(d===0?'today':d===1?'yesterday':d+'d ago')+'</strong> ('+new Date(item.lastBought).toLocaleDateString()+')';lbEl.style.display='';}
   else lbEl.style.display='none';
   document.getElementById('itemModal').classList.add('open');
 };
@@ -836,10 +836,10 @@ window.saveItemModal=async function(){
   }else{
     await writeItem({id:uid(),...data,checked:false,addedBy:getUserName(),addedAt:Date.now(),lastBought:null});
   }
-  addToHistory(name,data.category);closeItemModal();toast(editingItemId?'Item updated â':'Added: '+name);
+  addToHistory(name,data.category);closeItemModal();toast(editingItemId?'Item updated Ã¢ÂÂ':'Added: '+name);
 };
 
-// ââ Barcode âââââââââââââââââââââââââââââââââââââââââââââââ
+// Ã¢ÂÂÃ¢ÂÂ Barcode Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ
 window.openScanner=async function(){
   document.getElementById('scannerOverlay').style.display='flex';
   try{
@@ -863,9 +863,9 @@ window.closeScanner=function(){
 };
 window.lookupManualBarcode=function(){const c=document.getElementById('manualBarcodeInput').value.trim();if(c)lookupBarcodeCode(c);};
 window.lookupBarcodeField=function(){const c=document.getElementById('barcodeManualField').value.trim();if(c)lookupBarcodeFromModal(c);};
-async function lookupBarcodeCode(code){closeScanner();setBarcodeStatus('ð Looking up '+code+'â¦','info');document.getElementById('itemModal').classList.add('open');await lookupBarcodeFromModal(code);}
+async function lookupBarcodeCode(code){closeScanner();setBarcodeStatus('Ã°ÂÂÂ Looking up '+code+'Ã¢ÂÂ¦','info');document.getElementById('itemModal').classList.add('open');await lookupBarcodeFromModal(code);}
 async function lookupBarcodeFromModal(code){
-  setBarcodeStatus('ð Searching Open Food Factsâ¦','info');
+  setBarcodeStatus('Ã°ÂÂÂ Searching Open Food FactsÃ¢ÂÂ¦','info');
   try{
     const r=await fetch(`https://world.openfoodfacts.org/api/v0/product/${encodeURIComponent(code)}.json`);
     const j=await r.json();
@@ -875,9 +875,9 @@ async function lookupBarcodeFromModal(code){
       document.getElementById('itemBrandInput').value=brand.split(',')[0].trim();
       document.getElementById('itemWeightInput').value=p.quantity||'';
       document.getElementById('itemCategoryInput').value=guessCategory(name);
-      setBarcodeStatus('â Found: '+(name||'Product')+(brand?' by '+brand.split(',')[0].trim():''),'ok');
-    }else setBarcodeStatus('â  Not found. Fill in manually.','warn');
-  }catch{setBarcodeStatus('â  Could not reach database. Fill in manually.','warn');}
+      setBarcodeStatus('Ã¢ÂÂ Found: '+(name||'Product')+(brand?' by '+brand.split(',')[0].trim():''),'ok');
+    }else setBarcodeStatus('Ã¢ÂÂ  Not found. Fill in manually.','warn');
+  }catch{setBarcodeStatus('Ã¢ÂÂ  Could not reach database. Fill in manually.','warn');}
 }
 function setBarcodeStatus(msg,type){
   const el=document.getElementById('barcodeStatus');el.textContent=msg;el.style.display='';
@@ -885,13 +885,13 @@ function setBarcodeStatus(msg,type){
   el.style.color=type==='ok'?'var(--accent-dark)':type==='warn'?'#a16207':type==='info'?'var(--text-muted)':'var(--danger)';
 }
 
-// ââ List Modal ââââââââââââââââââââââââââââââââââââââââââââ
+// Ã¢ÂÂÃ¢ÂÂ List Modal Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ
 function buildIconGrid(){document.getElementById('iconGrid').innerHTML=ICONS.map(ic=>`<div class="icon-opt${ic===selectedIcon?' selected':''}" onclick="selectIcon('${ic}')">${ic}</div>`).join('');}
 function buildColorSwatches(){document.getElementById('colorSwatches').innerHTML=COLORS.map(c=>`<div class="color-swatch${c===selectedColor?' selected':''}" style="background:${c}" onclick="selectColor('${c}')"></div>`).join('');}
 window.selectIcon=function(ic){selectedIcon=ic;buildIconGrid();};
 window.selectColor=function(c){selectedColor=c;buildColorSwatches();};
 window.openNewListModal=function(){
-  editingListId=null;selectedIcon='ð';selectedColor='#22c55e';
+  editingListId=null;selectedIcon='Ã°ÂÂÂ';selectedColor='#22c55e';
   document.getElementById('listModalTitle').textContent='New List';
   ['listNameInput','listStoreInput','listStoreUrlInput'].forEach(id=>document.getElementById(id).value='');
   document.getElementById('deleteListBtn').style.display='none';
@@ -899,7 +899,7 @@ window.openNewListModal=function(){
 };
 window.openEditListModal=function(){
   if(!currentListId)return;const list=getList(currentListId);
-  editingListId=currentListId;selectedIcon=list.icon||'ð';selectedColor=list.color||'#22c55e';
+  editingListId=currentListId;selectedIcon=list.icon||'Ã°ÂÂÂ';selectedColor=list.color||'#22c55e';
   document.getElementById('listModalTitle').textContent='Edit List';
   document.getElementById('listNameInput').value=list.name||'';
   document.getElementById('listStoreInput').value=list.store||'';
@@ -941,7 +941,7 @@ window.deleteList=async function(e,id){
     ['filterBar','addFab','bottomBar','shareBtn','printBtn','editListBtn','startShoppingBtn','suggestionsBtn','reopenListBtn','endShoppingBtn'].forEach(n=>{const e=document.getElementById(n);if(e)e.style.display='none';});
     document.getElementById('listTitle').textContent='Select a list';document.getElementById('listStoreLine').textContent='';
     document.getElementById('editTripBtn').style.display='none';
-    document.getElementById('itemsArea').innerHTML='<div class="empty-state"><div class="icon">ð</div><h3>Select a list</h3></div>';
+    document.getElementById('itemsArea').innerHTML='<div class="empty-state"><div class="icon">Ã°ÂÂÂ</div><h3>Select a list</h3></div>';
     document.getElementById('mainHeader').classList.remove('shopping-active');
     document.getElementById('shoppingBar').classList.remove('active');
     shoppingMode=false;
@@ -955,22 +955,22 @@ window.deleteCurrentList=async function(){
   currentListId=null;
   ['filterBar','addFab','bottomBar','shareBtn','printBtn','editListBtn','startShoppingBtn','suggestionsBtn','reopenListBtn'].forEach(n=>{const e=document.getElementById(n);if(e)e.style.display='none';});
   document.getElementById('listTitle').textContent='Select a list';document.getElementById('listStoreLine').textContent='';
-  document.getElementById('itemsArea').innerHTML='<div class="empty-state"><div class="icon">ð</div><h3>Select a list</h3></div>';
+  document.getElementById('itemsArea').innerHTML='<div class="empty-state"><div class="icon">Ã°ÂÂÂ</div><h3>Select a list</h3></div>';
   renderSidebar();closeListModal();
 };
 
-// ââ Shopping Trip âââââââââââââââââââââââââââââââââââââââââ
+// Ã¢ÂÂÃ¢ÂÂ Shopping Trip Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ
 function formatTripLabel(store,dtVal){
   const d=dtVal?new Date(dtVal):new Date();
-  return store+' Â· '+d.toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'})+' '+d.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'});
+  return store+' ÃÂ· '+d.toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'})+' '+d.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'});
 }
 function localDatetimeNow(){const n=new Date();n.setSeconds(0,0);return new Date(n.getTime()-n.getTimezoneOffset()*60000).toISOString().slice(0,16);}
 
 window.startShopping=function(){
   _shopModalMode='start';const list=getList(currentListId);
-  document.getElementById('shopModalTitle').textContent='ð Start Shopping';
+  document.getElementById('shopModalTitle').textContent='Ã°ÂÂÂ Start Shopping';
   document.getElementById('shopModalHint').textContent='Confirm the store and date/time for this trip.';
-  document.getElementById('shopModalConfirmBtn').textContent='Start ð';
+  document.getElementById('shopModalConfirmBtn').textContent='Start Ã°ÂÂÂ';
   document.getElementById('shopConfirmStore').value=list?.store||'';
   document.getElementById('shopConfirmDate').value=list?.shoppingDate||localDatetimeNow();
   document.getElementById('startShoppingModal').classList.add('open');
@@ -978,7 +978,7 @@ window.startShopping=function(){
 };
 window.editTripDetails=function(){
   _shopModalMode='edit';const list=getList(currentListId);
-  document.getElementById('shopModalTitle').textContent='âï¸ Edit Trip Details';
+  document.getElementById('shopModalTitle').textContent='Ã¢ÂÂÃ¯Â¸Â Edit Trip Details';
   document.getElementById('shopModalHint').textContent='Update the store and date/time for this trip.';
   document.getElementById('shopModalConfirmBtn').textContent='Save Changes';
   document.getElementById('shopConfirmStore').value=list?.store||'';
@@ -996,10 +996,10 @@ window.confirmShopping=async function(){
   const updates={store,shoppingDate:dtVal,shoppingLabel:label};
   if(db)await fbUpdate(`lists/${currentListId}`,updates);
   else{const d=localLoad();Object.assign(d[currentListId],updates);localSave(d);listsData=d;}
-  const sl='ð '+label;
+  const sl='Ã°ÂÂÂ '+label;
   document.getElementById('listStoreLine').textContent=sl;
   document.getElementById('editTripBtn').style.display='';
-  if(_shopModalMode==='edit'){renderSidebar();toast('Trip details updated â');return;}
+  if(_shopModalMode==='edit'){renderSidebar();toast('Trip details updated Ã¢ÂÂ');return;}
   shoppingMode=true;
   document.getElementById('mainHeader').classList.add('shopping-active');
   document.getElementById('startShoppingBtn').style.display='none';
@@ -1008,7 +1008,7 @@ window.confirmShopping=async function(){
   document.getElementById('bottomBar').style.display='none';
   document.getElementById('addFab').style.display='none';
   document.getElementById('shoppingBar').classList.add('active');
-  renderSidebar();renderItems();toast('Shopping at '+store+' started! ð');
+  renderSidebar();renderItems();toast('Shopping at '+store+' started! Ã°ÂÂÂ');
 };
 window.endShopping=async function(){
   shoppingMode=false;
@@ -1019,7 +1019,7 @@ window.endShopping=async function(){
   document.getElementById('endShoppingBtn').style.display='none';
   document.getElementById('shoppingBar').classList.remove('active');
   selectList(currentListId);
-  toast('Shopping complete â  List marked as Closed.');
+  toast('Shopping complete Ã¢ÂÂ  List marked as Closed.');
 };
 window.reopenList=async function(){
   const updates={status:'open'};
@@ -1028,12 +1028,12 @@ window.reopenList=async function(){
   selectList(currentListId);toast('List reopened.');
 };
 
-// ââ Suggestions âââââââââââââââââââââââââââââââââââââââââââ
+// Ã¢ÂÂÃ¢ÂÂ Suggestions Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ
 window.closeSuggestions=function(){document.getElementById('suggestionsModal').classList.remove('open');};
 window.reopenSuggestions=function(){
   const list=getList(currentListId);
   if(list?.store)showSuggestions(currentListId,list.store,list.storeUrl||'');
-  else toast('Add a store name first (â Settings).');
+  else toast('Add a store name first (Ã¢ÂÂ Settings).');
 };
 window.showSuggestions=async function(listId,store,storeUrl){
   _sugSession={};
@@ -1060,19 +1060,19 @@ window.showSuggestions=async function(listId,store,storeUrl){
       const sid='sug-h-'+item.id+'-'+hi;
       const hdata=JSON.stringify({name:h.name,brand:h.brand||'',weight:h.weight||'',qty:h.qty||'',unit:h.unit||'',category:h.category||'',notes:h.notes||'',price:h.price||''}).replace(/"/g,'&quot;');
       return`<div class="sug-row" id="${sid}">
-        <div class="sug-row-info"><div class="sug-row-name">${esc(h.name)}${h.brand?' Â· <span style="font-weight:400">'+esc(h.brand)+'</span>':''}</div>
-        <div class="sug-row-meta">${[h.weight,h.lastBought?new Date(h.lastBought).toLocaleDateString():''].filter(Boolean).join(' Â· ')}</div></div>
-        ${h.price?`<span class="sug-row-price">â¬${h.price}</span>`:''}
+        <div class="sug-row-info"><div class="sug-row-name">${esc(h.name)}${h.brand?' ÃÂ· <span style="font-weight:400">'+esc(h.brand)+'</span>':''}</div>
+        <div class="sug-row-meta">${[h.weight,h.lastBought?new Date(h.lastBought).toLocaleDateString():''].filter(Boolean).join(' ÃÂ· ')}</div></div>
+        ${h.price?`<span class="sug-row-price">Ã¢ÂÂ¬${h.price}</span>`:''}
         <button class="sug-add-btn" onclick="sugAddHistItem(${hdata},'${sid}')">Add</button>
       </div>`;
     }).join(''):'<div class="sug-empty">No history yet at this store.</div>';
     return`<div class="sug-item-block">
       <div class="sug-item-header">
-        <span class="sug-item-name">${item.category||'ð¦'} ${esc(item.name)}</span>
-        ${storeUrl?`<a class="sug-store-link" href="${storeUrl}/search?q=${encodeURIComponent(item.name)}" target="_blank">ð ${esc(store)} â</a>`:''}
+        <span class="sug-item-name">${item.category||'Ã°ÂÂÂ¦'} ${esc(item.name)}</span>
+        ${storeUrl?`<a class="sug-store-link" href="${storeUrl}/search?q=${encodeURIComponent(item.name)}" target="_blank">Ã°ÂÂÂ ${esc(store)} Ã¢ÂÂ</a>`:''}
       </div>
-      <div class="sug-section"><div class="sug-section-label">ð Previously at ${esc(store)}</div>${histHTML}</div>
-      <div class="sug-section" id="sug-off-${item.id}"><div class="sug-section-label">ð Open Food Facts</div><div class="sug-loading">Searchingâ¦</div></div>
+      <div class="sug-section"><div class="sug-section-label">Ã°ÂÂÂ Previously at ${esc(store)}</div>${histHTML}</div>
+      <div class="sug-section" id="sug-off-${item.id}"><div class="sug-section-label">Ã°ÂÂÂ Open Food Facts</div><div class="sug-loading">SearchingÃ¢ÂÂ¦</div></div>
     </div>`;
   }).join('');
   document.getElementById('suggestionsModal').classList.add('open');
@@ -1085,23 +1085,23 @@ async function fetchOFF(item,listId){
     const j=await r.json();
     const prods=(j.products||[]).filter(p=>p.product_name).slice(0,5);
     _sugSession['off_'+item.id]=prods;
-    if(!prods.length){el.innerHTML='<div class="sug-section-label">ð Open Food Facts</div><div class="sug-empty">No products found.</div>';return;}
-    el.innerHTML='<div class="sug-section-label">ð Open Food Facts</div>'+prods.map((p,pi)=>{
+    if(!prods.length){el.innerHTML='<div class="sug-section-label">Ã°ÂÂÂ Open Food Facts</div><div class="sug-empty">No products found.</div>';return;}
+    el.innerHTML='<div class="sug-section-label">Ã°ÂÂÂ Open Food Facts</div>'+prods.map((p,pi)=>{
       const pname=p.product_name,brand=p.brands?p.brands.split(',')[0].trim():'',sid=`sug-off-${item.id}-${pi}`;
       return`<div class="sug-row" id="${sid}">
         <div class="sug-row-info"><div class="sug-row-name">${esc(pname)}</div>
-        <div class="sug-row-meta">${[brand,p.quantity,p.nutriscore_grade?'Nutri-score '+p.nutriscore_grade.toUpperCase():''].filter(Boolean).join(' Â· ')}</div></div>
+        <div class="sug-row-meta">${[brand,p.quantity,p.nutriscore_grade?'Nutri-score '+p.nutriscore_grade.toUpperCase():''].filter(Boolean).join(' ÃÂ· ')}</div></div>
         <button class="sug-add-btn" onclick="sugAddOFFItem('${item.id}',${pi},'${sid}','${listId}')">Add</button>
       </div>`;
     }).join('');
-  }catch{el.innerHTML='<div class="sug-section-label">ð Open Food Facts</div><div class="sug-empty">Could not reach database.</div>';}
+  }catch{el.innerHTML='<div class="sug-section-label">Ã°ÂÂÂ Open Food Facts</div><div class="sug-empty">Could not reach database.</div>';}
 }
 window.sugAddHistItem=async function(h,rowId){
   const item={id:uid(),name:(h.name||'').toUpperCase(),brand:h.brand||'',weight:h.weight||'',qty:h.qty||'',unit:h.unit||'',
     category:h.category||guessCategory(h.name||''),notes:h.notes||'',price:h.price||'',image:'',
     checked:false,addedBy:getUserName(),addedAt:Date.now(),lastBought:null};
   await writeItem(item);addToHistory(item.name,item.category);
-  const btn=document.querySelector('#'+rowId+' .sug-add-btn');if(btn){btn.textContent='â Added';btn.classList.add('added');}
+  const btn=document.querySelector('#'+rowId+' .sug-add-btn');if(btn){btn.textContent='Ã¢ÂÂ Added';btn.classList.add('added');}
   toast('Added: '+item.name);
 };
 window.sugAddOFFItem=async function(srcId,pi,rowId,listId){
@@ -1111,22 +1111,22 @@ window.sugAddOFFItem=async function(srcId,pi,rowId,listId){
     checked:false,addedBy:getUserName(),addedAt:Date.now(),lastBought:null};
   const saved=currentListId;currentListId=listId;await writeItem(item);currentListId=saved;
   addToHistory(name,item.category);
-  const btn=document.querySelector('#'+rowId+' .sug-add-btn');if(btn){btn.textContent='â Added';btn.classList.add('added');}
+  const btn=document.querySelector('#'+rowId+' .sug-add-btn');if(btn){btn.textContent='Ã¢ÂÂ Added';btn.classList.add('added');}
   toast('Added: '+name);
 };
 
-// ââ Share & Print âââââââââââââââââââââââââââââââââââââââââ
+// Ã¢ÂÂÃ¢ÂÂ Share & Print Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ
 window.shareList=function(){navigator.clipboard?.writeText(location.origin+location.pathname+'?list='+currentListId);toast('Link copied!');};
 window.printList=function(){
   const list=getList(currentListId);if(!list)return;
   const items=list.items?Object.values(list.items):[];
-  const rows=arr=>arr.map(i=>`<tr><td>${i.name}</td><td>${i.brand||''}</td><td>${i.weight||''}</td><td>${i.qty||''}${i.unit?' '+i.unit:''}</td><td>${i.price?'â¬'+i.price:''}</td><td>${i.category||''}</td></tr>`).join('');
+  const rows=arr=>arr.map(i=>`<tr><td>${i.name}</td><td>${i.brand||''}</td><td>${i.weight||''}</td><td>${i.qty||''}${i.unit?' '+i.unit:''}</td><td>${i.price?'Ã¢ÂÂ¬'+i.price:''}</td><td>${i.category||''}</td></tr>`).join('');
   const w=window.open('','_blank');
   w.document.write(`<html><head><title>${list.name}</title><style>body{font-family:sans-serif;padding:20px}table{border-collapse:collapse;width:100%}td,th{border:1px solid #ddd;padding:6px 10px;font-size:12px}th{background:#f5f5f5}</style></head><body><h2>${list.name}</h2><p>${new Date().toLocaleDateString()}</p><table><tr><th>Item</th><th>Brand</th><th>Weight</th><th>Qty</th><th>Cost</th><th>Category</th></tr>${rows(items)}</table></body></html>`);
   w.print();
 };
 
-// ââ Receipt âââââââââââââââââââââââââââââââââââââââââââââââ
+// Ã¢ÂÂÃ¢ÂÂ Receipt Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ
 window.openReceiptModal=function(){document.getElementById('receiptModal').classList.add('open');};
 window.closeReceiptModal=function(){document.getElementById('receiptModal').classList.remove('open');};
 window.dragOver=function(e){e.preventDefault();document.getElementById('receiptDrop').classList.add('drag-over');};
@@ -1135,13 +1135,13 @@ window.processReceipt=async function(file){
   if(!file)return;
   document.getElementById('ocrProgress').style.display='block';
   document.getElementById('receiptDrop').style.display='none';
-  document.getElementById('ocrStatus').textContent='Loading OCRâ¦';
+  document.getElementById('ocrStatus').textContent='Loading OCRÃ¢ÂÂ¦';
   document.getElementById('ocrBarFill').style.width='10%';
   try{
     const sc=document.createElement('script');sc.src='https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js';
     document.head.appendChild(sc);await new Promise(r=>sc.onload=r);
     document.getElementById('ocrBarFill').style.width='30%';
-    const worker=await Tesseract.createWorker('eng',1,{logger:m=>{if(m.status==='recognizing text'){document.getElementById('ocrBarFill').style.width=(30+m.progress*60)+'%';document.getElementById('ocrStatus').textContent='Readingâ¦ '+Math.round(m.progress*100)+'%';}}});
+    const worker=await Tesseract.createWorker('eng',1,{logger:m=>{if(m.status==='recognizing text'){document.getElementById('ocrBarFill').style.width=(30+m.progress*60)+'%';document.getElementById('ocrStatus').textContent='ReadingÃ¢ÂÂ¦ '+Math.round(m.progress*100)+'%';}}});
     const{data:{text}}=await worker.recognize(file);await worker.terminate();
     document.getElementById('ocrBarFill').style.width='100%';
     parseReceiptText(text);
@@ -1171,10 +1171,10 @@ function parseReceiptText(text){
   document.getElementById('receiptFooter').style.display='flex';
   const matchEl=document.getElementById('receiptMatchList');
   if(!receiptMatches.length)matchEl.innerHTML='<p style="color:var(--text-muted);font-size:.83rem">No items matched. Receipt may be blurry.</p>';
-  else matchEl.innerHTML=receiptMatches.map((m,i)=>`<div class="receipt-match-row"><div class="match-name">${esc(m.name)}</div><input type="number" value="${m.price.toFixed(2)}" step="0.01" min="0" style="width:70px;padding:4px 6px;border-radius:7px;border:1px solid var(--border);background:var(--surface2);color:var(--text);font-size:.82rem" onchange="receiptMatches[${i}].price=parseFloat(this.value)||0"/><span class="match-status match-ok">â</span></div>`).join('');
+  else matchEl.innerHTML=receiptMatches.map((m,i)=>`<div class="receipt-match-row"><div class="match-name">${esc(m.name)}</div><input type="number" value="${m.price.toFixed(2)}" step="0.01" min="0" style="width:70px;padding:4px 6px;border-radius:7px;border:1px solid var(--border);background:var(--surface2);color:var(--text);font-size:.82rem" onchange="receiptMatches[${i}].price=parseFloat(this.value)||0"/><span class="match-status match-ok">Ã¢ÂÂ</span></div>`).join('');
   const real=unmatched.filter(u=>u.price>0.1);
   document.getElementById('receiptUnmatched').style.display=real.length?'':'none';
-  if(real.length)document.getElementById('receiptUnmatchedList').innerHTML=real.map(u=>`<div class="receipt-match-row"><div class="match-name" style="color:var(--text-muted)">${esc(u.line)}</div><span class="match-price">â¬${u.price.toFixed(2)}</span><span class="match-status match-miss">not on list</span></div>`).join('');
+  if(real.length)document.getElementById('receiptUnmatchedList').innerHTML=real.map(u=>`<div class="receipt-match-row"><div class="match-name" style="color:var(--text-muted)">${esc(u.line)}</div><span class="match-price">Ã¢ÂÂ¬${u.price.toFixed(2)}</span><span class="match-status match-miss">not on list</span></div>`).join('');
 }
 window.applyReceiptPrices=async function(){
   for(const m of receiptMatches){
@@ -1182,7 +1182,7 @@ window.applyReceiptPrices=async function(){
     if(db)await fbUpdate(`lists/${currentListId}/items/${m.itemId}`,updates);
     else{const d=localLoad();if(d[currentListId]?.items?.[m.itemId])Object.assign(d[currentListId].items[m.itemId],updates);localSave(d);listsData=d;}
   }
-  closeReceiptModal();renderItems();toast('Prices saved for '+receiptMatches.length+' items â');endShopping();
+  closeReceiptModal();renderItems();toast('Prices saved for '+receiptMatches.length+' items Ã¢ÂÂ');endShopping();
 };
 window.resetReceipt=function(){
   document.getElementById('ocrProgress').style.display='none';document.getElementById('receiptResults').style.display='none';
@@ -1190,7 +1190,7 @@ window.resetReceipt=function(){
   document.getElementById('receiptFileInput').value='';receiptMatches=[];
 };
 
-// ââ Recipe ââââââââââââââââââââââââââââââââââââââââââââââââ
+// Ã¢ÂÂÃ¢ÂÂ Recipe Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ
 window.openRecipe=function(){if(!currentListId){toast('Select a list first.');return;}document.getElementById('recipePanel').classList.add('open');};
 window.closeRecipe=function(){document.getElementById('recipePanel').classList.remove('open');document.getElementById('recipeInput').value='';};
 window.importRecipe=async function(){
@@ -1202,16 +1202,16 @@ window.importRecipe=async function(){
     await writeItem({id:uid(),name,brand:'',weight:'',qty:qty||'',unit:unit||'',category,notes:'',price:'',image:'',checked:false,addedBy:getUserName(),addedAt:Date.now(),lastBought:null});
     addToHistory(name,category);count++;
   }
-  closeRecipe();toast('Added '+count+' ingredient'+(count!==1?'s':'')+'! ð½ï¸');
+  closeRecipe();toast('Added '+count+' ingredient'+(count!==1?'s':'')+'! Ã°ÂÂÂ½Ã¯Â¸Â');
 };
 
-// ââ Theme & Mobile ââââââââââââââââââââââââââââââââââââââââ
+// Ã¢ÂÂÃ¢ÂÂ Theme & Mobile Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ
 window.toggleTheme=function(){const t=document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark';document.documentElement.setAttribute('data-theme',t);localStorage.setItem('shopping_theme',t);};
 window.toggleSidebar=function(){document.getElementById('sidebar').classList.toggle('open');document.getElementById('backdrop').classList.toggle('show');};
 window.closeSidebar=function(){document.getElementById('sidebar').classList.remove('open');document.getElementById('backdrop').classList.remove('show');};
 window.addEventListener('resize',()=>{const m=document.getElementById('menuBtn');if(m)m.style.display=window.innerWidth<=640?'flex':'none';});
 
-// ââ Deep link âââââââââââââââââââââââââââââââââââââââââââââ
+// Ã¢ÂÂÃ¢ÂÂ Deep link Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ
 const urlList=new URLSearchParams(location.search).get('list');
 if(urlList){const t=setInterval(()=>{if(getList(urlList)){clearInterval(t);selectList(urlList);}},300);setTimeout(()=>clearInterval(t),5000);}
 </script>
@@ -1377,8 +1377,7 @@ var _rctRows=[],_rctOcrText='',_rctAction='record';
 
 window.parseStoreInfo=function(text){
   if(!text||!text.trim())return{storeName:'',storeLocation:'',vatNumber:''};
-  var lines=text.split('
-').map(function(l){return l.trim();}).filter(function(l){return l.length>1;});
+  var lines=text.split('\n').map(function(l){return l.trim();}).filter(function(l){return l.length>1;});
   var storeName='',addrLines=[],vatNumber='';
   var pEnd=/(\d+[.,]\d{2})\s*[A-Z*]?\s*$/;
   var vRe=/(?:vat\s*reg(?:istration)?\s*(?:no\.?|#|number)?|tax\s*(?:id|reg|no\.?)|\btin\b|p\.?\s*iva|\bnif\b|vatin|partita\s*iva)\s*[:\-]?\s*([A-Z0-9\-\/\.]{4,20})/i;
