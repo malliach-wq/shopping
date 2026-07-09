@@ -1139,11 +1139,21 @@ window.processReceipt=async function(file){
   var bar=document.getElementById('ocrBarFill');
   if(prog)prog.style.display='block';
   if(drop)drop.style.display='none';
-  if(stat)stat.textContent='Loading OCR…';
-  if(bar)bar.style.width='10%';
+  if(stat)stat.textContent='Loading…';
+  if(bar)bar.style.width='5%';
   try{
+    if(typeof Tesseract==='undefined'){
+      if(stat)stat.textContent='Loading Tesseract…';
+      await new Promise(function(res,rej){
+        var s=document.createElement('script');
+        s.src='https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js';
+        s.onload=res;s.onerror=rej;
+        document.head.appendChild(s);
+      });
+    }
     var imgSrc=file;
-    if(file.type==='application/pdf'||file.name.toLowerCase().endsWith('.pdf')){
+    var isPdf=file.type==='application/pdf'||file.name.toLowerCase().endsWith('.pdf');
+    if(isPdf){
       if(stat)stat.textContent='Rendering PDF…';
       if(bar)bar.style.width='15%';
       if(typeof pdfjsLib==='undefined'){
@@ -1165,6 +1175,8 @@ window.processReceipt=async function(file){
       imgSrc=canvas;
       if(bar)bar.style.width='30%';
     }
+    if(stat)stat.textContent='Running OCR…';
+    if(bar)bar.style.width='30%';
     var worker=await Tesseract.createWorker('eng',1,{
       workerPath:'https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/worker.min.js',
       corePath:'https://cdn.jsdelivr.net/npm/tesseract.js-core@5/tesseract-core-simd-lstm.wasm.js',
@@ -1184,12 +1196,12 @@ window.processReceipt=async function(file){
     if(typeof closeReceiptModal==='function')closeReceiptModal();
     if(typeof openReceiptTable==='function')openReceiptTable(text);
   }catch(e){
-    if(stat)stat.textContent='OCR failed – enter items manually';
     console.error('OCR error:',e);
+    if(stat)stat.textContent='OCR failed – enter items manually';
     setTimeout(function(){
       if(typeof closeReceiptModal==='function')closeReceiptModal();
       if(typeof openReceiptTable==='function')openReceiptTable('');
-    },1200);
+    },1500);
   }
 };
 function parseReceiptText(text){
