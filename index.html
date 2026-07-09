@@ -1342,7 +1342,7 @@ function renderRecSidebar(){
 window.openReceiptUpload=function(){if(typeof openReceiptModal==='function')openReceiptModal();};
 
 /* OCR PARSER */
-function parseReceiptOCR(text){
+window.parseReceiptOCR=function(text){
   if(!text||!text.trim())return{rows:[],receiptTotal:null};
   var lines=text.split('\n').map(function(l){return l.trim();}).filter(function(l){return l.length>1;});
   var rows=[];
@@ -1409,7 +1409,7 @@ function buildRctModal(){
   document.body.appendChild(m);
 }
 
-function openReceiptTable(ocrText){
+window.openReceiptTable=function(ocrText){
   buildRctModal();
   _rctOcrText=ocrText||'';
   var parsed=parseReceiptOCR(_rctOcrText);
