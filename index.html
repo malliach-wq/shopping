@@ -1573,6 +1573,7 @@ window.rctSave=function(){
   var all=rLoad(R_KEY);
   all[recId]={storeName:storeName,storeLocation:storeLocation,vatNumber:vatNumber,total:total,items:_rctRows.slice(),action:action,date:Date.now()};
   if(window._pendingReceiptFile){try{localStorage.setItem('receipt_file_'+recId,window._pendingReceiptFile);localStorage.setItem('receipt_fname_'+recId,window._pendingReceiptFileName||'receipt');}catch(fe){}}
+  if(window._populateShopDB)window._populateShopDB(recId,all[recId]);
   if(action==='record'){
     rSave(R_KEY,all);closeRctModal();
     if(typeof closeReceiptModal==='function')closeReceiptModal();
@@ -1855,6 +1856,131 @@ if(typeof _oSA==='function'){
 window.addEventListener('load',function(){setTimeout(function(){if(!document.getElementById('sidebar-accord'))init();},2000);});
 })();
 
+/* ===== SHOP LOCAL DATABASE (IndexedDB) ===== */
+var _shopDB=null;
+window.initShopDB=function(){
+  return new Promise(function(res,rej){
+    if(_shopDB){res(_shopDB);return;}
+    var req=indexedDB.open('shopLocalDB',1);
+    req.onupgradeneeded=function(e){
+      var db=e.target.result;
+      if(!db.objectStoreNames.contains('stores')){
+        var s=db.createObjectStore('stores',{keyPath:'id'});
+        s.createIndex('normName','normName',{unique:false});
+      }
+      if(!db.objectStoreNames.contains('products')){
+        var p=db.createObjectStore('products',{keyPath:'key'});
+        p.createIndex('normName','normName',{unique:false});
+        p.createIndex('storeId','storeId',{unique:false});
+        p.createIndex('code','code',{unique:false});
+      }
+    };
+    req.onsuccess=function(e){_shopDB=e.target.result;res(_shopDB);};
+    req.onerror=function(e){rej(e);};
+  });
+};
+window.dbSaveStore=function(d){
+  return window.initShopDB().then(function(db){
+    return new Promise(function(res,rej){
+      var tx=db.transaction('stores','readwrite');
+      var st=tx.objectStore('stores');
+      var id=d.vatNumber||'__'+(d.name||'').toLowerCase().replace(/[^a-z0-9]+/g,'_');
+      var gr=st.get(id);
+      gr.onsuccess=function(){
+        var ex=gr.result||{};
+        var rec=Object.assign({},ex,d,{id:id,normName:(d.name||'').toLowerCase(),
+          lastSeen:Date.now(),firstSeen:ex.firstSeen||Date.now(),seenCount:(ex.seenCount||0)+1});
+        st.put(rec);tx.oncomplete=function(){res(rec);};tx.onerror=rej;
+      };gr.onerror=rej;
+    });
+  });
+};
+window.dbFindStore=function(query){
+  return window.initShopDB().then(function(db){
+    return new Promise(function(res){
+      var tx=db.transaction('stores','readonly');
+      var st=tx.objectStore('stores');
+      var qL=(query||'').toLowerCase();
+      var gr=st.getAll();
+      gr.onsuccess=function(){
+        var all=gr.result||[];
+        var found=all.find(function(r){return r.id===query||r.vatNumber===query||(r.normName&&r.normName.indexOf(qL)!==-1);});
+        res(found||null);
+      };gr.onerror=function(){res(null);};
+    });
+  });
+};
+window.dbSaveProduct=function(d){
+  return window.initShopDB().then(function(db){
+    return new Promise(function(res,rej){
+      var tx=db.transaction('products','readwrite');
+      var pt=tx.objectStore('products');
+      var key=(d.code||'_nc_')+'|'+(d.storeId||'_ns_');
+      var gr=pt.get(key);
+      gr.onsuccess=function(){
+        var ex=gr.result||{};
+        var ph=ex.priceHistory||[];
+        if(d.unitPrice!=null&&(ph.length===0||ph[ph.length-1].price!==d.unitPrice)){
+          ph.push({price:d.unitPrice,date:Date.now()});
+          if(ph.length>20)ph=ph.slice(-20);
+        }
+        var rec=Object.assign({},ex,d,{key:key,normName:(d.name||'').toLowerCase(),
+          priceHistory:ph,lastSeen:Date.now(),firstSeen:ex.firstSeen||Date.now(),seenCount:(ex.seenCount||0)+1});
+        if(d.onlinePrice!=null)rec.onlinePriceChecked=Date.now();
+        pt.put(rec);tx.oncomplete=function(){res(rec);};tx.onerror=rej;
+      };gr.onerror=rej;
+    });
+  });
+};
+window.dbFindProduct=function(query,storeId){
+  return window.initShopDB().then(function(db){
+    return new Promise(function(res){
+      var tx=db.transaction('products','readonly');
+      var pt=tx.objectStore('products');
+      var qL=(query||'').toLowerCase();
+      if(storeId&&query){
+        var gr=pt.get(query+'|'+storeId);
+        gr.onsuccess=function(){
+          if(gr.result){res([gr.result]);return;}
+          searchAll();
+        };gr.onerror=searchAll;
+      } else searchAll();
+      function searchAll(){
+        var ga=pt.getAll();
+        ga.onsuccess=function(){
+          res((ga.result||[]).filter(function(p){return p.normName&&p.normName.indexOf(qL)!==-1;}));
+        };ga.onerror=function(){res([]);};
+      }
+    });
+  });
+};
+window.dbGetStats=function(){
+  return window.initShopDB().then(function(db){
+    return new Promise(function(res){
+      var tx=db.transaction(['stores','products'],'readonly');
+      var stats={stores:0,products:0};
+      var sc=tx.objectStore('stores').count();
+      var pc=tx.objectStore('products').count();
+      sc.onsuccess=function(){stats.stores=sc.result;};
+      pc.onsuccess=function(){stats.products=pc.result;};
+      tx.oncomplete=function(){res(stats);};
+      tx.onerror=function(){res(stats);};
+    });
+  });
+};
+window._populateShopDB=function(recId,rec){
+  if(!rec)return;
+  var storeId=rec.vatNumber||'__'+(rec.storeName||'').toLowerCase().replace(/[^a-z0-9]+/g,'_');
+  window.dbSaveStore({id:storeId,vatNumber:rec.vatNumber||null,name:rec.storeName,location:rec.storeLocation,verified:false}).catch(function(){});
+  (rec.items||[]).forEach(function(item){
+    if(!item.name)return;
+    window.dbSaveProduct({code:item.code||'',name:item.name,storeId:storeId,storeName:rec.storeName,unitPrice:parseFloat(item.unitPrice)||0}).catch(function(){});
+  });
+};
+// Init DB on load
+window.initShopDB().catch(function(){});
+
+/* ===== RECEIPT FILE VIEWER ===== */
 window.viewReceiptFile=function(id){
   var dataUrl=localStorage.getItem('receipt_file_'+id);
   var fname=localStorage.getItem('receipt_fname_'+id)||'receipt';
@@ -1866,8 +1992,7 @@ window.viewReceiptFile=function(id){
   cb.style.cssText='position:absolute;top:14px;right:18px;background:#fff;border:none;padding:7px 16px;border-radius:6px;cursor:pointer;font-size:15px;font-weight:600;';
   cb.onclick=function(){document.body.removeChild(ov);};
   ov.appendChild(cb);
-  var isPdf=dataUrl.indexOf('application/pdf')!==-1||fname.toLowerCase().endsWith('.pdf');
-  if(isPdf){
+  if(dataUrl.indexOf('application/pdf')!==-1||fname.toLowerCase().endsWith('.pdf')){
     var em=document.createElement('embed');
     em.src=dataUrl;em.type='application/pdf';
     em.style.cssText='width:90vw;height:85vh;border-radius:8px;background:#fff;';
@@ -1881,77 +2006,103 @@ window.viewReceiptFile=function(id){
   document.body.appendChild(ov);
 };
 
+/* ===== STORE VALIDATION (DB-first) ===== */
 window.validateStoreOnline=function(storeName,storeLocation){
-  var branches=['mriehel','tigne','shoreline','zejtun','mosta'];
-  var nm=(storeName||'').toLowerCase();
-  var matched=branches.filter(function(b){return nm.indexOf(b)!==-1;});
   var snEl=document.getElementById('rctStoreName');
   if(!snEl)return;
   var badge=document.getElementById('_storeValidBadge');
   if(!badge){
-    badge=document.createElement('span');
-    badge.id='_storeValidBadge';
+    badge=document.createElement('span');badge.id='_storeValidBadge';
     badge.style.cssText='margin-left:8px;font-size:11px;padding:2px 7px;border-radius:4px;vertical-align:middle;';
     snEl.parentNode.insertBefore(badge,snEl.nextSibling);
   }
-  if(matched.length>0){
-    badge.textContent='✓ Verified branch';
-    badge.style.background='#d4edda';badge.style.color='#155724';
-    return;
-  }
-  badge.textContent='⏳ Checking...';badge.style.background='#fff3cd';badge.style.color='#856404';
-  fetch('https://api.allorigins.win/get?url='+encodeURIComponent('https://www.homemate.com.mt/'))
-  .then(function(r){return r.json();})
-  .then(function(j){
-    var html=(j.contents||'').toLowerCase();
-    var m2=branches.filter(function(b){return nm.indexOf(b)!==-1;});
-    if(m2.length>0){badge.textContent='✓ Verified';badge.style.background='#d4edda';badge.style.color='#155724';}
-    else if(html.indexOf('homemate')!==-1){badge.textContent='⚠ Branch unmatched';badge.style.background='#fff3cd';badge.style.color='#856404';}
-    else{badge.textContent='— Not verified';badge.style.background='#f8d7da';badge.style.color='#721c24';}
-  }).catch(function(){badge.textContent='— Offline';badge.style.background='#f8f9fa';badge.style.color='#6c757d';});
+  badge.textContent='⏳';badge.style.background='#f8f9fa';badge.style.color='#6c757d';
+  var branches=['mriehel','tigne','shoreline','zejtun','mosta'];
+  var nm=(storeName||'').toLowerCase();
+  var matched=branches.some(function(b){return nm.indexOf(b)!==-1;});
+  // Check local DB first
+  window.dbFindStore(storeName).then(function(stored){
+    if(stored&&stored.verified){
+      badge.textContent='✓ Verified (cached)';badge.style.background='#d4edda';badge.style.color='#155724';return;
+    }
+    if(matched){
+      badge.textContent='✓ Known branch';badge.style.background='#d4edda';badge.style.color='#155724';
+      window.dbSaveStore({name:storeName,location:storeLocation,verified:true}).catch(function(){});
+      return;
+    }
+    badge.textContent='⏳ Checking online...';badge.style.background='#fff3cd';badge.style.color='#856404';
+    fetch('https://api.allorigins.win/get?url='+encodeURIComponent('https://www.homemate.com.mt/'))
+    .then(function(r){return r.json();})
+    .then(function(j){
+      var html=(j.contents||'').toLowerCase();
+      var ok=branches.some(function(b){return nm.indexOf(b)!==-1;});
+      window.dbSaveStore({name:storeName,location:storeLocation,verified:ok}).catch(function(){});
+      if(ok){badge.textContent='✓ Verified';badge.style.background='#d4edda';badge.style.color='#155724';}
+      else if(html.indexOf('homemate')!==-1){badge.textContent='⚠ Branch unmatched';badge.style.background='#fff3cd';badge.style.color='#856404';}
+      else{badge.textContent='— Not verified';badge.style.background='#f8d7da';badge.style.color='#721c24';}
+    }).catch(function(){badge.textContent='— Offline';badge.style.background='#f8f9fa';badge.style.color='#6c757d';});
+  });
 };
 
+/* ===== ITEM PRICE CHECK (DB-first, cache 7 days) ===== */
 window.checkItemPrices=function(){
   var rows=window._rctRows;
   if(!rows||!rows.length){alert('No items to check.');return;}
-  var tbl=document.querySelector('#rctModal table');
-  if(!tbl)return;
+  var tbl=document.querySelector('#rctModal table');if(!tbl)return;
   if(!document.getElementById('_pchTh')){
-    var th=document.createElement('th');th.id='_pchTh';th.textContent='Online';th.style.cssText='font-size:11px;color:#666;';
-    var headRow=tbl.querySelector('thead tr');if(headRow)headRow.appendChild(th);
+    var th=document.createElement('th');th.id='_pchTh';th.textContent='Online';
+    th.style.cssText='font-size:11px;color:#666;';
+    var hr=tbl.querySelector('thead tr');if(hr)hr.appendChild(th);
   }
+  var vatEl=document.getElementById('rctVatNo');
+  var storeVat=vatEl?vatEl.value.trim():'';
+  var snEl2=document.getElementById('rctStoreName');
+  var storeNm=snEl2?snEl2.value.trim():'';
+  var storeId=storeVat||'__'+(storeNm||'').toLowerCase().replace(/[^a-z0-9]+/g,'_');
+  var weekAgo=Date.now()-7*24*3600*1000;
   var trs=tbl.querySelectorAll('tbody tr');
   trs.forEach(function(tr,idx){
-    var existing=tr.querySelector('._pchTd');
-    var td=existing||document.createElement('td');
+    var ex2=tr.querySelector('._pchTd');
+    var td=ex2||document.createElement('td');
     td.className='_pchTd';td.style.cssText='font-size:11px;text-align:center;';
-    td.textContent='⏳';td.title='Checking...';
-    if(!existing)tr.appendChild(td);
+    td.textContent='⏳';td.title='';if(!ex2)tr.appendChild(td);
     var item=rows[idx];if(!item)return;
-    var q=encodeURIComponent((item.name||'').replace(/[^ws]/g,' ').trim().substring(0,35));
-    if(!q){td.textContent='—';return;}
-    fetch('https://api.allorigins.win/get?url='+encodeURIComponent('https://www.homemate.com.mt/search-site-results?search='+q+'&nostock=0'))
-    .then(function(r){return r.json();})
-    .then(function(j){
-      var html=j.contents||'';
-      if(html.indexOf('No results have been found')!==-1){
-        td.textContent='—';td.title='Not found on homemate.com.mt';
-      } else {
-        var pm=html.match(/€([d]+.[d]{2})/);
-        if(pm){
-          var wp=parseFloat(pm[1]);
-          var rp=parseFloat(item.unitPrice)||0;
-          if(Math.abs(wp-rp)<0.02){
-            td.textContent='✓';td.style.color='#155724';td.title='Price matches: €'+wp.toFixed(2);
-          } else {
-            td.textContent='⚠€'+wp.toFixed(2);td.style.color='#856404';
-            td.title='Receipt: €'+rp.toFixed(2)+' | Web: €'+wp.toFixed(2);
-          }
-        } else {
-          td.textContent='?';td.title='Found on site, price unclear';
-        }
+    var code=item.code||'';var name=item.name||'';
+    function showResult(wp,rp,cached){
+      if(wp===null){td.textContent='—';td.title='Not found online';}
+      else if(Math.abs(wp-rp)<0.02){td.textContent='✓';td.style.color='#155724';td.title='€'+wp.toFixed(2)+(cached?' (cached)':'');}
+      else{td.textContent='⚠€'+wp.toFixed(2);td.style.color='#856404';td.title='Receipt:€'+rp.toFixed(2)+' Web:€'+wp.toFixed(2)+(cached?' (cached)':'');}
+    }
+    // Check DB cache first
+    window.dbFindProduct(code||name,storeId).then(function(hits){
+      var hit=hits&&hits.length?hits[0]:null;
+      if(hit&&hit.onlinePriceChecked&&hit.onlinePriceChecked>weekAgo){
+        showResult(hit.onlinePrice,parseFloat(item.unitPrice)||0,true);return;
       }
-    }).catch(function(){td.textContent='!';td.title='Check failed';});
+      // Fetch online
+      var q=encodeURIComponent(name.replace(/[^ws]/g,' ').trim().substring(0,35));
+      if(!q){td.textContent='—';return;}
+      fetch('https://api.allorigins.win/get?url='+encodeURIComponent('https://www.homemate.com.mt/search-site-results?search='+q+'&nostock=0'))
+      .then(function(r){return r.json();})
+      .then(function(j){
+        var html=j.contents||'';
+        var rp=parseFloat(item.unitPrice)||0;
+        if(html.indexOf('No results have been found')!==-1){
+          td.textContent='—';td.title='Not found';
+          window.dbSaveProduct({code:code,name:name,storeId:storeId,storeName:storeNm,unitPrice:rp,onlinePrice:null}).catch(function(){});
+        } else {
+          var pm=html.match(/€([d]+.[d]{2})/);
+          if(pm){
+            var wp=parseFloat(pm[1]);
+            window.dbSaveProduct({code:code,name:name,storeId:storeId,storeName:storeNm,unitPrice:rp,onlinePrice:wp}).catch(function(){});
+            showResult(wp,rp,false);
+          } else {
+            td.textContent='?';td.title='Found, price unclear';
+            window.dbSaveProduct({code:code,name:name,storeId:storeId,storeName:storeNm,unitPrice:rp}).catch(function(){});
+          }
+        }
+      }).catch(function(){td.textContent='!';td.title='Check failed';});
+    });
   });
 };
 </script>
