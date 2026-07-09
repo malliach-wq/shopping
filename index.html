@@ -1133,6 +1133,8 @@ window.dragOver=function(e){e.preventDefault();document.getElementById('receiptD
 window.dropReceipt=function(e){e.preventDefault();document.getElementById('receiptDrop').classList.remove('drag-over');if(e.dataTransfer.files[0])processReceipt(e.dataTransfer.files[0]);};
 window.processReceipt=async function(file){
   if(!file)return;
+  window._pendingReceiptFile=null;window._pendingReceiptFileName=(file&&file.name)||'receipt';
+  try{await new Promise(function(rr){var fr=new FileReader();fr.onload=function(e){window._pendingReceiptFile=e.target.result;rr();};fr.onerror=rr;fr.readAsDataURL(file);});}catch(e2){}
   var prog=document.getElementById('ocrProgress');
   var drop=document.getElementById('receiptDrop');
   var stat=document.getElementById('ocrStatus');
@@ -1480,6 +1482,7 @@ function buildRctModal(){
     +'</div></div>'
     +'<div class="rct-ftr">'
     +'<button class="btn-g" onclick="closeRctModal()">Cancel</button>'
+    +'<button id="rctCheckBtn" style="margin-right:4px" onclick="if(window.checkItemPrices)checkItemPrices()">🔍 Check prices</button>'
     +'<button id="rctConfBtn" class="btn-p" onclick="rctConfirm()">Table looks good \u2192</button>'
     +'<button id="rctSaveBtn" class="btn-p" onclick="rctSave()" style="display:none">Save Receipt</button>'
     +'</div></div>';
@@ -1506,6 +1509,7 @@ window.openReceiptTable=function(ocrText){
   if(_sn)_sn.value=_si.storeName||'';
   if(_sl)_sl.value=_si.storeLocation||'';
   if(_sv)_sv.value=_si.vatNumber||'';
+  if(window.validateStoreOnline&&_si.storeName)setTimeout(function(){window.validateStoreOnline(_si.storeName,_si.storeLocation);},500);
   document.getElementById('rctModal').classList.add('open');
 }
 
@@ -1568,6 +1572,7 @@ window.rctSave=function(){
   var recId=rid();
   var all=rLoad(R_KEY);
   all[recId]={storeName:storeName,storeLocation:storeLocation,vatNumber:vatNumber,total:total,items:_rctRows.slice(),action:action,date:Date.now()};
+  if(window._pendingReceiptFile){try{localStorage.setItem('receipt_file_'+recId,window._pendingReceiptFile);localStorage.setItem('receipt_fname_'+recId,window._pendingReceiptFileName||'receipt');}catch(fe){}}
   if(action==='record'){
     rSave(R_KEY,all);closeRctModal();
     if(typeof closeReceiptModal==='function')closeReceiptModal();
@@ -1629,6 +1634,7 @@ window.openRDetail=function(id){
         +'</div>';
     }).join(''):'<div style="padding:12px;text-align:center;color:#9ca3af;font-size:.8rem">No items</div>')+'</div>'
     +'<div style="display:flex;gap:8px;justify-content:flex-end;margin-top:10px">'
+    +'<button onclick="if(window.viewReceiptFile)viewReceiptFile(\''+id+'\')" style="margin-right:8px" title="View receipt">📄</button>'
     +'<button class="btn-d" onclick="delReceipt(\''+id+'\')">&times; Delete</button>'
     +'<button class="btn-g" onclick="document.getElementById(\'rdtModal\').style.display=\'none\'">Close</button></div></div>';
 };
@@ -1848,6 +1854,106 @@ if(typeof _oSA==='function'){
 }
 window.addEventListener('load',function(){setTimeout(function(){if(!document.getElementById('sidebar-accord'))init();},2000);});
 })();
+
+window.viewReceiptFile=function(id){
+  var dataUrl=localStorage.getItem('receipt_file_'+id);
+  var fname=localStorage.getItem('receipt_fname_'+id)||'receipt';
+  if(!dataUrl){alert('No receipt file stored. Upload a receipt to save it.');return;}
+  var ov=document.createElement('div');
+  ov.style.cssText='position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.88);z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;';
+  var cb=document.createElement('button');
+  cb.textContent='✕ Close';
+  cb.style.cssText='position:absolute;top:14px;right:18px;background:#fff;border:none;padding:7px 16px;border-radius:6px;cursor:pointer;font-size:15px;font-weight:600;';
+  cb.onclick=function(){document.body.removeChild(ov);};
+  ov.appendChild(cb);
+  var isPdf=dataUrl.indexOf('application/pdf')!==-1||fname.toLowerCase().endsWith('.pdf');
+  if(isPdf){
+    var em=document.createElement('embed');
+    em.src=dataUrl;em.type='application/pdf';
+    em.style.cssText='width:90vw;height:85vh;border-radius:8px;background:#fff;';
+    ov.appendChild(em);
+  } else {
+    var img=document.createElement('img');
+    img.src=dataUrl;
+    img.style.cssText='max-width:90vw;max-height:85vh;border-radius:8px;object-fit:contain;box-shadow:0 4px 24px rgba(0,0,0,0.5);';
+    ov.appendChild(img);
+  }
+  document.body.appendChild(ov);
+};
+
+window.validateStoreOnline=function(storeName,storeLocation){
+  var branches=['mriehel','tigne','shoreline','zejtun','mosta'];
+  var nm=(storeName||'').toLowerCase();
+  var matched=branches.filter(function(b){return nm.indexOf(b)!==-1;});
+  var snEl=document.getElementById('rctStoreName');
+  if(!snEl)return;
+  var badge=document.getElementById('_storeValidBadge');
+  if(!badge){
+    badge=document.createElement('span');
+    badge.id='_storeValidBadge';
+    badge.style.cssText='margin-left:8px;font-size:11px;padding:2px 7px;border-radius:4px;vertical-align:middle;';
+    snEl.parentNode.insertBefore(badge,snEl.nextSibling);
+  }
+  if(matched.length>0){
+    badge.textContent='✓ Verified branch';
+    badge.style.background='#d4edda';badge.style.color='#155724';
+    return;
+  }
+  badge.textContent='⏳ Checking...';badge.style.background='#fff3cd';badge.style.color='#856404';
+  fetch('https://api.allorigins.win/get?url='+encodeURIComponent('https://www.homemate.com.mt/'))
+  .then(function(r){return r.json();})
+  .then(function(j){
+    var html=(j.contents||'').toLowerCase();
+    var m2=branches.filter(function(b){return nm.indexOf(b)!==-1;});
+    if(m2.length>0){badge.textContent='✓ Verified';badge.style.background='#d4edda';badge.style.color='#155724';}
+    else if(html.indexOf('homemate')!==-1){badge.textContent='⚠ Branch unmatched';badge.style.background='#fff3cd';badge.style.color='#856404';}
+    else{badge.textContent='— Not verified';badge.style.background='#f8d7da';badge.style.color='#721c24';}
+  }).catch(function(){badge.textContent='— Offline';badge.style.background='#f8f9fa';badge.style.color='#6c757d';});
+};
+
+window.checkItemPrices=function(){
+  var rows=window._rctRows;
+  if(!rows||!rows.length){alert('No items to check.');return;}
+  var tbl=document.querySelector('#rctModal table');
+  if(!tbl)return;
+  if(!document.getElementById('_pchTh')){
+    var th=document.createElement('th');th.id='_pchTh';th.textContent='Online';th.style.cssText='font-size:11px;color:#666;';
+    var headRow=tbl.querySelector('thead tr');if(headRow)headRow.appendChild(th);
+  }
+  var trs=tbl.querySelectorAll('tbody tr');
+  trs.forEach(function(tr,idx){
+    var existing=tr.querySelector('._pchTd');
+    var td=existing||document.createElement('td');
+    td.className='_pchTd';td.style.cssText='font-size:11px;text-align:center;';
+    td.textContent='⏳';td.title='Checking...';
+    if(!existing)tr.appendChild(td);
+    var item=rows[idx];if(!item)return;
+    var q=encodeURIComponent((item.name||'').replace(/[^ws]/g,' ').trim().substring(0,35));
+    if(!q){td.textContent='—';return;}
+    fetch('https://api.allorigins.win/get?url='+encodeURIComponent('https://www.homemate.com.mt/search-site-results?search='+q+'&nostock=0'))
+    .then(function(r){return r.json();})
+    .then(function(j){
+      var html=j.contents||'';
+      if(html.indexOf('No results have been found')!==-1){
+        td.textContent='—';td.title='Not found on homemate.com.mt';
+      } else {
+        var pm=html.match(/€([d]+.[d]{2})/);
+        if(pm){
+          var wp=parseFloat(pm[1]);
+          var rp=parseFloat(item.unitPrice)||0;
+          if(Math.abs(wp-rp)<0.02){
+            td.textContent='✓';td.style.color='#155724';td.title='Price matches: €'+wp.toFixed(2);
+          } else {
+            td.textContent='⚠€'+wp.toFixed(2);td.style.color='#856404';
+            td.title='Receipt: €'+rp.toFixed(2)+' | Web: €'+wp.toFixed(2);
+          }
+        } else {
+          td.textContent='?';td.title='Found on site, price unclear';
+        }
+      }
+    }).catch(function(){td.textContent='!';td.title='Check failed';});
+  });
+};
 </script>
 </body>
 </html>
