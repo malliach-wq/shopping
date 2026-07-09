@@ -368,7 +368,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
           <button class="btn btn-ghost btn-sm" onclick="document.getElementById('itemImageFile').click()">Ã°ÂÂÂ· Upload Photo</button>
           <span style="font-size:.75rem;color:var(--text-muted)">or drag &amp; drop</span>
         </div>
-        <input type="file" id="itemImageFile" accept="image/*,application/pdf" style="display:none" onchange="handleItemImage(this.files[0])"/>
+        <input type="file" id="itemImageFile" accept="image/*" style="display:none" onchange="handleItemImage(this.files[0])"/>
       </div>
       <div id="lastBoughtDisplay" style="display:none;font-size:.78rem;color:var(--text-muted);padding:6px 0"></div>
     </div>
@@ -438,7 +438,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
           <p style="font-weight:600;margin-bottom:4px">Upload your receipt</p>
           <p style="font-size:.8rem;color:var(--text-muted)">Photo or scan Ã¢ÂÂ we'll match items and record prices.</p>
         </div>
-        <input type="file" id="receiptFileInput" accept="image/*" style="display:none" onchange="processReceipt(this.files[0])"/>
+        <input type="file" id="receiptFileInput" accept="image/*,application/pdf" style="display:none" onchange="processReceipt(this.files[0])"/>
         <div id="ocrProgress" class="ocr-progress" style="display:none">
           <p style="font-size:.85rem;font-weight:600" id="ocrStatus">Reading receiptÃ¢ÂÂ¦</p>
           <div class="ocr-bar"><div class="ocr-bar-fill" id="ocrBarFill" style="width:0%"></div></div>
