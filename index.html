@@ -2127,9 +2127,10 @@ window._renderRctPages=function(){
   var pl=document.getElementById('rctPageList');
   var thumbs=document.getElementById('rctPageThumbs');
   if(!pl||!thumbs)return;
-  if(pages.length===0){if(drop)drop.style.display='block';pl.style.display='none';return;}
+  if(pages.length===0){if(drop)drop.style.display='block';pl.style.display='none';var _rr=document.getElementById('receiptResults');if(_rr)_rr.style.display='none';return;}
   if(drop)drop.style.display='none';
   pl.style.display='block';
+  var _rRes=document.getElementById('receiptResults');if(_rRes)_rRes.style.display='block';
   thumbs.innerHTML='';
   pages.forEach(function(p,idx){
     var wrap=document.createElement('div');
