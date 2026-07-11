@@ -215,19 +215,19 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 <!-- Setup -->
 <div class="setup-overlay" id="setupOverlay" style="display:none">
   <div class="setup-card">
-    <h2>Ã°ÂÂÂ Shopping Lists Setup</h2>
+    <h2>ÃÂ°ÃÂÃÂÃÂ Shopping Lists Setup</h2>
     <p>Enable real-time family sharing with Firebase (free, 2 min). Or skip for local-only.</p>
     <div class="setup-steps">
-      <div class="setup-step">Go to <a href="https://console.firebase.google.com" target="_blank" style="color:var(--accent)">console.firebase.google.com</a> Ã¢ÂÂ create project</div>
-      <div class="setup-step">Build Ã¢ÂÂ Realtime Database Ã¢ÂÂ Create Ã¢ÂÂ Start in test mode</div>
-      <div class="setup-step">Project Settings Ã¢ÂÂ Your apps Ã¢ÂÂ Add web app Ã¢ÂÂ copy firebaseConfig</div>
+      <div class="setup-step">Go to <a href="https://console.firebase.google.com" target="_blank" style="color:var(--accent)">console.firebase.google.com</a> ÃÂ¢ÃÂÃÂ create project</div>
+      <div class="setup-step">Build ÃÂ¢ÃÂÃÂ Realtime Database ÃÂ¢ÃÂÃÂ Create ÃÂ¢ÃÂÃÂ Start in test mode</div>
+      <div class="setup-step">Project Settings ÃÂ¢ÃÂÃÂ Your apps ÃÂ¢ÃÂÃÂ Add web app ÃÂ¢ÃÂÃÂ copy firebaseConfig</div>
       <div class="setup-step">Paste it below:</div>
     </div>
     <div class="form-field"><label>Firebase Config JSON</label>
       <textarea id="fbConfigInput" rows="5" placeholder='{"apiKey":"...","databaseURL":"...","projectId":"..."}'></textarea>
     </div>
     <div class="form-field"><label>Your Name</label><input type="text" id="setupName" placeholder="e.g. Chris" maxlength="20"/></div>
-    <button class="btn btn-primary" style="width:100%;justify-content:center;padding:12px" onclick="saveSetup()">Get Started Ã¢ÂÂ</button>
+    <button class="btn btn-primary" style="width:100%;justify-content:center;padding:12px" onclick="saveSetup()">Get Started ÃÂ¢ÃÂÃÂ</button>
     <p style="margin-top:10px;text-align:center;font-size:.75rem">Or <a href="#" onclick="useLocalMode()" style="color:var(--accent)">use without sync</a></p>
   </div>
 </div>
@@ -239,7 +239,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
   <p style="color:#fff;font-size:.9rem;margin-top:24px;opacity:.85">Point camera at barcode</p>
   <div id="scannerResult" class="scanner-result" style="display:none"></div>
   <div style="position:absolute;bottom:40px;display:flex;gap:12px;align-items:center">
-    <input type="text" id="manualBarcodeInput" placeholder="Type barcode manuallyÃ¢ÂÂ¦" style="background:#fff;color:#000;border-radius:99px;padding:10px 16px;border:none;width:220px;font-size:.9rem"/>
+    <input type="text" id="manualBarcodeInput" placeholder="Type barcode manuallyÃÂ¢ÃÂÃÂ¦" style="background:#fff;color:#000;border-radius:99px;padding:10px 16px;border:none;width:220px;font-size:.9rem"/>
     <button class="btn btn-white btn-sm" onclick="lookupManualBarcode()">Look Up</button>
     <button class="btn" style="background:#fff2;color:#fff;border:1px solid #fff4" onclick="closeScanner()">Cancel</button>
   </div>
@@ -247,36 +247,36 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 
 <div class="app" id="app" style="display:none">
   <div class="sidebar" id="sidebar">
-    <div class="sidebar-header"><h1>Ã°ÂÂÂ My Lists</h1><button class="icon-btn" onclick="openNewListModal()">Ã¯Â¼Â</button></div>
+    <div class="sidebar-header"><h1>ÃÂ°ÃÂÃÂÃÂ My Lists</h1><button class="icon-btn" onclick="openNewListModal()">ÃÂ¯ÃÂ¼ÃÂ</button></div>
     <div class="lists-section" id="listsSidebar"></div>
     <div class="sidebar-footer">
       <div class="user-pill">
         <div class="user-avatar" id="userAvatar">C</div>
         <span id="userNameLabel" style="flex:1">Chris</span>
-        <button class="icon-btn" onclick="toggleTheme()" style="width:24px;height:24px;font-size:.85rem">Ã°ÂÂÂ</button>
+        <button class="icon-btn" onclick="toggleTheme()" style="width:24px;height:24px;font-size:.85rem">ÃÂ°ÃÂÃÂÃÂ</button>
       </div>
-      <button class="btn btn-ghost btn-sm" style="justify-content:center" onclick="openRecipe()">Ã°ÂÂÂ Import Recipe</button>
+      <button class="btn btn-ghost btn-sm" style="justify-content:center" onclick="openRecipe()">ÃÂ°ÃÂÃÂÃÂ Import Recipe</button>
     </div>
   </div>
 
   <div class="main">
     <div class="main-header" id="mainHeader">
-      <button class="icon-btn" id="menuBtn" onclick="toggleSidebar()" style="display:none">Ã¢ÂÂ°</button>
+      <button class="icon-btn" id="menuBtn" onclick="toggleSidebar()" style="display:none">ÃÂ¢ÃÂÃÂ°</button>
       <div class="header-title">
         <h2 id="listTitle">Select a list</h2>
         <div style="display:flex;align-items:center;gap:5px">
           <div class="header-store" id="listStoreLine"></div>
-          <button class="icon-btn" id="editTripBtn" onclick="editTripDetails()" style="display:none;width:18px;height:18px;font-size:.65rem;opacity:.65" title="Edit store &amp; date">Ã¢ÂÂÃ¯Â¸Â</button>
+          <button class="icon-btn" id="editTripBtn" onclick="editTripDetails()" style="display:none;width:18px;height:18px;font-size:.65rem;opacity:.65" title="Edit store &amp; date">ÃÂ¢ÃÂÃÂÃÂ¯ÃÂ¸ÃÂ</button>
         </div>
       </div>
       <div class="header-actions">
-        <button class="btn btn-ghost btn-sm" id="suggestionsBtn" onclick="reopenSuggestions()" style="display:none" title="Smart suggestions">Ã°ÂÂÂ¡</button>
-        <button class="btn btn-ghost btn-sm" id="startShoppingBtn" onclick="startShopping()" style="display:none">Ã°ÂÂÂ Start Shopping</button>
-        <button class="btn btn-ghost btn-sm" id="reopenListBtn" onclick="reopenList()" style="display:none">Ã¢ÂÂ© Reopen</button>
-        <button class="btn btn-white btn-sm" id="endShoppingBtn" onclick="endShopping()" style="display:none">Ã¢ÂÂ Finish</button>
-        <button class="btn btn-ghost btn-sm" onclick="shareList()" id="shareBtn" style="display:none">Ã°ÂÂÂ</button>
-        <button class="btn btn-ghost btn-sm" onclick="printList()" id="printBtn" style="display:none">Ã°ÂÂÂ¨</button>
-        <button class="icon-btn" onclick="openEditListModal()" id="editListBtn" style="display:none">Ã¢ÂÂ</button>
+        <button class="btn btn-ghost btn-sm" id="suggestionsBtn" onclick="reopenSuggestions()" style="display:none" title="Smart suggestions">ÃÂ°ÃÂÃÂÃÂ¡</button>
+        <button class="btn btn-ghost btn-sm" id="startShoppingBtn" onclick="startShopping()" style="display:none">ÃÂ°ÃÂÃÂÃÂ Start Shopping</button>
+        <button class="btn btn-ghost btn-sm" id="reopenListBtn" onclick="reopenList()" style="display:none">ÃÂ¢ÃÂÃÂ© Reopen</button>
+        <button class="btn btn-white btn-sm" id="endShoppingBtn" onclick="endShopping()" style="display:none">ÃÂ¢ÃÂÃÂ Finish</button>
+        <button class="btn btn-ghost btn-sm" onclick="shareList()" id="shareBtn" style="display:none">ÃÂ°ÃÂÃÂÃÂ</button>
+        <button class="btn btn-ghost btn-sm" onclick="printList()" id="printBtn" style="display:none">ÃÂ°ÃÂÃÂÃÂ¨</button>
+        <button class="icon-btn" onclick="openEditListModal()" id="editListBtn" style="display:none">ÃÂ¢ÃÂÃÂ</button>
       </div>
     </div>
 
@@ -288,7 +288,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     </div>
 
     <div class="recipe-panel" id="recipePanel">
-      <p style="font-size:.8rem;color:var(--text-muted);margin-bottom:8px">Paste ingredients Ã¢ÂÂ one per line (e.g. "2 cups flour")</p>
+      <p style="font-size:.8rem;color:var(--text-muted);margin-bottom:8px">Paste ingredients ÃÂ¢ÃÂÃÂ one per line (e.g. "2 cups flour")</p>
       <textarea id="recipeInput" placeholder="500g chicken breast&#10;2 cloves garlic&#10;1 tin tomatoes"></textarea>
       <div style="display:flex;gap:8px;margin-top:8px">
         <button class="btn btn-primary btn-sm" onclick="importRecipe()">Add to List</button>
@@ -297,25 +297,25 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     </div>
 
     <div class="items-area" id="itemsArea">
-      <div class="empty-state"><div class="icon">Ã°ÂÂÂ</div><h3>Select a list</h3><p>Choose from the sidebar or create a new one.</p></div>
+      <div class="empty-state"><div class="icon">ÃÂ°ÃÂÃÂÃÂ</div><h3>Select a list</h3><p>Choose from the sidebar or create a new one.</p></div>
     </div>
   </div>
 </div>
 
-<button class="fab" id="addFab" style="display:none" onclick="openAddModal()">Ã¯Â¼Â</button>
+<button class="fab" id="addFab" style="display:none" onclick="openAddModal()">ÃÂ¯ÃÂ¼ÃÂ</button>
 
 <div class="shopping-bar" id="shoppingBar">
   <div class="shopping-counter">
     <div class="picked-count"><span id="pickedCount">0</span> / <span id="totalCount">0</span> picked</div>
     <div class="total-label">Tap items as you pick them up</div>
   </div>
-  <div class="shopping-total" id="shoppingTotal">Ã¢ÂÂ¬0.00</div>
-  <button class="btn btn-white btn-sm" onclick="openReceiptModal()">Ã°ÂÂ§Â¾ Validate Receipt</button>
+  <div class="shopping-total" id="shoppingTotal">ÃÂ¢ÃÂÃÂ¬0.00</div>
+  <button class="btn btn-white btn-sm" onclick="openReceiptModal()">ÃÂ°ÃÂÃÂ§ÃÂ¾ Validate Receipt</button>
 </div>
 
 <div class="bottom-bar" id="bottomBar" style="display:none">
   <div class="quick-add-wrap">
-    <input class="quick-add-input" id="quickInput" placeholder="Quick addÃ¢ÂÂ¦ or tap Ã¯Â¼Â for full form" autocomplete="off"/>
+    <input class="quick-add-input" id="quickInput" placeholder="Quick addÃÂ¢ÃÂÃÂ¦ or tap ÃÂ¯ÃÂ¼ÃÂ for full form" autocomplete="off"/>
     <div class="autocomplete-dropdown" id="autocomplete" style="display:none"></div>
   </div>
   <button class="btn btn-primary" onclick="addItemFromQuick()">Add</button>
@@ -324,12 +324,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 <!-- Add/Edit Item Modal -->
 <div class="modal-overlay" id="itemModal" onclick="if(event.target===this)closeItemModal()">
   <div class="modal">
-    <div class="modal-header"><h3 id="itemModalTitle">Add Item</h3><button class="icon-btn" onclick="closeItemModal()">Ã¢ÂÂ</button></div>
+    <div class="modal-header"><h3 id="itemModalTitle">Add Item</h3><button class="icon-btn" onclick="closeItemModal()">ÃÂ¢ÃÂÃÂ</button></div>
     <div class="modal-body">
       <div style="display:flex;gap:8px;margin-bottom:14px">
-        <button class="btn btn-ghost" style="flex:1;justify-content:center" onclick="openScanner()">Ã°ÂÂÂ· Scan Barcode</button>
-        <input type="text" id="barcodeManualField" placeholder="Barcode numberÃ¢ÂÂ¦" style="flex:2;padding:9px 12px;border-radius:10px;border:1.5px solid var(--border);background:var(--surface2);color:var(--text);font-size:.87rem;outline:none"/>
-        <button class="btn btn-ghost btn-sm" onclick="lookupBarcodeField()">Ã¢ÂÂ</button>
+        <button class="btn btn-ghost" style="flex:1;justify-content:center" onclick="openScanner()">ÃÂ°ÃÂÃÂÃÂ· Scan Barcode</button>
+        <input type="text" id="barcodeManualField" placeholder="Barcode numberÃÂ¢ÃÂÃÂ¦" style="flex:2;padding:9px 12px;border-radius:10px;border:1.5px solid var(--border);background:var(--surface2);color:var(--text);font-size:.87rem;outline:none"/>
+        <button class="btn btn-ghost btn-sm" onclick="lookupBarcodeField()">ÃÂ¢ÃÂÃÂ</button>
       </div>
       <div id="barcodeStatus" style="display:none;font-size:.78rem;padding:6px 10px;border-radius:8px;margin-bottom:10px"></div>
       <div class="form-row">
@@ -341,31 +341,31 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
         <div class="form-field"><label>Qty</label><input type="number" id="itemQtyInput" placeholder="1" min="0" step="any"/></div>
         <div class="form-field"><label>Unit</label>
           <select id="itemUnitInput">
-            <option value="">Ã¢ÂÂ</option><option>pcs</option><option>kg</option><option>g</option><option>litre</option><option>ml</option>
+            <option value="">ÃÂ¢ÃÂÃÂ</option><option>pcs</option><option>kg</option><option>g</option><option>litre</option><option>ml</option>
             <option>pack</option><option>bottle</option><option>tin</option><option>box</option><option>bag</option><option>bunch</option>
           </select>
         </div>
       </div>
       <div class="form-row">
-        <div class="form-field"><label>Cost (Ã¢ÂÂ¬)</label><input type="number" id="itemPriceInput" placeholder="0.00" min="0" step="0.01"/></div>
+        <div class="form-field"><label>Cost (ÃÂ¢ÃÂÃÂ¬)</label><input type="number" id="itemPriceInput" placeholder="0.00" min="0" step="0.01"/></div>
         <div class="form-field"><label>Category</label>
           <select id="itemCategoryInput">
             <option value="">Auto-detect</option>
-            <option>Ã°ÂÂ¥Â¦ Produce</option><option>Ã°ÂÂ¥Â Dairy</option><option>Ã°ÂÂÂ Bakery</option><option>Ã°ÂÂ¥Â© Meat &amp; Fish</option>
-            <option>Ã¢ÂÂÃ¯Â¸Â Frozen</option><option>Ã°ÂÂ¥Â« Canned &amp; Dry</option><option>Ã°ÂÂ§Â Beverages</option><option>Ã°ÂÂÂ« Snacks &amp; Sweets</option>
-            <option>Ã°ÂÂ§Â´ Personal Care</option><option>Ã°ÂÂ§Â¹ Household</option><option>Ã°ÂÂÂ¾ Pets</option><option>Ã°ÂÂÂ Health</option><option>Ã°ÂÂÂ¦ Other</option>
+            <option>ÃÂ°ÃÂÃÂ¥ÃÂ¦ Produce</option><option>ÃÂ°ÃÂÃÂ¥ÃÂ Dairy</option><option>ÃÂ°ÃÂÃÂÃÂ Bakery</option><option>ÃÂ°ÃÂÃÂ¥ÃÂ© Meat &amp; Fish</option>
+            <option>ÃÂ¢ÃÂÃÂÃÂ¯ÃÂ¸ÃÂ Frozen</option><option>ÃÂ°ÃÂÃÂ¥ÃÂ« Canned &amp; Dry</option><option>ÃÂ°ÃÂÃÂ§ÃÂ Beverages</option><option>ÃÂ°ÃÂÃÂÃÂ« Snacks &amp; Sweets</option>
+            <option>ÃÂ°ÃÂÃÂ§ÃÂ´ Personal Care</option><option>ÃÂ°ÃÂÃÂ§ÃÂ¹ Household</option><option>ÃÂ°ÃÂÃÂÃÂ¾ Pets</option><option>ÃÂ°ÃÂÃÂÃÂ Health</option><option>ÃÂ°ÃÂÃÂÃÂ¦ Other</option>
           </select>
         </div>
       </div>
       <div class="form-field"><label>Notes</label><textarea id="itemNotesInput" rows="2" placeholder="e.g. lactose-free, ripe ones, on offer"></textarea></div>
       <div class="form-field">
-        <label>Photo <span style="font-weight:400;text-transform:none;letter-spacing:0;font-size:.72rem">(optional Ã¢ÂÂ helps spot on shelf)</span></label>
+        <label>Photo <span style="font-weight:400;text-transform:none;letter-spacing:0;font-size:.72rem">(optional ÃÂ¢ÃÂÃÂ helps spot on shelf)</span></label>
         <div id="itemImagePreviewWrap" style="display:none" class="img-preview-wrap">
           <img id="itemImagePreview" class="img-preview" src="" alt=""/>
-          <button class="img-remove-btn" onclick="clearItemImage()">Ã¢ÂÂ</button>
+          <button class="img-remove-btn" onclick="clearItemImage()">ÃÂ¢ÃÂÃÂ</button>
         </div>
         <div id="itemImagePlaceholder" style="display:flex;align-items:center;gap:10px">
-          <button class="btn btn-ghost btn-sm" onclick="document.getElementById('itemImageFile').click()">Ã°ÂÂÂ· Upload Photo</button>
+          <button class="btn btn-ghost btn-sm" onclick="document.getElementById('itemImageFile').click()">ÃÂ°ÃÂÃÂÃÂ· Upload Photo</button>
           <span style="font-size:.75rem;color:var(--text-muted)">or drag &amp; drop</span>
         </div>
         <input type="file" id="itemImageFile" accept="image/*" style="display:none" onchange="handleItemImage(this.files[0])"/>
@@ -373,7 +373,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
       <div id="lastBoughtDisplay" style="display:none;font-size:.78rem;color:var(--text-muted);padding:6px 0"></div>
     </div>
     <div class="modal-footer">
-      <button class="btn btn-danger btn-sm" id="deleteItemBtn" onclick="deleteEditingItem()" style="display:none;margin-right:auto">Ã°ÂÂÂ Delete</button>
+      <button class="btn btn-danger btn-sm" id="deleteItemBtn" onclick="deleteEditingItem()" style="display:none;margin-right:auto">ÃÂ°ÃÂÃÂÃÂ Delete</button>
       <button class="btn btn-ghost" onclick="closeItemModal()">Cancel</button>
       <button class="btn btn-primary" onclick="saveItemModal()" id="itemSaveBtn">Add to List</button>
     </div>
@@ -383,7 +383,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 <!-- New/Edit List Modal -->
 <div class="modal-overlay" id="listModal" onclick="if(event.target===this)closeListModal()">
   <div class="modal">
-    <div class="modal-header"><h3 id="listModalTitle">New List</h3><button class="icon-btn" onclick="closeListModal()">Ã¢ÂÂ</button></div>
+    <div class="modal-header"><h3 id="listModalTitle">New List</h3><button class="icon-btn" onclick="closeListModal()">ÃÂ¢ÃÂÃÂ</button></div>
     <div class="modal-body">
       <div class="form-field"><label>List Name</label><input type="text" id="listNameInput" placeholder="e.g. Weekly Shop"/></div>
       <div class="form-field"><label>Icon</label><div class="icon-grid" id="iconGrid"></div></div>
@@ -402,7 +402,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 <!-- Start/Edit Trip Modal -->
 <div class="modal-overlay" id="startShoppingModal" onclick="if(event.target===this)closeStartShoppingModal()">
   <div class="modal" style="max-width:400px">
-    <div class="modal-header"><h3 id="shopModalTitle">Ã°ÂÂÂ Start Shopping</h3><button class="icon-btn" onclick="closeStartShoppingModal()">Ã¢ÂÂ</button></div>
+    <div class="modal-header"><h3 id="shopModalTitle">ÃÂ°ÃÂÃÂÃÂ Start Shopping</h3><button class="icon-btn" onclick="closeStartShoppingModal()">ÃÂ¢ÃÂÃÂ</button></div>
     <div class="modal-body">
       <p id="shopModalHint" style="font-size:.85rem;color:var(--text-muted);margin-bottom:16px">Confirm the store and date/time for this trip.</p>
       <div class="form-field"><label>Store / Supermarket</label><input type="text" id="shopConfirmStore" placeholder="e.g. Lidl Malta"/></div>
@@ -410,7 +410,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     </div>
     <div class="modal-footer">
       <button class="btn btn-ghost" onclick="closeStartShoppingModal()">Cancel</button>
-      <button class="btn btn-primary" id="shopModalConfirmBtn" onclick="confirmShopping()">Start Ã°ÂÂÂ</button>
+      <button class="btn btn-primary" id="shopModalConfirmBtn" onclick="confirmShopping()">Start ÃÂ°ÃÂÃÂÃÂ</button>
     </div>
   </div>
 </div>
@@ -420,7 +420,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
   <div class="modal" style="max-width:600px">
     <div class="modal-header">
       <div><h3 id="suggestionsTitle">Smart Suggestions</h3><p id="suggestionsSubtitle" style="font-size:.75rem;color:var(--text-muted);margin-top:2px"></p></div>
-      <button class="icon-btn" onclick="closeSuggestions()">Ã¢ÂÂ</button>
+      <button class="icon-btn" onclick="closeSuggestions()">ÃÂ¢ÃÂÃÂ</button>
     </div>
     <div class="modal-body" style="padding-top:8px"><div id="suggestionsBody"></div></div>
     <div class="modal-footer"><button class="btn btn-ghost" onclick="closeSuggestions()">Done</button></div>
@@ -430,28 +430,28 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 <!-- Receipt Modal -->
 <div class="modal-overlay" id="receiptModal" onclick="if(event.target===this)closeReceiptModal()">
   <div class="modal" style="max-width:580px">
-    <div class="modal-header"><h3>Ã°ÂÂ§Â¾ Validate Receipt</h3><button class="icon-btn" onclick="closeReceiptModal()">Ã¢ÂÂ</button></div>
+    <div class="modal-header"><h3>ÃÂ°ÃÂÃÂ§ÃÂ¾ Validate Receipt</h3><button class="icon-btn" onclick="closeReceiptModal()">ÃÂ¢ÃÂÃÂ</button></div>
     <div class="modal-body">
       <div id="receiptUploadArea">
         <div class="receipt-drop" id="receiptDrop" onclick="document.getElementById('receiptFileInput').click()" ondragover="dragOver(event)" ondrop="dropReceipt(event)">
-          <div class="icon">Ã°ÂÂ§Â¾</div>
+          <div class="icon">ÃÂ°ÃÂÃÂ§ÃÂ¾</div>
           <p style="font-weight:600;margin-bottom:4px">Upload your receipt</p>
-          <p style="font-size:.8rem;color:var(--text-muted)">Photo or scan Ã¢ÂÂ we'll match items and record prices.</p>
+          <p style="font-size:.8rem;color:var(--text-muted)">Photo or scan ÃÂ¢ÃÂÃÂ we'll match items and record prices.</p>
         </div>
         <input type="file" id="receiptFileInput" accept="image/*,application/pdf" style="display:none" onchange="processReceipt(this.files[0])"/>
         <div id="ocrProgress" class="ocr-progress" style="display:none">
-          <p style="font-size:.85rem;font-weight:600" id="ocrStatus">Reading receiptÃ¢ÂÂ¦</p>
+          <p style="font-size:.85rem;font-weight:600" id="ocrStatus">Reading receiptÃÂ¢ÃÂÃÂ¦</p>
           <div class="ocr-bar"><div class="ocr-bar-fill" id="ocrBarFill" style="width:0%"></div></div>
         </div>
       </div>
       <div id="receiptResults" style="display:none">
         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
           <p style="font-size:.83rem;font-weight:600">Matched items:</p>
-          <button class="btn btn-ghost btn-sm" onclick="resetReceipt()">Ã¢ÂÂ© Upload again</button>
+          <button class="btn btn-ghost btn-sm" onclick="resetReceipt()">ÃÂ¢ÃÂÃÂ© Upload again</button>
         </div>
         <div id="receiptMatchList"></div>
         <div id="receiptUnmatched" style="margin-top:12px;display:none">
-          <p style="font-size:.78rem;font-weight:600;color:var(--text-muted);margin-bottom:6px">Ã¢ÂÂ  Not on list:</p>
+          <p style="font-size:.78rem;font-weight:600;color:var(--text-muted);margin-bottom:6px">ÃÂ¢ÃÂÃÂ  Not on list:</p>
           <div id="receiptUnmatchedList"></div>
         </div>
       </div>
@@ -466,37 +466,37 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 <div class="toast" id="toast"></div>
 
 <script type="module">
-// Ã¢ÂÂÃ¢ÂÂ Config Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ
+// ÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂ Config ÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂ
 const LISTS_KEY='shopping_lists_v1',USER_KEY='shopping_user',CFG_KEY='shopping_fb_cfg',HISTORY_KEY='shopping_history';
 let db=null,currentListId=null,currentFilter='all',editingItemId=null,editingListId=null;
-let selectedIcon='Ã°ÂÂÂ',selectedColor='#22c55e',acIndex=-1;
+let selectedIcon='ÃÂ°ÃÂÃÂÃÂ',selectedColor='#22c55e',acIndex=-1;
 let shoppingMode=false,receiptMatches=[],_shopModalMode='start',currentItemImage=null;
 let scannerStream=null,scannerActive=false;
 let _sugSession={};
-const ICONS=['Ã°ÂÂÂ','Ã°ÂÂÂ ','Ã°ÂÂÂ','Ã°ÂÂÂ','Ã°ÂÂÂÃ¯Â¸Â','Ã°ÂÂÂ¿','Ã°ÂÂÂ¶','Ã°ÂÂÂ¾','Ã°ÂÂÂ','Ã°ÂÂÂ','Ã°ÂÂ§Â¹','Ã°ÂÂÂ·'];
+const ICONS=['ÃÂ°ÃÂÃÂÃÂ','ÃÂ°ÃÂÃÂÃÂ ','ÃÂ°ÃÂÃÂÃÂ','ÃÂ°ÃÂÃÂÃÂ','ÃÂ°ÃÂÃÂÃÂÃÂ¯ÃÂ¸ÃÂ','ÃÂ°ÃÂÃÂÃÂ¿','ÃÂ°ÃÂÃÂÃÂ¶','ÃÂ°ÃÂÃÂÃÂ¾','ÃÂ°ÃÂÃÂÃÂ','ÃÂ°ÃÂÃÂÃÂ','ÃÂ°ÃÂÃÂ§ÃÂ¹','ÃÂ°ÃÂÃÂÃÂ·'];
 const COLORS=['#22c55e','#3b82f6','#f59e0b','#ef4444','#8b5cf6','#ec4899','#06b6d4','#f97316','#84cc16','#14b8a6'];
 const CATEGORIES={
-  'Ã°ÂÂ¥Â¦ Produce':['apple','banana','orange','lemon','lime','grape','strawberr','blueberr','raspberry','melon','tomato','potato','onion','garlic','ginger','carrot','broccoli','spinach','lettuce','cucumber','pepper','avocado','mango','pineapple','pear','peach','plum','kiwi','cherry','mushroom','celery','courgette','zucchini','aubergine','eggplant','cabbage','cauliflower','leek','spring onion','salad','herbs','parsley','coriander','basil','mint','rocket','peas','beans','sweetcorn'],
-  'Ã°ÂÂ¥Â Dairy':['milk','cheese','butter','yogurt','yoghurt','cream','egg','margarine','mozzarella','parmesan','feta','cheddar','brie'],
-  'Ã°ÂÂÂ Bakery':['bread','roll','baguette','croissant','bagel','muffin','cake','biscuit','cookie','pastry','wrap','pitta','tortilla','loaf'],
-  'Ã°ÂÂ¥Â© Meat & Fish':['chicken','beef','pork','lamb','fish','salmon','tuna','prawn','shrimp','mince','steak','sausage','bacon','turkey','duck','sardine','cod'],
-  'Ã¢ÂÂÃ¯Â¸Â Frozen':['frozen','ice cream','oven chips','sorbet'],
-  'Ã°ÂÂ¥Â« Canned & Dry':['pasta','rice','lentil','chickpea','kidney bean','flour','sugar','salt','oil','vinegar','sauce','ketchup','mustard','mayonnaise','jam','honey','cereal','oat','stock','broth','soup','tinned','canned','baked beans','coconut milk','passata'],
-  'Ã°ÂÂ§Â Beverages':['water','juice','coffee','tea','wine','beer','coke','cola','sprite','fanta','lemonade','kombucha','smoothie','energy drink','soft drink','squash'],
-  'Ã°ÂÂÂ« Snacks & Sweets':['chocolate','crisp','popcorn','nuts','peanut','almond','walnut','cashew','pistachio','raisin','granola bar','sweets','candy','gummy'],
-  'Ã°ÂÂ§Â´ Personal Care':['shampoo','conditioner','shower gel','soap','toothpaste','toothbrush','deodorant','razor','moisturiser','lotion','sunscreen','cotton','floss'],
-  'Ã°ÂÂ§Â¹ Household':['washing up','dishwasher','laundry','detergent','bleach','sponge','bin bag','toilet paper','tissue','kitchen roll','foil','cling film','cleaning'],
-  'Ã°ÂÂÂ¾ Pets':['dog food','cat food','kibble','litter','pet treats'],
-  'Ã°ÂÂÂ Health':['vitamin','supplement','paracetamol','ibuprofen','plaster','medicine'],
+  'ÃÂ°ÃÂÃÂ¥ÃÂ¦ Produce':['apple','banana','orange','lemon','lime','grape','strawberr','blueberr','raspberry','melon','tomato','potato','onion','garlic','ginger','carrot','broccoli','spinach','lettuce','cucumber','pepper','avocado','mango','pineapple','pear','peach','plum','kiwi','cherry','mushroom','celery','courgette','zucchini','aubergine','eggplant','cabbage','cauliflower','leek','spring onion','salad','herbs','parsley','coriander','basil','mint','rocket','peas','beans','sweetcorn'],
+  'ÃÂ°ÃÂÃÂ¥ÃÂ Dairy':['milk','cheese','butter','yogurt','yoghurt','cream','egg','margarine','mozzarella','parmesan','feta','cheddar','brie'],
+  'ÃÂ°ÃÂÃÂÃÂ Bakery':['bread','roll','baguette','croissant','bagel','muffin','cake','biscuit','cookie','pastry','wrap','pitta','tortilla','loaf'],
+  'ÃÂ°ÃÂÃÂ¥ÃÂ© Meat & Fish':['chicken','beef','pork','lamb','fish','salmon','tuna','prawn','shrimp','mince','steak','sausage','bacon','turkey','duck','sardine','cod'],
+  'ÃÂ¢ÃÂÃÂÃÂ¯ÃÂ¸ÃÂ Frozen':['frozen','ice cream','oven chips','sorbet'],
+  'ÃÂ°ÃÂÃÂ¥ÃÂ« Canned & Dry':['pasta','rice','lentil','chickpea','kidney bean','flour','sugar','salt','oil','vinegar','sauce','ketchup','mustard','mayonnaise','jam','honey','cereal','oat','stock','broth','soup','tinned','canned','baked beans','coconut milk','passata'],
+  'ÃÂ°ÃÂÃÂ§ÃÂ Beverages':['water','juice','coffee','tea','wine','beer','coke','cola','sprite','fanta','lemonade','kombucha','smoothie','energy drink','soft drink','squash'],
+  'ÃÂ°ÃÂÃÂÃÂ« Snacks & Sweets':['chocolate','crisp','popcorn','nuts','peanut','almond','walnut','cashew','pistachio','raisin','granola bar','sweets','candy','gummy'],
+  'ÃÂ°ÃÂÃÂ§ÃÂ´ Personal Care':['shampoo','conditioner','shower gel','soap','toothpaste','toothbrush','deodorant','razor','moisturiser','lotion','sunscreen','cotton','floss'],
+  'ÃÂ°ÃÂÃÂ§ÃÂ¹ Household':['washing up','dishwasher','laundry','detergent','bleach','sponge','bin bag','toilet paper','tissue','kitchen roll','foil','cling film','cleaning'],
+  'ÃÂ°ÃÂÃÂÃÂ¾ Pets':['dog food','cat food','kibble','litter','pet treats'],
+  'ÃÂ°ÃÂÃÂÃÂ Health':['vitamin','supplement','paracetamol','ibuprofen','plaster','medicine'],
 };
-function guessCategory(n){n=(n||'').toLowerCase();for(const[cat,kw]of Object.entries(CATEGORIES)){if(kw.some(k=>n.includes(k)))return cat;}return'Ã°ÂÂÂ¦ Other';}
+function guessCategory(n){n=(n||'').toLowerCase();for(const[cat,kw]of Object.entries(CATEGORIES)){if(kw.some(k=>n.includes(k)))return cat;}return'ÃÂ°ÃÂÃÂÃÂ¦ Other';}
 
-// Ã¢ÂÂÃ¢ÂÂ Storage Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ
+// ÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂ Storage ÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂ
 function localLoad(){try{return JSON.parse(localStorage.getItem(LISTS_KEY))||{};}catch{return{};}}
 function localSave(d){localStorage.setItem(LISTS_KEY,JSON.stringify(d));}
 let listsData={};
 
-// Ã¢ÂÂÃ¢ÂÂ Firebase Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ
+// ÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂ Firebase ÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂ
 async function initFirebase(cfg){
   const{initializeApp}=await import('https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js');
   const{getDatabase,ref,set,onValue,remove,update}=await import('https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js');
@@ -508,7 +508,7 @@ async function fbWrite(p,v){if(!db)return;await window._fb.set(window._fb.ref(db
 async function fbUpdate(p,v){if(!db)return;await window._fb.update(window._fb.ref(db,p),v);}
 async function fbRemove(p){if(!db)return;await window._fb.remove(window._fb.ref(db,p));}
 
-// Ã¢ÂÂÃ¢ÂÂ Helpers Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ
+// ÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂ Helpers ÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂ
 function uid(){return Date.now().toString(36)+Math.random().toString(36).slice(2);}
 function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.className='toast show';setTimeout(()=>t.className='toast',2600);}
@@ -518,7 +518,7 @@ function getList(id){return getAllLists()[id];}
 function getHistory(){try{return JSON.parse(localStorage.getItem(HISTORY_KEY))||[];}catch{return[];}}
 function addToHistory(name,category){const h=getHistory().filter(i=>i.name!==name);h.unshift({name,category});localStorage.setItem(HISTORY_KEY,JSON.stringify(h.slice(0,200)));}
 
-// Ã¢ÂÂÃ¢ÂÂ Setup Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ
+// ÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂ Setup ÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂ
 window.saveSetup=async function(){
   const raw=document.getElementById('fbConfigInput').value.trim();
   const name=document.getElementById('setupName').value.trim();
@@ -552,27 +552,27 @@ async function startApp(){
   else await startApp();
 })();
 
-// Ã¢ÂÂÃ¢ÂÂ Sidebar Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ
+// ÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂ Sidebar ÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂ
 function listCardHTML(id,list){
   const items=list.items?Object.values(list.items):[];
   const closed=list.status==='closed';
   const rem=items.filter(i=>!i.checked).length;
   const trip=list.shoppingLabel?list.shoppingLabel.substring(0,30):(list.store||'');
   return `<div class="list-item${id===currentListId?' active':''}${closed?' closed':''}" onclick="selectList('${id}')">
-    <div class="list-icon" style="background:${list.color||'#22c55e'}22">${closed?'Ã¢ÂÂ':list.icon||'Ã°ÂÂÂ'}</div>
+    <div class="list-icon" style="background:${list.color||'#22c55e'}22">${closed?'ÃÂ¢ÃÂÃÂ':list.icon||'ÃÂ°ÃÂÃÂÃÂ'}</div>
     <div class="list-meta">
       <div class="list-name">${esc(list.name)}</div>
       <div class="list-count">${trip?esc(trip)+'<br>':''}${items.length} item${items.length!==1?'s':''}</div>
     </div>
     ${closed?'<span class="list-closed-badge">Done</span>':rem>0?`<span class="list-badge">${rem}</span>`:''}
-    <button class="list-edit-btn" onclick="editList(event,'${id}')" title="Edit list">Ã¢ÂÂÃ¯Â¸Â</button>
+    <button class="list-edit-btn" onclick="editList(event,'${id}')" title="Edit list">ÃÂ¢ÃÂÃÂÃÂ¯ÃÂ¸ÃÂ</button>
   </div>`;
 }
 function renderSidebar(){
   const lists=getAllLists();
   const el=document.getElementById('listsSidebar');
   const entries=Object.entries(lists);
-  if(!entries.length){el.innerHTML='<div style="padding:20px 10px;text-align:center;color:var(--text-muted);font-size:.82rem">No lists yet.<br>Click Ã¯Â¼Â to create one.</div>';return;}
+  if(!entries.length){el.innerHTML='<div style="padding:20px 10px;text-align:center;color:var(--text-muted);font-size:.82rem">No lists yet.<br>Click ÃÂ¯ÃÂ¼ÃÂ to create one.</div>';return;}
   const open=entries.filter(([,l])=>l.status!=='closed');
   const closed=entries.filter(([,l])=>l.status==='closed');
   let html='';
@@ -589,7 +589,7 @@ window.selectList=function(id){
   currentListId=id;currentFilter='all';renderSidebar();
   const list=getList(id);const closed=list?.status==='closed';
   document.getElementById('listTitle').textContent=list?.name||'';
-  const sl=list?.shoppingLabel?'Ã°ÂÂÂ '+list.shoppingLabel:(list?.store?'Ã°ÂÂÂ '+list.store:'');
+  const sl=list?.shoppingLabel?'ÃÂ°ÃÂÃÂÃÂ '+list.shoppingLabel:(list?.store?'ÃÂ°ÃÂÃÂÃÂ '+list.store:'');
   document.getElementById('listStoreLine').textContent=sl;
   document.getElementById('editTripBtn').style.display=sl?'':'none';
   ['filterBar','shareBtn','printBtn','editListBtn','suggestionsBtn'].forEach(n=>{const e=document.getElementById(n);if(e)e.style.display='';});
@@ -603,7 +603,7 @@ window.selectList=function(id){
   if(window.innerWidth<=640)closeSidebar();
 };
 
-// Ã¢ÂÂÃ¢ÂÂ Items Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ
+// ÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂ Items ÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂ
 function lastBoughtChip(ts){
   if(!ts)return'';
   const days=Math.floor((Date.now()-ts)/86400000);
@@ -611,7 +611,7 @@ function lastBoughtChip(ts){
   if(days===0){cls='recent';label='today';}else if(days===1){cls='recent';label='yesterday';}
   else if(days<=7){cls='recent';label=days+'d ago';}else if(days<=21){cls='medium';label=Math.floor(days/7)+'w ago';}
   else if(days<=60){cls='old';label=Math.floor(days/7)+'w ago';}else{cls='old';label=Math.floor(days/30)+'mo ago';}
-  return`<span class="last-bought-chip ${cls}" title="${new Date(ts).toLocaleDateString()}">Ã°ÂÂÂ ${label}</span>`;
+  return`<span class="last-bought-chip ${cls}" title="${new Date(ts).toLocaleDateString()}">ÃÂ°ÃÂÃÂÃÂ ${label}</span>`;
 }
 function renderItems(){
   const list=getList(currentListId);if(!list)return;
@@ -619,20 +619,20 @@ function renderItems(){
   const priced=items.filter(i=>i.price&&!i.checked);
   const total=priced.reduce((s,i)=>s+(parseFloat(i.price)||0)*(parseFloat(i.qty)||1),0);
   const pill=document.getElementById('budgetPill');
-  if(priced.length){pill.style.display='';pill.textContent='Ã°ÂÂ§Â¾ Ã¢ÂÂ¬'+total.toFixed(2);}else pill.style.display='none';
+  if(priced.length){pill.style.display='';pill.textContent='ÃÂ°ÃÂÃÂ§ÃÂ¾ ÃÂ¢ÃÂÃÂ¬'+total.toFixed(2);}else pill.style.display='none';
   if(shoppingMode){
     const picked=items.filter(i=>i.checked).length;
     document.getElementById('pickedCount').textContent=picked;
     document.getElementById('totalCount').textContent=items.length;
-    document.getElementById('shoppingTotal').textContent='Ã¢ÂÂ¬'+items.filter(i=>i.checked&&i.price).reduce((s,i)=>s+(parseFloat(i.price)||0)*(parseFloat(i.qty)||1),0).toFixed(2);
+    document.getElementById('shoppingTotal').textContent='ÃÂ¢ÃÂÃÂ¬'+items.filter(i=>i.checked&&i.price).reduce((s,i)=>s+(parseFloat(i.price)||0)*(parseFloat(i.qty)||1),0).toFixed(2);
   }
   let filtered=items;
   if(currentFilter==='active')filtered=items.filter(i=>!i.checked);
   if(currentFilter==='checked')filtered=items.filter(i=>i.checked);
   const active=filtered.filter(i=>!i.checked),checked=filtered.filter(i=>i.checked);
   let html='';
-  if(!items.length)html='<div class="empty-state"><div class="icon">Ã°ÂÂÂ</div><h3>List is empty</h3><p>Tap Ã¯Â¼Â to add items.</p></div>';
-  else if(!filtered.length)html='<div class="empty-state"><div class="icon">Ã¢ÂÂ¨</div><h3>Nothing here</h3></div>';
+  if(!items.length)html='<div class="empty-state"><div class="icon">ÃÂ°ÃÂÃÂÃÂ</div><h3>List is empty</h3><p>Tap ÃÂ¯ÃÂ¼ÃÂ to add items.</p></div>';
+  else if(!filtered.length)html='<div class="empty-state"><div class="icon">ÃÂ¢ÃÂÃÂ¨</div><h3>Nothing here</h3></div>';
   else{
     const groups={};
     active.forEach(i=>{const cat=i.category||guessCategory(i.name);if(!groups[cat])groups[cat]=[];groups[cat].push(i);});
@@ -642,7 +642,7 @@ function renderItems(){
       html+='</div>';
     });
     if(checked.length&&currentFilter!=='active'){
-      html+=`<div class="section-divider" onclick="toggleCheckedSection(this)"><div class="section-divider-line"></div><div class="section-divider-label"><span>Ã¢ÂÂ¼</span> ${checked.length} ${shoppingMode?'in basket':'checked'}</div><div class="section-divider-line"></div></div><div id="checkedSection">`;
+      html+=`<div class="section-divider" onclick="toggleCheckedSection(this)"><div class="section-divider-line"></div><div class="section-divider-label"><span>ÃÂ¢ÃÂÃÂ¼</span> ${checked.length} ${shoppingMode?'in basket':'checked'}</div><div class="section-divider-line"></div></div><div id="checkedSection">`;
       checked.forEach(item=>{html+=itemCardHTML(item,list);});
       html+='</div>';
     }
@@ -651,14 +651,14 @@ function renderItems(){
 }
 function itemCardHTML(item,list){
   const shopping=shoppingMode;
-  const storeSearch=list.store&&list.storeUrl?`<button class="item-search-btn" onclick="searchItem('${esc(item.name)}','${esc(list.storeUrl)}','${esc(list.store)}',event)">Ã°ÂÂÂ ${esc(list.store)}</button>`:'';
+  const storeSearch=list.store&&list.storeUrl?`<button class="item-search-btn" onclick="searchItem('${esc(item.name)}','${esc(list.storeUrl)}','${esc(list.store)}',event)">ÃÂ°ÃÂÃÂÃÂ ${esc(list.store)}</button>`:'';
   const thumb=item.image
     ?`<img class="item-thumb" src="${item.image}" alt="${esc(item.name)}" onclick="openItemModal('${item.id}')">`
-    :`<div class="item-thumb-placeholder" onclick="openItemModal('${item.id}')" title="Add photo">Ã°ÂÂÂ·</div>`;
+    :`<div class="item-thumb-placeholder" onclick="openItemModal('${item.id}')" title="Add photo">ÃÂ°ÃÂÃÂÃÂ·</div>`;
   return`<div class="item-card${item.checked?(shopping?' picked':' checked'):''}" id="ic-${item.id}">
     <div class="item-main">
       ${thumb}
-      <div class="item-check${item.checked?' done':''}${shopping?' shopping-pick':''}" onclick="toggleItem('${item.id}')">${item.checked?'Ã¢ÂÂ':''}</div>
+      <div class="item-check${item.checked?' done':''}${shopping?' shopping-pick':''}" onclick="toggleItem('${item.id}')">${item.checked?'ÃÂ¢ÃÂÃÂ':''}</div>
       <div class="item-body" onclick="openItemModal('${item.id}')">
         <div class="item-name">${esc(item.name)}</div>
         <div class="item-detail-row">
@@ -668,7 +668,7 @@ function itemCardHTML(item,list){
             ${item.qty?`<span>${item.qty}${item.unit?' '+item.unit:''}</span>`:''}
           </div>
           <div class="item-detail-line">
-            ${item.price?`<span class="item-price-tag">Ã¢ÂÂ¬${(parseFloat(item.price)*(parseFloat(item.qty)||1)).toFixed(2)}</span>`:''}
+            ${item.price?`<span class="item-price-tag">ÃÂ¢ÃÂÃÂ¬${(parseFloat(item.price)*(parseFloat(item.qty)||1)).toFixed(2)}</span>`:''}
             ${item.notes?`<span style="font-style:italic;color:var(--text-muted)">${esc(item.notes)}</span>`:''}
             ${lastBoughtChip(item.lastBought)}
             ${item.addedBy&&item.addedBy!==getUserName()?`<span style="color:var(--text-muted)">by ${esc(item.addedBy)}</span>`:''}
@@ -677,13 +677,13 @@ function itemCardHTML(item,list){
         </div>
       </div>
       <div class="item-actions" onclick="event.stopPropagation()">
-        <button class="icon-btn" onclick="removeItem('${item.id}')" style="font-size:.85rem">Ã°ÂÂÂ</button>
+        <button class="icon-btn" onclick="removeItem('${item.id}')" style="font-size:.85rem">ÃÂ°ÃÂÃÂÃÂ</button>
       </div>
     </div>
   </div>`;
 }
 
-// Ã¢ÂÂÃ¢ÂÂ Item interactions Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ
+// ÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂ Item interactions ÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂ
 window.toggleItem=async function(itemId){
   const item=getList(currentListId)?.items?.[itemId];if(!item)return;
   const newVal=!item.checked,updates={checked:newVal};if(newVal)updates.lastBought=Date.now();
@@ -694,11 +694,11 @@ window.removeItem=async function(itemId){
   if(db)await fbRemove(`lists/${currentListId}/items/${itemId}`);
   else{const d=localLoad();delete d[currentListId].items[itemId];localSave(d);listsData=d;renderSidebar();renderItems();}
 };
-window.toggleCheckedSection=function(el){const s=document.getElementById('checkedSection');if(s){const h=s.style.display==='none';s.style.display=h?'':'none';el.querySelector('span').textContent=h?'Ã¢ÂÂ¼':'Ã¢ÂÂ¶';}};
+window.toggleCheckedSection=function(el){const s=document.getElementById('checkedSection');if(s){const h=s.style.display==='none';s.style.display=h?'':'none';el.querySelector('span').textContent=h?'ÃÂ¢ÃÂÃÂ¼':'ÃÂ¢ÃÂÃÂ¶';}};
 window.searchItem=function(name,url,store,e){e.stopPropagation();window.open(`${url}/search?q=${encodeURIComponent(name)}`,'_blank');};
 window.setFilter=function(f,el){currentFilter=f;document.querySelectorAll('.filter-chip').forEach(c=>c.classList.remove('active'));el.classList.add('active');renderItems();};
 
-// Ã¢ÂÂÃ¢ÂÂ Quick add Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ
+// ÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂ Quick add ÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂ
 function parseQuickInput(raw){
   raw=raw.trim();let qty='',unit='',name=raw;
   const m=raw.match(/^([\d.]+)\s*(kg|g|litre|l|ml|pcs?|pack|bottle|tin|box|bag|bunch)s?\s+(.+)$/i);
@@ -741,7 +741,7 @@ async function writeItem(item){
   else{const d=localLoad();if(!d[currentListId].items)d[currentListId].items={};d[currentListId].items[item.id]=item;localSave(d);listsData=d;renderSidebar();renderItems();}
 }
 
-// Ã¢ÂÂÃ¢ÂÂ Item Image Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ
+// ÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂ Item Image ÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂ
 function compressImage(file,maxW,maxH,q){
   return new Promise(resolve=>{
     const img=new Image(),url=URL.createObjectURL(file);
@@ -775,7 +775,7 @@ function setImageUI(data){
   else{document.getElementById('itemImagePreview').src='';document.getElementById('itemImagePreviewWrap').style.display='none';document.getElementById('itemImagePlaceholder').style.display='flex';}
 }
 
-// Ã¢ÂÂÃ¢ÂÂ Item Modal Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ
+// ÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂ Item Modal ÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂ
 window.openAddModal=function(prefill={}){
   editingItemId=null;
   document.getElementById('itemModalTitle').textContent='Add Item';
@@ -816,7 +816,7 @@ window.openItemModal=function(itemId){
   document.getElementById('itemImageFile').value='';
   setImageUI(item.image||null);
   const lbEl=document.getElementById('lastBoughtDisplay');
-  if(item.lastBought){const d=Math.floor((Date.now()-item.lastBought)/86400000);lbEl.innerHTML='Ã°ÂÂÂ Last bought: <strong>'+(d===0?'today':d===1?'yesterday':d+'d ago')+'</strong> ('+new Date(item.lastBought).toLocaleDateString()+')';lbEl.style.display='';}
+  if(item.lastBought){const d=Math.floor((Date.now()-item.lastBought)/86400000);lbEl.innerHTML='ÃÂ°ÃÂÃÂÃÂ Last bought: <strong>'+(d===0?'today':d===1?'yesterday':d+'d ago')+'</strong> ('+new Date(item.lastBought).toLocaleDateString()+')';lbEl.style.display='';}
   else lbEl.style.display='none';
   document.getElementById('itemModal').classList.add('open');
 };
@@ -836,10 +836,10 @@ window.saveItemModal=async function(){
   }else{
     await writeItem({id:uid(),...data,checked:false,addedBy:getUserName(),addedAt:Date.now(),lastBought:null});
   }
-  addToHistory(name,data.category);closeItemModal();toast(editingItemId?'Item updated Ã¢ÂÂ':'Added: '+name);
+  addToHistory(name,data.category);closeItemModal();toast(editingItemId?'Item updated ÃÂ¢ÃÂÃÂ':'Added: '+name);
 };
 
-// Ã¢ÂÂÃ¢ÂÂ Barcode Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ
+// ÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂ Barcode ÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂ
 window.openScanner=async function(){
   document.getElementById('scannerOverlay').style.display='flex';
   try{
@@ -863,9 +863,9 @@ window.closeScanner=function(){
 };
 window.lookupManualBarcode=function(){const c=document.getElementById('manualBarcodeInput').value.trim();if(c)lookupBarcodeCode(c);};
 window.lookupBarcodeField=function(){const c=document.getElementById('barcodeManualField').value.trim();if(c)lookupBarcodeFromModal(c);};
-async function lookupBarcodeCode(code){closeScanner();setBarcodeStatus('Ã°ÂÂÂ Looking up '+code+'Ã¢ÂÂ¦','info');document.getElementById('itemModal').classList.add('open');await lookupBarcodeFromModal(code);}
+async function lookupBarcodeCode(code){closeScanner();setBarcodeStatus('ÃÂ°ÃÂÃÂÃÂ Looking up '+code+'ÃÂ¢ÃÂÃÂ¦','info');document.getElementById('itemModal').classList.add('open');await lookupBarcodeFromModal(code);}
 async function lookupBarcodeFromModal(code){
-  setBarcodeStatus('Ã°ÂÂÂ Searching Open Food FactsÃ¢ÂÂ¦','info');
+  setBarcodeStatus('ÃÂ°ÃÂÃÂÃÂ Searching Open Food FactsÃÂ¢ÃÂÃÂ¦','info');
   try{
     const r=await fetch(`https://world.openfoodfacts.org/api/v0/product/${encodeURIComponent(code)}.json`);
     const j=await r.json();
@@ -875,9 +875,9 @@ async function lookupBarcodeFromModal(code){
       document.getElementById('itemBrandInput').value=brand.split(',')[0].trim();
       document.getElementById('itemWeightInput').value=p.quantity||'';
       document.getElementById('itemCategoryInput').value=guessCategory(name);
-      setBarcodeStatus('Ã¢ÂÂ Found: '+(name||'Product')+(brand?' by '+brand.split(',')[0].trim():''),'ok');
-    }else setBarcodeStatus('Ã¢ÂÂ  Not found. Fill in manually.','warn');
-  }catch{setBarcodeStatus('Ã¢ÂÂ  Could not reach database. Fill in manually.','warn');}
+      setBarcodeStatus('ÃÂ¢ÃÂÃÂ Found: '+(name||'Product')+(brand?' by '+brand.split(',')[0].trim():''),'ok');
+    }else setBarcodeStatus('ÃÂ¢ÃÂÃÂ  Not found. Fill in manually.','warn');
+  }catch{setBarcodeStatus('ÃÂ¢ÃÂÃÂ  Could not reach database. Fill in manually.','warn');}
 }
 function setBarcodeStatus(msg,type){
   const el=document.getElementById('barcodeStatus');el.textContent=msg;el.style.display='';
@@ -885,13 +885,13 @@ function setBarcodeStatus(msg,type){
   el.style.color=type==='ok'?'var(--accent-dark)':type==='warn'?'#a16207':type==='info'?'var(--text-muted)':'var(--danger)';
 }
 
-// Ã¢ÂÂÃ¢ÂÂ List Modal Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ
+// ÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂ List Modal ÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂ
 function buildIconGrid(){document.getElementById('iconGrid').innerHTML=ICONS.map(ic=>`<div class="icon-opt${ic===selectedIcon?' selected':''}" onclick="selectIcon('${ic}')">${ic}</div>`).join('');}
 function buildColorSwatches(){document.getElementById('colorSwatches').innerHTML=COLORS.map(c=>`<div class="color-swatch${c===selectedColor?' selected':''}" style="background:${c}" onclick="selectColor('${c}')"></div>`).join('');}
 window.selectIcon=function(ic){selectedIcon=ic;buildIconGrid();};
 window.selectColor=function(c){selectedColor=c;buildColorSwatches();};
 window.openNewListModal=function(){
-  editingListId=null;selectedIcon='Ã°ÂÂÂ';selectedColor='#22c55e';
+  editingListId=null;selectedIcon='ÃÂ°ÃÂÃÂÃÂ';selectedColor='#22c55e';
   document.getElementById('listModalTitle').textContent='New List';
   ['listNameInput','listStoreInput','listStoreUrlInput'].forEach(id=>document.getElementById(id).value='');
   document.getElementById('deleteListBtn').style.display='none';
@@ -899,7 +899,7 @@ window.openNewListModal=function(){
 };
 window.openEditListModal=function(){
   if(!currentListId)return;const list=getList(currentListId);
-  editingListId=currentListId;selectedIcon=list.icon||'Ã°ÂÂÂ';selectedColor=list.color||'#22c55e';
+  editingListId=currentListId;selectedIcon=list.icon||'ÃÂ°ÃÂÃÂÃÂ';selectedColor=list.color||'#22c55e';
   document.getElementById('listModalTitle').textContent='Edit List';
   document.getElementById('listNameInput').value=list.name||'';
   document.getElementById('listStoreInput').value=list.store||'';
@@ -941,7 +941,7 @@ window.deleteList=async function(e,id){
     ['filterBar','addFab','bottomBar','shareBtn','printBtn','editListBtn','startShoppingBtn','suggestionsBtn','reopenListBtn','endShoppingBtn'].forEach(n=>{const e=document.getElementById(n);if(e)e.style.display='none';});
     document.getElementById('listTitle').textContent='Select a list';document.getElementById('listStoreLine').textContent='';
     document.getElementById('editTripBtn').style.display='none';
-    document.getElementById('itemsArea').innerHTML='<div class="empty-state"><div class="icon">Ã°ÂÂÂ</div><h3>Select a list</h3></div>';
+    document.getElementById('itemsArea').innerHTML='<div class="empty-state"><div class="icon">ÃÂ°ÃÂÃÂÃÂ</div><h3>Select a list</h3></div>';
     document.getElementById('mainHeader').classList.remove('shopping-active');
     document.getElementById('shoppingBar').classList.remove('active');
     shoppingMode=false;
@@ -955,22 +955,22 @@ window.deleteCurrentList=async function(){
   currentListId=null;
   ['filterBar','addFab','bottomBar','shareBtn','printBtn','editListBtn','startShoppingBtn','suggestionsBtn','reopenListBtn'].forEach(n=>{const e=document.getElementById(n);if(e)e.style.display='none';});
   document.getElementById('listTitle').textContent='Select a list';document.getElementById('listStoreLine').textContent='';
-  document.getElementById('itemsArea').innerHTML='<div class="empty-state"><div class="icon">Ã°ÂÂÂ</div><h3>Select a list</h3></div>';
+  document.getElementById('itemsArea').innerHTML='<div class="empty-state"><div class="icon">ÃÂ°ÃÂÃÂÃÂ</div><h3>Select a list</h3></div>';
   renderSidebar();closeListModal();
 };
 
-// Ã¢ÂÂÃ¢ÂÂ Shopping Trip Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ
+// ÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂ Shopping Trip ÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂ
 function formatTripLabel(store,dtVal){
   const d=dtVal?new Date(dtVal):new Date();
-  return store+' ÃÂ· '+d.toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'})+' '+d.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'});
+  return store+' ÃÂÃÂ· '+d.toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'})+' '+d.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'});
 }
 function localDatetimeNow(){const n=new Date();n.setSeconds(0,0);return new Date(n.getTime()-n.getTimezoneOffset()*60000).toISOString().slice(0,16);}
 
 window.startShopping=function(){
   _shopModalMode='start';const list=getList(currentListId);
-  document.getElementById('shopModalTitle').textContent='Ã°ÂÂÂ Start Shopping';
+  document.getElementById('shopModalTitle').textContent='ÃÂ°ÃÂÃÂÃÂ Start Shopping';
   document.getElementById('shopModalHint').textContent='Confirm the store and date/time for this trip.';
-  document.getElementById('shopModalConfirmBtn').textContent='Start Ã°ÂÂÂ';
+  document.getElementById('shopModalConfirmBtn').textContent='Start ÃÂ°ÃÂÃÂÃÂ';
   document.getElementById('shopConfirmStore').value=list?.store||'';
   document.getElementById('shopConfirmDate').value=list?.shoppingDate||localDatetimeNow();
   document.getElementById('startShoppingModal').classList.add('open');
@@ -978,7 +978,7 @@ window.startShopping=function(){
 };
 window.editTripDetails=function(){
   _shopModalMode='edit';const list=getList(currentListId);
-  document.getElementById('shopModalTitle').textContent='Ã¢ÂÂÃ¯Â¸Â Edit Trip Details';
+  document.getElementById('shopModalTitle').textContent='ÃÂ¢ÃÂÃÂÃÂ¯ÃÂ¸ÃÂ Edit Trip Details';
   document.getElementById('shopModalHint').textContent='Update the store and date/time for this trip.';
   document.getElementById('shopModalConfirmBtn').textContent='Save Changes';
   document.getElementById('shopConfirmStore').value=list?.store||'';
@@ -996,10 +996,10 @@ window.confirmShopping=async function(){
   const updates={store,shoppingDate:dtVal,shoppingLabel:label};
   if(db)await fbUpdate(`lists/${currentListId}`,updates);
   else{const d=localLoad();Object.assign(d[currentListId],updates);localSave(d);listsData=d;}
-  const sl='Ã°ÂÂÂ '+label;
+  const sl='ÃÂ°ÃÂÃÂÃÂ '+label;
   document.getElementById('listStoreLine').textContent=sl;
   document.getElementById('editTripBtn').style.display='';
-  if(_shopModalMode==='edit'){renderSidebar();toast('Trip details updated Ã¢ÂÂ');return;}
+  if(_shopModalMode==='edit'){renderSidebar();toast('Trip details updated ÃÂ¢ÃÂÃÂ');return;}
   shoppingMode=true;
   document.getElementById('mainHeader').classList.add('shopping-active');
   document.getElementById('startShoppingBtn').style.display='none';
@@ -1008,7 +1008,7 @@ window.confirmShopping=async function(){
   document.getElementById('bottomBar').style.display='none';
   document.getElementById('addFab').style.display='none';
   document.getElementById('shoppingBar').classList.add('active');
-  renderSidebar();renderItems();toast('Shopping at '+store+' started! Ã°ÂÂÂ');
+  renderSidebar();renderItems();toast('Shopping at '+store+' started! ÃÂ°ÃÂÃÂÃÂ');
 };
 window.endShopping=async function(){
   shoppingMode=false;
@@ -1019,7 +1019,7 @@ window.endShopping=async function(){
   document.getElementById('endShoppingBtn').style.display='none';
   document.getElementById('shoppingBar').classList.remove('active');
   selectList(currentListId);
-  toast('Shopping complete Ã¢ÂÂ  List marked as Closed.');
+  toast('Shopping complete ÃÂ¢ÃÂÃÂ  List marked as Closed.');
 };
 window.reopenList=async function(){
   const updates={status:'open'};
@@ -1028,12 +1028,12 @@ window.reopenList=async function(){
   selectList(currentListId);toast('List reopened.');
 };
 
-// Ã¢ÂÂÃ¢ÂÂ Suggestions Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ
+// ÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂ Suggestions ÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂ
 window.closeSuggestions=function(){document.getElementById('suggestionsModal').classList.remove('open');};
 window.reopenSuggestions=function(){
   const list=getList(currentListId);
   if(list?.store)showSuggestions(currentListId,list.store,list.storeUrl||'');
-  else toast('Add a store name first (Ã¢ÂÂ Settings).');
+  else toast('Add a store name first (ÃÂ¢ÃÂÃÂ Settings).');
 };
 window.showSuggestions=async function(listId,store,storeUrl){
   _sugSession={};
@@ -1060,19 +1060,19 @@ window.showSuggestions=async function(listId,store,storeUrl){
       const sid='sug-h-'+item.id+'-'+hi;
       const hdata=JSON.stringify({name:h.name,brand:h.brand||'',weight:h.weight||'',qty:h.qty||'',unit:h.unit||'',category:h.category||'',notes:h.notes||'',price:h.price||''}).replace(/"/g,'&quot;');
       return`<div class="sug-row" id="${sid}">
-        <div class="sug-row-info"><div class="sug-row-name">${esc(h.name)}${h.brand?' ÃÂ· <span style="font-weight:400">'+esc(h.brand)+'</span>':''}</div>
-        <div class="sug-row-meta">${[h.weight,h.lastBought?new Date(h.lastBought).toLocaleDateString():''].filter(Boolean).join(' ÃÂ· ')}</div></div>
-        ${h.price?`<span class="sug-row-price">Ã¢ÂÂ¬${h.price}</span>`:''}
+        <div class="sug-row-info"><div class="sug-row-name">${esc(h.name)}${h.brand?' ÃÂÃÂ· <span style="font-weight:400">'+esc(h.brand)+'</span>':''}</div>
+        <div class="sug-row-meta">${[h.weight,h.lastBought?new Date(h.lastBought).toLocaleDateString():''].filter(Boolean).join(' ÃÂÃÂ· ')}</div></div>
+        ${h.price?`<span class="sug-row-price">ÃÂ¢ÃÂÃÂ¬${h.price}</span>`:''}
         <button class="sug-add-btn" onclick="sugAddHistItem(${hdata},'${sid}')">Add</button>
       </div>`;
     }).join(''):'<div class="sug-empty">No history yet at this store.</div>';
     return`<div class="sug-item-block">
       <div class="sug-item-header">
-        <span class="sug-item-name">${item.category||'Ã°ÂÂÂ¦'} ${esc(item.name)}</span>
-        ${storeUrl?`<a class="sug-store-link" href="${storeUrl}/search?q=${encodeURIComponent(item.name)}" target="_blank">Ã°ÂÂÂ ${esc(store)} Ã¢ÂÂ</a>`:''}
+        <span class="sug-item-name">${item.category||'ÃÂ°ÃÂÃÂÃÂ¦'} ${esc(item.name)}</span>
+        ${storeUrl?`<a class="sug-store-link" href="${storeUrl}/search?q=${encodeURIComponent(item.name)}" target="_blank">ÃÂ°ÃÂÃÂÃÂ ${esc(store)} ÃÂ¢ÃÂÃÂ</a>`:''}
       </div>
-      <div class="sug-section"><div class="sug-section-label">Ã°ÂÂÂ Previously at ${esc(store)}</div>${histHTML}</div>
-      <div class="sug-section" id="sug-off-${item.id}"><div class="sug-section-label">Ã°ÂÂÂ Open Food Facts</div><div class="sug-loading">SearchingÃ¢ÂÂ¦</div></div>
+      <div class="sug-section"><div class="sug-section-label">ÃÂ°ÃÂÃÂÃÂ Previously at ${esc(store)}</div>${histHTML}</div>
+      <div class="sug-section" id="sug-off-${item.id}"><div class="sug-section-label">ÃÂ°ÃÂÃÂÃÂ Open Food Facts</div><div class="sug-loading">SearchingÃÂ¢ÃÂÃÂ¦</div></div>
     </div>`;
   }).join('');
   document.getElementById('suggestionsModal').classList.add('open');
@@ -1085,23 +1085,23 @@ async function fetchOFF(item,listId){
     const j=await r.json();
     const prods=(j.products||[]).filter(p=>p.product_name).slice(0,5);
     _sugSession['off_'+item.id]=prods;
-    if(!prods.length){el.innerHTML='<div class="sug-section-label">Ã°ÂÂÂ Open Food Facts</div><div class="sug-empty">No products found.</div>';return;}
-    el.innerHTML='<div class="sug-section-label">Ã°ÂÂÂ Open Food Facts</div>'+prods.map((p,pi)=>{
+    if(!prods.length){el.innerHTML='<div class="sug-section-label">ÃÂ°ÃÂÃÂÃÂ Open Food Facts</div><div class="sug-empty">No products found.</div>';return;}
+    el.innerHTML='<div class="sug-section-label">ÃÂ°ÃÂÃÂÃÂ Open Food Facts</div>'+prods.map((p,pi)=>{
       const pname=p.product_name,brand=p.brands?p.brands.split(',')[0].trim():'',sid=`sug-off-${item.id}-${pi}`;
       return`<div class="sug-row" id="${sid}">
         <div class="sug-row-info"><div class="sug-row-name">${esc(pname)}</div>
-        <div class="sug-row-meta">${[brand,p.quantity,p.nutriscore_grade?'Nutri-score '+p.nutriscore_grade.toUpperCase():''].filter(Boolean).join(' ÃÂ· ')}</div></div>
+        <div class="sug-row-meta">${[brand,p.quantity,p.nutriscore_grade?'Nutri-score '+p.nutriscore_grade.toUpperCase():''].filter(Boolean).join(' ÃÂÃÂ· ')}</div></div>
         <button class="sug-add-btn" onclick="sugAddOFFItem('${item.id}',${pi},'${sid}','${listId}')">Add</button>
       </div>`;
     }).join('');
-  }catch{el.innerHTML='<div class="sug-section-label">Ã°ÂÂÂ Open Food Facts</div><div class="sug-empty">Could not reach database.</div>';}
+  }catch{el.innerHTML='<div class="sug-section-label">ÃÂ°ÃÂÃÂÃÂ Open Food Facts</div><div class="sug-empty">Could not reach database.</div>';}
 }
 window.sugAddHistItem=async function(h,rowId){
   const item={id:uid(),name:(h.name||'').toUpperCase(),brand:h.brand||'',weight:h.weight||'',qty:h.qty||'',unit:h.unit||'',
     category:h.category||guessCategory(h.name||''),notes:h.notes||'',price:h.price||'',image:'',
     checked:false,addedBy:getUserName(),addedAt:Date.now(),lastBought:null};
   await writeItem(item);addToHistory(item.name,item.category);
-  const btn=document.querySelector('#'+rowId+' .sug-add-btn');if(btn){btn.textContent='Ã¢ÂÂ Added';btn.classList.add('added');}
+  const btn=document.querySelector('#'+rowId+' .sug-add-btn');if(btn){btn.textContent='ÃÂ¢ÃÂÃÂ Added';btn.classList.add('added');}
   toast('Added: '+item.name);
 };
 window.sugAddOFFItem=async function(srcId,pi,rowId,listId){
@@ -1111,22 +1111,22 @@ window.sugAddOFFItem=async function(srcId,pi,rowId,listId){
     checked:false,addedBy:getUserName(),addedAt:Date.now(),lastBought:null};
   const saved=currentListId;currentListId=listId;await writeItem(item);currentListId=saved;
   addToHistory(name,item.category);
-  const btn=document.querySelector('#'+rowId+' .sug-add-btn');if(btn){btn.textContent='Ã¢ÂÂ Added';btn.classList.add('added');}
+  const btn=document.querySelector('#'+rowId+' .sug-add-btn');if(btn){btn.textContent='ÃÂ¢ÃÂÃÂ Added';btn.classList.add('added');}
   toast('Added: '+name);
 };
 
-// Ã¢ÂÂÃ¢ÂÂ Share & Print Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ
+// ÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂ Share & Print ÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂ
 window.shareList=function(){navigator.clipboard?.writeText(location.origin+location.pathname+'?list='+currentListId);toast('Link copied!');};
 window.printList=function(){
   const list=getList(currentListId);if(!list)return;
   const items=list.items?Object.values(list.items):[];
-  const rows=arr=>arr.map(i=>`<tr><td>${i.name}</td><td>${i.brand||''}</td><td>${i.weight||''}</td><td>${i.qty||''}${i.unit?' '+i.unit:''}</td><td>${i.price?'Ã¢ÂÂ¬'+i.price:''}</td><td>${i.category||''}</td></tr>`).join('');
+  const rows=arr=>arr.map(i=>`<tr><td>${i.name}</td><td>${i.brand||''}</td><td>${i.weight||''}</td><td>${i.qty||''}${i.unit?' '+i.unit:''}</td><td>${i.price?'ÃÂ¢ÃÂÃÂ¬'+i.price:''}</td><td>${i.category||''}</td></tr>`).join('');
   const w=window.open('','_blank');
   w.document.write(`<html><head><title>${list.name}</title><style>body{font-family:sans-serif;padding:20px}table{border-collapse:collapse;width:100%}td,th{border:1px solid #ddd;padding:6px 10px;font-size:12px}th{background:#f5f5f5}</style></head><body><h2>${list.name}</h2><p>${new Date().toLocaleDateString()}</p><table><tr><th>Item</th><th>Brand</th><th>Weight</th><th>Qty</th><th>Cost</th><th>Category</th></tr>${rows(items)}</table></body></html>`);
   w.print();
 };
 
-// Ã¢ÂÂÃ¢ÂÂ Receipt Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ
+// ÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂ Receipt ÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂ
 window.openReceiptModal=function(){document.getElementById('receiptModal').classList.add('open');};
 window.closeReceiptModal=function(){document.getElementById('receiptModal').classList.remove('open');};
 window.dragOver=function(e){e.preventDefault();document.getElementById('receiptDrop').classList.add('drag-over');};
@@ -1141,11 +1141,12 @@ window.processReceipt=async function(file){
   var bar=document.getElementById('ocrBarFill');
   if(prog)prog.style.display='block';
   if(drop)drop.style.display='none';
-  if(stat)stat.textContent='Loading…';
+  if(stat)stat.textContent='Loadingâ¦';
   if(bar)bar.style.width='5%';
+  var ocrTimer=setTimeout(function(){if(prog)prog.style.display='none';if(drop){drop.style.display='block';}if(stat)stat.textContent='';alert('OCR timed out. Try a clearer photo or enter items manually.');},60000);
   try{
     if(typeof Tesseract==='undefined'){
-      if(stat)stat.textContent='Loading Tesseract…';
+      if(stat)stat.textContent='Loading Tesseractâ¦';
       await new Promise(function(res,rej){
         var s=document.createElement('script');
         s.src='https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js';
@@ -1156,7 +1157,7 @@ window.processReceipt=async function(file){
     var imgSrc=file;
     var isPdf=file.type==='application/pdf'||file.name.toLowerCase().endsWith('.pdf');
     if(isPdf){
-      if(stat)stat.textContent='Rendering PDF…';
+      if(stat)stat.textContent='Rendering PDFâ¦';
       if(bar)bar.style.width='15%';
       if(typeof pdfjsLib==='undefined'){
         await new Promise(function(res,rej){
@@ -1177,7 +1178,7 @@ window.processReceipt=async function(file){
       imgSrc=canvas;
       if(bar)bar.style.width='30%';
     }
-    if(stat)stat.textContent='Running OCR…';
+    if(stat)stat.textContent='Running OCRâ¦';
     if(bar)bar.style.width='30%';
     var worker=await Tesseract.createWorker('eng',1,{
       workerPath:'https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/worker.min.js',
@@ -1186,7 +1187,7 @@ window.processReceipt=async function(file){
       logger:function(m){
         if(m.status==='recognizing text'){
           if(bar)bar.style.width=(30+m.progress*60)+'%';
-          if(stat)stat.textContent='Reading… '+Math.round(m.progress*100)+'%';
+          if(stat)stat.textContent='Readingâ¦ '+Math.round(m.progress*100)+'%';
         }
       }
     });
@@ -1196,14 +1197,14 @@ window.processReceipt=async function(file){
     if(stat)stat.textContent='Done';
     var text=result.data.text||'';
     if(typeof closeReceiptModal==='function')closeReceiptModal();
-    if(typeof openReceiptTable==='function')openReceiptTable(text);
+    clearTimeout(ocrTimer);if(typeof openReceiptTable==='function')openReceiptTable(text);
   }catch(e){
+    clearTimeout(ocrTimer);
+    if(prog)prog.style.display='none';
+    if(drop){drop.style.display='block';}
+    if(stat)stat.textContent='OCR failed - please try again';
     console.error('OCR error:',e);
-    if(stat)stat.textContent='OCR failed – enter items manually';
-    setTimeout(function(){
-      if(typeof closeReceiptModal==='function')closeReceiptModal();
-      if(typeof openReceiptTable==='function')openReceiptTable('');
-    },1500);
+    alert('OCR failed: '+(e&&e.message?e.message:'unknown error')+'. Try a clearer photo or enter items manually.');
   }
 };
 function parseReceiptText(text){
@@ -1230,10 +1231,10 @@ function parseReceiptText(text){
   document.getElementById('receiptFooter').style.display='flex';
   const matchEl=document.getElementById('receiptMatchList');
   if(!receiptMatches.length)matchEl.innerHTML='<p style="color:var(--text-muted);font-size:.83rem">No items matched. Receipt may be blurry.</p>';
-  else matchEl.innerHTML=receiptMatches.map((m,i)=>`<div class="receipt-match-row"><div class="match-name">${esc(m.name)}</div><input type="number" value="${m.price.toFixed(2)}" step="0.01" min="0" style="width:70px;padding:4px 6px;border-radius:7px;border:1px solid var(--border);background:var(--surface2);color:var(--text);font-size:.82rem" onchange="receiptMatches[${i}].price=parseFloat(this.value)||0"/><span class="match-status match-ok">Ã¢ÂÂ</span></div>`).join('');
+  else matchEl.innerHTML=receiptMatches.map((m,i)=>`<div class="receipt-match-row"><div class="match-name">${esc(m.name)}</div><input type="number" value="${m.price.toFixed(2)}" step="0.01" min="0" style="width:70px;padding:4px 6px;border-radius:7px;border:1px solid var(--border);background:var(--surface2);color:var(--text);font-size:.82rem" onchange="receiptMatches[${i}].price=parseFloat(this.value)||0"/><span class="match-status match-ok">ÃÂ¢ÃÂÃÂ</span></div>`).join('');
   const real=unmatched.filter(u=>u.price>0.1);
   document.getElementById('receiptUnmatched').style.display=real.length?'':'none';
-  if(real.length)document.getElementById('receiptUnmatchedList').innerHTML=real.map(u=>`<div class="receipt-match-row"><div class="match-name" style="color:var(--text-muted)">${esc(u.line)}</div><span class="match-price">Ã¢ÂÂ¬${u.price.toFixed(2)}</span><span class="match-status match-miss">not on list</span></div>`).join('');
+  if(real.length)document.getElementById('receiptUnmatchedList').innerHTML=real.map(u=>`<div class="receipt-match-row"><div class="match-name" style="color:var(--text-muted)">${esc(u.line)}</div><span class="match-price">ÃÂ¢ÃÂÃÂ¬${u.price.toFixed(2)}</span><span class="match-status match-miss">not on list</span></div>`).join('');
 }
 window.applyReceiptPrices=async function(){
   for(const m of receiptMatches){
@@ -1241,7 +1242,7 @@ window.applyReceiptPrices=async function(){
     if(db)await fbUpdate(`lists/${currentListId}/items/${m.itemId}`,updates);
     else{const d=localLoad();if(d[currentListId]?.items?.[m.itemId])Object.assign(d[currentListId].items[m.itemId],updates);localSave(d);listsData=d;}
   }
-  closeReceiptModal();renderItems();toast('Prices saved for '+receiptMatches.length+' items Ã¢ÂÂ');endShopping();
+  closeReceiptModal();renderItems();toast('Prices saved for '+receiptMatches.length+' items ÃÂ¢ÃÂÃÂ');endShopping();
 };
 window.resetReceipt=function(){
   document.getElementById('ocrProgress').style.display='none';document.getElementById('receiptResults').style.display='none';
@@ -1249,7 +1250,7 @@ window.resetReceipt=function(){
   document.getElementById('receiptFileInput').value='';receiptMatches=[];
 };
 
-// Ã¢ÂÂÃ¢ÂÂ Recipe Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ
+// ÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂ Recipe ÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂ
 window.openRecipe=function(){if(!currentListId){toast('Select a list first.');return;}document.getElementById('recipePanel').classList.add('open');};
 window.closeRecipe=function(){document.getElementById('recipePanel').classList.remove('open');document.getElementById('recipeInput').value='';};
 window.importRecipe=async function(){
@@ -1261,16 +1262,16 @@ window.importRecipe=async function(){
     await writeItem({id:uid(),name,brand:'',weight:'',qty:qty||'',unit:unit||'',category,notes:'',price:'',image:'',checked:false,addedBy:getUserName(),addedAt:Date.now(),lastBought:null});
     addToHistory(name,category);count++;
   }
-  closeRecipe();toast('Added '+count+' ingredient'+(count!==1?'s':'')+'! Ã°ÂÂÂ½Ã¯Â¸Â');
+  closeRecipe();toast('Added '+count+' ingredient'+(count!==1?'s':'')+'! ÃÂ°ÃÂÃÂÃÂ½ÃÂ¯ÃÂ¸ÃÂ');
 };
 
-// Ã¢ÂÂÃ¢ÂÂ Theme & Mobile Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ
+// ÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂ Theme & Mobile ÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂ
 window.toggleTheme=function(){const t=document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark';document.documentElement.setAttribute('data-theme',t);localStorage.setItem('shopping_theme',t);};
 window.toggleSidebar=function(){document.getElementById('sidebar').classList.toggle('open');document.getElementById('backdrop').classList.toggle('show');};
 window.closeSidebar=function(){document.getElementById('sidebar').classList.remove('open');document.getElementById('backdrop').classList.remove('show');};
 window.addEventListener('resize',()=>{const m=document.getElementById('menuBtn');if(m)m.style.display=window.innerWidth<=640?'flex':'none';});
 
-// Ã¢ÂÂÃ¢ÂÂ Deep link Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ
+// ÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂ Deep link ÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂÃÂ¢ÃÂÃÂ
 const urlList=new URLSearchParams(location.search).get('list');
 if(urlList){const t=setInterval(()=>{if(getList(urlList)){clearInterval(t);selectList(urlList);}},300);setTimeout(()=>clearInterval(t),5000);}
 </script>
@@ -1482,7 +1483,7 @@ function buildRctModal(){
     +'</div></div>'
     +'<div class="rct-ftr">'
     +'<button class="btn-g" onclick="closeRctModal()">Cancel</button>'
-    +'<button id="rctCheckBtn" style="margin-right:4px" onclick="if(window.checkItemPrices)checkItemPrices()">🔍 Check prices</button>'
+    +'<button id="rctCheckBtn" style="margin-right:4px" onclick="if(window.checkItemPrices)checkItemPrices()">ð Check prices</button>'
     +'<button id="rctConfBtn" class="btn-p" onclick="rctConfirm()">Table looks good \u2192</button>'
     +'<button id="rctSaveBtn" class="btn-p" onclick="rctSave()" style="display:none">Save Receipt</button>'
     +'</div></div>';
@@ -1635,7 +1636,7 @@ window.openRDetail=function(id){
         +'</div>';
     }).join(''):'<div style="padding:12px;text-align:center;color:#9ca3af;font-size:.8rem">No items</div>')+'</div>'
     +'<div style="display:flex;gap:8px;justify-content:flex-end;margin-top:10px">'
-    +'<button onclick="if(window.viewReceiptFile)viewReceiptFile(\''+id+'\')" style="margin-right:8px" title="View receipt">📄</button>'
+    +'<button onclick="if(window.viewReceiptFile)viewReceiptFile(\''+id+'\')" style="margin-right:8px" title="View receipt">ð</button>'
     +'<button class="btn-d" onclick="delReceipt(\''+id+'\')">&times; Delete</button>'
     +'<button class="btn-g" onclick="document.getElementById(\'rdtModal\').style.display=\'none\'">Close</button></div></div>';
 };
@@ -1988,7 +1989,7 @@ window.viewReceiptFile=function(id){
   var ov=document.createElement('div');
   ov.style.cssText='position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.88);z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;';
   var cb=document.createElement('button');
-  cb.textContent='✕ Close';
+  cb.textContent='â Close';
   cb.style.cssText='position:absolute;top:14px;right:18px;background:#fff;border:none;padding:7px 16px;border-radius:6px;cursor:pointer;font-size:15px;font-weight:600;';
   cb.onclick=function(){document.body.removeChild(ov);};
   ov.appendChild(cb);
@@ -2016,31 +2017,31 @@ window.validateStoreOnline=function(storeName,storeLocation){
     badge.style.cssText='margin-left:8px;font-size:11px;padding:2px 7px;border-radius:4px;vertical-align:middle;';
     snEl.parentNode.insertBefore(badge,snEl.nextSibling);
   }
-  badge.textContent='⏳';badge.style.background='#f8f9fa';badge.style.color='#6c757d';
+  badge.textContent='â³';badge.style.background='#f8f9fa';badge.style.color='#6c757d';
   var branches=['mriehel','tigne','shoreline','zejtun','mosta'];
   var nm=(storeName||'').toLowerCase();
   var matched=branches.some(function(b){return nm.indexOf(b)!==-1;});
   // Check local DB first
   window.dbFindStore(storeName).then(function(stored){
     if(stored&&stored.verified){
-      badge.textContent='✓ Verified (cached)';badge.style.background='#d4edda';badge.style.color='#155724';return;
+      badge.textContent='â Verified (cached)';badge.style.background='#d4edda';badge.style.color='#155724';return;
     }
     if(matched){
-      badge.textContent='✓ Known branch';badge.style.background='#d4edda';badge.style.color='#155724';
+      badge.textContent='â Known branch';badge.style.background='#d4edda';badge.style.color='#155724';
       window.dbSaveStore({name:storeName,location:storeLocation,verified:true}).catch(function(){});
       return;
     }
-    badge.textContent='⏳ Checking online...';badge.style.background='#fff3cd';badge.style.color='#856404';
+    badge.textContent='â³ Checking online...';badge.style.background='#fff3cd';badge.style.color='#856404';
     fetch('https://api.allorigins.win/get?url='+encodeURIComponent('https://www.homemate.com.mt/'))
     .then(function(r){return r.json();})
     .then(function(j){
       var html=(j.contents||'').toLowerCase();
       var ok=branches.some(function(b){return nm.indexOf(b)!==-1;});
       window.dbSaveStore({name:storeName,location:storeLocation,verified:ok}).catch(function(){});
-      if(ok){badge.textContent='✓ Verified';badge.style.background='#d4edda';badge.style.color='#155724';}
-      else if(html.indexOf('homemate')!==-1){badge.textContent='⚠ Branch unmatched';badge.style.background='#fff3cd';badge.style.color='#856404';}
-      else{badge.textContent='— Not verified';badge.style.background='#f8d7da';badge.style.color='#721c24';}
-    }).catch(function(){badge.textContent='— Offline';badge.style.background='#f8f9fa';badge.style.color='#6c757d';});
+      if(ok){badge.textContent='â Verified';badge.style.background='#d4edda';badge.style.color='#155724';}
+      else if(html.indexOf('homemate')!==-1){badge.textContent='â  Branch unmatched';badge.style.background='#fff3cd';badge.style.color='#856404';}
+      else{badge.textContent='â Not verified';badge.style.background='#f8d7da';badge.style.color='#721c24';}
+    }).catch(function(){badge.textContent='â Offline';badge.style.background='#f8f9fa';badge.style.color='#6c757d';});
   });
 };
 
@@ -2065,13 +2066,13 @@ window.checkItemPrices=function(){
     var ex2=tr.querySelector('._pchTd');
     var td=ex2||document.createElement('td');
     td.className='_pchTd';td.style.cssText='font-size:11px;text-align:center;';
-    td.textContent='⏳';td.title='';if(!ex2)tr.appendChild(td);
+    td.textContent='â³';td.title='';if(!ex2)tr.appendChild(td);
     var item=rows[idx];if(!item)return;
     var code=item.code||'';var name=item.name||'';
     function showResult(wp,rp,cached){
-      if(wp===null){td.textContent='—';td.title='Not found online';}
-      else if(Math.abs(wp-rp)<0.02){td.textContent='✓';td.style.color='#155724';td.title='€'+wp.toFixed(2)+(cached?' (cached)':'');}
-      else{td.textContent='⚠€'+wp.toFixed(2);td.style.color='#856404';td.title='Receipt:€'+rp.toFixed(2)+' Web:€'+wp.toFixed(2)+(cached?' (cached)':'');}
+      if(wp===null){td.textContent='â';td.title='Not found online';}
+      else if(Math.abs(wp-rp)<0.02){td.textContent='â';td.style.color='#155724';td.title='â¬'+wp.toFixed(2)+(cached?' (cached)':'');}
+      else{td.textContent='â â¬'+wp.toFixed(2);td.style.color='#856404';td.title='Receipt:â¬'+rp.toFixed(2)+' Web:â¬'+wp.toFixed(2)+(cached?' (cached)':'');}
     }
     // Check DB cache first
     window.dbFindProduct(code||name,storeId).then(function(hits){
@@ -2081,17 +2082,17 @@ window.checkItemPrices=function(){
       }
       // Fetch online
       var q=encodeURIComponent(name.replace(/[^ws]/g,' ').trim().substring(0,35));
-      if(!q){td.textContent='—';return;}
+      if(!q){td.textContent='â';return;}
       fetch('https://api.allorigins.win/get?url='+encodeURIComponent('https://www.homemate.com.mt/search-site-results?search='+q+'&nostock=0'))
       .then(function(r){return r.json();})
       .then(function(j){
         var html=j.contents||'';
         var rp=parseFloat(item.unitPrice)||0;
         if(html.indexOf('No results have been found')!==-1){
-          td.textContent='—';td.title='Not found';
+          td.textContent='â';td.title='Not found';
           window.dbSaveProduct({code:code,name:name,storeId:storeId,storeName:storeNm,unitPrice:rp,onlinePrice:null}).catch(function(){});
         } else {
-          var pm=html.match(/€([d]+.[d]{2})/);
+          var pm=html.match(/â¬([d]+.[d]{2})/);
           if(pm){
             var wp=parseFloat(pm[1]);
             window.dbSaveProduct({code:code,name:name,storeId:storeId,storeName:storeNm,unitPrice:rp,onlinePrice:wp}).catch(function(){});
