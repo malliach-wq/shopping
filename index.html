@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5,user-scalable=yes">
 <title>Shopping Lists</title>
 <style>
 :root{
@@ -1123,7 +1123,12 @@ window.printList=function(){
   const items=list.items?Object.values(list.items):[];
   const rows=arr=>arr.map(i=>`<tr><td>${i.name}</td><td>${i.brand||''}</td><td>${i.weight||''}</td><td>${i.qty||''}${i.unit?' '+i.unit:''}</td><td>${i.price?''+i.price:''}</td><td>${i.category||''}</td></tr>`).join('');
   const w=window.open('','_blank');
-  w.document.write(`<html><head><title>${list.name}</title><style>body{font-family:sans-serif;padding:20px}table{border-collapse:collapse;width:100%}td,th{border:1px solid #ddd;padding:6px 10px;font-size:12px}th{background:#f5f5f5}</style></head><body><h2>${list.name}</h2><p>${new Date().toLocaleDateString()}</p><table><tr><th>Item</th><th>Brand</th><th>Weight</th><th>Qty</th><th>Cost</th><th>Category</th></tr>${rows(items)}</table></body></html>`);
+  w.document.write(`<html><head><title>${list.name}</title><style>body{font-family:sans-serif;padding:20px}table{border-collapse:collapse;width:100%}td,th{border:1px solid #ddd;padding:6px 10px;font-size:12px}th{background:#f5f5f5}
+/* Mobile touch fixes */
+* { -webkit-tap-highlight-color: rgba(0,0,0,0); }
+button, a, [onclick], .btn, .btn-p, .btn-d, .btn-sm, .btn-ghost, .icon-btn, .item, .item-row, .list-item, .sidebar-item, label { cursor:pointer; touch-action:manipulation; }
+input, textarea, select { touch-action:manipulation; }
+</style></head><body><h2>${list.name}</h2><p>${new Date().toLocaleDateString()}</p><table><tr><th>Item</th><th>Brand</th><th>Weight</th><th>Qty</th><th>Cost</th><th>Category</th></tr>${rows(items)}</table></body></html>`);
   w.print();
 };
 
@@ -2127,10 +2132,9 @@ window._renderRctPages=function(){
   var pl=document.getElementById('rctPageList');
   var thumbs=document.getElementById('rctPageThumbs');
   if(!pl||!thumbs)return;
-  if(pages.length===0){if(drop)drop.style.display='block';pl.style.display='none';var _rr=document.getElementById('receiptResults');if(_rr)_rr.style.display='none';return;}
+  if(pages.length===0){if(drop)drop.style.display='block';pl.style.display='none';return;}
   if(drop)drop.style.display='none';
   pl.style.display='block';
-  var _rRes=document.getElementById('receiptResults');if(_rRes)_rRes.style.display='block';
   thumbs.innerHTML='';
   pages.forEach(function(p,idx){
     var wrap=document.createElement('div');
