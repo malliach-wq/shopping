@@ -99,13 +99,13 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--t
 <script>
 const LST_KEY='shopping_lists_v1';
 let lists={},activeId=null,editingId=null;
-function load(){try{return JSON.parse(localStorage.getItem(LST_KEY))||{}}catch(e){return{}}}
+function load(){try{var data=JSON.parse(localStorage.getItem(LST_KEY))||{};Object.keys(data).forEach(function(k){var l=data[k];if(l.items&&!Array.isArray(l.items)){l.items=Object.entries(l.items).map(function(e){var id=e[0],it=e[1];var txt=(it.qty&&it.qty>1?it.qty+'x ':'')+( it.name||it.text||''  );return{id:id,text:txt.trim(),checked:!!(it.done||it.checked)};});}});return data;}catch(e){return{}}}
 function save(){try{localStorage.setItem(LST_KEY,JSON.stringify(lists))}catch(e){}}
 function lid(){return 'lst'+Date.now()+Math.random().toString(36).slice(2,6)}
 function iid(){return 'itm'+Date.now()+Math.random().toString(36).slice(2,6)}
 function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
 function toast(msg,dur){dur=dur||2400;var el=document.getElementById('toast');el.textContent=msg;el.classList.add('show');setTimeout(function(){el.classList.remove('show')},dur)}
-function itemStats(list){var items=list.items||[];var total=items.length;var checked=items.filter(function(i){return i.checked}).length;return{total:total,checked:checked}}
+function itemStats(list){var items=Array.isArray(list.items)?list.items:Object.values(list.items||{});var total=items.length;var checked=items.filter(function(i){return i.checked||i.done}).length;return{total:total,checked:checked}}
 function renderSidebar(){
   var listEl=document.getElementById('sidebarList');
   var entries=Object.entries(lists).sort(function(a,b){return(b[1].created||0)-(a[1].created||0)});
