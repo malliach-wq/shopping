@@ -99,7 +99,7 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--t
 <script>
 const LST_KEY='shopping_lists_v1';
 let lists={},activeId=null,editingId=null;
-function load(){try{var data=JSON.parse(localStorage.getItem(LST_KEY))||{};Object.keys(data).forEach(function(k){var l=data[k];if(l.items&&!Array.isArray(l.items)){l.items=Object.entries(l.items).map(function(e){var id=e[0],it=e[1];var txt=(it.qty&&it.qty>1?it.qty+'x ':'')+( it.name||it.text||''  );return{id:id,text:txt.trim(),checked:!!(it.done||it.checked)};});}});return data;}catch(e){return{}}}
+function load(){try{var data=JSON.parse(localStorage.getItem(LST_KEY))||{};Object.keys(data).forEach(function(k){var l=data[k];if(l.items&&!Array.isArray(l.items)){l.items=Object.entries(l.items).map(function(e){var id=e[0],it=e[1];var txt=(it.qty&&it.qty>1?it.qty+'x ':'')+( it.name||it.text||'');return{id:id,text:txt.trim(),checked:!!(it.done||it.checked)};});}});return data;}catch(e){return{}}}
 function save(){try{localStorage.setItem(LST_KEY,JSON.stringify(lists))}catch(e){}}
 function lid(){return 'lst'+Date.now()+Math.random().toString(36).slice(2,6)}
 function iid(){return 'itm'+Date.now()+Math.random().toString(36).slice(2,6)}
@@ -186,7 +186,12 @@ function renderDetailView(id){
     +(checkedItems.length?'<div class="section-label" style="margin-top:'+(unchecked.length?'22px':'0')+'">Got it ✓</div><ul class="items-list">'+checkedItems.map(renderItem).join('')+'</ul>':'')
     +(!items.length?'<p style="color:var(--text-light);font-size:.83rem">No items yet — add one above.</p>':'')
     +'</div></div>';
-  document.getElementById('newItemInput').focus();
+  var ni=document.getElementById('newItemInput');
+  ni.focus();
+  // Attach library item autocomplete
+  if(window.LibraryClient){
+    LibraryClient.attachAutocomplete(ni,{type:'item',onSelect:function(i){ni.value=i.name;}});
+  }
 }
 function addItem(listId){
   var input=document.getElementById('newItemInput');
@@ -227,5 +232,6 @@ function init(){
 }
 init();
 </script>
+<script src="https://my-library-tan.vercel.app/library-client.js"></script>
 </body>
 </html>
